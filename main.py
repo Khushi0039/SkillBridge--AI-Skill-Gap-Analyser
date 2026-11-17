@@ -430,6 +430,23 @@ def health():
 def read_roles():
     roles = get_all_roles()
 
+    # Include each role's required skills so the dashboard can still
+    # produce an offline preview if the analysis POST is temporarily unavailable.
+    with get_connection() as conn:
+        rows = conn.execute("""
+            SELECT role_id, skill_name
+            FROM role_skills
+            WHERE skill_name IS NOT NULL AND TRIM(skill_name) <> ''
+            ORDER BY role_id, skill_type, skill_name
+        """).fetchall()
+
+    skills_by_role = {}
+    for row in rows:
+        skills_by_role.setdefault(row["role_id"], []).append(row["skill_name"])
+
+    for role in roles:
+        role["required_skills"] = skills_by_role.get(role["role_id"], [])
+
     return {
         "total_roles": len(roles),
         "roles": roles

@@ -480,6 +480,25 @@ async function loadJobRoles() {
 
         allRoles = data.roles;
 
+        // Attach bundled skill requirements as a backup even when the live
+        // role endpoint responds but an older backend build is still deployed.
+        try {
+            const backupResponse = await fetch("role_fallback.json");
+            if (backupResponse.ok) {
+                const backupData = await backupResponse.json();
+                const backupByName = new Map(
+                    (backupData.roles || []).map(role => [String(role.job_role).toLowerCase(), role.required_skills || []])
+                );
+                allRoles.forEach(role => {
+                    if (!Array.isArray(role.required_skills) || !role.required_skills.length) {
+                        role.required_skills = backupByName.get(String(role.job_role).toLowerCase()) || [];
+                    }
+                });
+            }
+        } catch (backupError) {
+            console.warn("Bundled skill backup could not be loaded:", backupError);
+        }
+
         // Extract unique categories
         const categories = [
             ...new Set(
@@ -530,17 +549,34 @@ async function loadJobRoles() {
 
     } catch (error) {
 
-        console.error("Dropdown loading error:", error);
+        console.error("Live role list unavailable; loading bundled demo catalogue:", error);
 
-        categorySelect.innerHTML =
-            `<option value="">Unable to load categories</option>`;
+        try {
+            const fallbackResponse = await fetch("role_fallback.json");
+            if (!fallbackResponse.ok) throw new Error("Bundled role catalogue unavailable.");
+            const fallbackData = await fallbackResponse.json();
+            allRoles = Array.isArray(fallbackData.roles) ? fallbackData.roles : [];
+            if (!allRoles.length) throw new Error("Bundled role catalogue is empty.");
 
-        careerSelect.innerHTML =
-            `<option value="">Unable to load job roles</option>`;
+            const categories = [...new Set(allRoles.map(role => role.sector).filter(Boolean))].sort();
+            categorySelect.innerHTML = '<option value="">Choose a career category</option>';
+            categories.forEach(category => {
+                const option = document.createElement("option");
+                option.value = category;
+                option.textContent = category;
+                categorySelect.appendChild(option);
+            });
 
-        if (message) {
-            message.textContent =
-                "Unable to load categories. Please check the server.";
+            careerSelect.innerHTML = '<option value="">Choose a target job role</option>';
+            careerSelect.disabled = true;
+            if (message) {
+                message.textContent = "Using the built-in role catalogue while the server reconnects. Analysis will run as a local preview.";
+            }
+        } catch (fallbackError) {
+            console.error("Bundled role catalogue failed:", fallbackError);
+            categorySelect.innerHTML = '<option value="">Unable to load categories</option>';
+            careerSelect.innerHTML = '<option value="">Unable to load job roles</option>';
+            if (message) message.textContent = "Could not load the role catalogue. Refresh the page and try again.";
         }
 
     }
@@ -668,9 +704,9 @@ document.getElementById("analyzeSkillsButton").addEventListener(
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(
-                    data.detail || "Skill analysis failed."
-                );
+                const requestError = new Error(data.detail || "Skill analysis failed.");
+                requestError.allowOfflineFallback = response.status === 401 || response.status >= 500;
+                throw requestError;
             }
 
 
@@ -687,8 +723,71 @@ document.getElementById("analyzeSkillsButton").addEventListener(
         }
 
         catch (error) {
-            message.textContent = error.message;
-            console.error(error);
+            console.error("Skill analysis request failed:", error);
+
+            // Keep the core demo usable during Render cold starts or temporary
+            // network/auth failures. This preview is calculated from the real
+            // role-skill list already loaded from the API and is not saved.
+            if (error instanceof TypeError || error.allowOfflineFallback) {
+                const selectedRole = allRoles.find(
+                    role => String(role.role_id) === String(roleId)
+                );
+                const requiredSkills = selectedRole?.required_skills || [];
+
+                if (selectedRole && requiredSkills.length) {
+                    const normalize = value => {
+                        const aliases = {
+                            "py": "python",
+                            "python programming": "python",
+                            "ms excel": "excel",
+                            "microsoft excel": "excel",
+                            "mysql": "sql",
+                            "postgresql": "sql",
+                            "powerbi": "power bi",
+                            "ml": "machine learning",
+                            "ai": "artificial intelligence",
+                            "js": "javascript",
+                            "react.js": "react",
+                            "react js": "react",
+                            "node.js": "nodejs",
+                            "html5": "html",
+                            "css3": "css"
+                        };
+                        const key = String(value || "").trim().toLowerCase().replace(/\\s+/g, " ");
+                        return aliases[key] || key.replace(/[^a-z0-9+#]+/g, " ").trim();
+                    };
+
+                    const entered = new Set(studentSkills.map(normalize));
+                    const matched = [];
+                    const missing = [];
+
+                    requiredSkills.forEach(item => {
+                        const requirement = String(item || "").trim();
+                        const alternatives = requirement.split(/\\s+or\\s+/i);
+                        const found = alternatives.some(part => entered.has(normalize(part)));
+                        (found ? matched : missing).push(requirement.toLowerCase());
+                    });
+
+                    const total = matched.length + missing.length;
+                    const preview = {
+                        role_id: Number(roleId),
+                        job_role: selectedRole.job_role,
+                        sector: selectedRole.sector,
+                        matched_skills: matched.sort(),
+                        missing_skills: missing.sort(),
+                        match_percentage: total ? Math.round((matched.length / total) * 10000) / 100 : 0,
+                        learning_plan: {},
+                        offline_preview: true
+                    };
+
+                    displayAnalysisResults(preview);
+                    message.textContent = "Offline preview shown. The API could not be reached, so this result has not been saved.";
+                } else {
+                    message.textContent = "The server is temporarily unavailable and this role has no cached skill list. Please refresh once the server is awake.";
+                }
+            } else {
+                message.textContent = error.message || "Skill analysis failed. Please try again.";
+            }
         }
 
         finally {

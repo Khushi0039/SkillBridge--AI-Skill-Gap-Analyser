@@ -1,0 +1,5264 @@
+{
+  "roles": [
+    {
+      "role_id": 1,
+      "sector": "Technology",
+      "job_role": "AI / Machine Learning Engineer",
+      "required_skills": [
+        "Python",
+        "SQL",
+        "statistics and probability",
+        "data preprocessing",
+        "feature engineering",
+        "scikit-learn",
+        "PyTorch or TensorFlow",
+        "model evaluation",
+        "Git",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 2,
+      "sector": "Technology",
+      "job_role": "Generative AI Application Engineer",
+      "required_skills": [
+        "Python",
+        "LLM APIs",
+        "prompt design",
+        "RAG",
+        "embeddings",
+        "vector search",
+        "REST APIs",
+        "evaluation",
+        "Git",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 3,
+      "sector": "Technology",
+      "job_role": "Data Analyst",
+      "required_skills": [
+        "SQL",
+        "Excel",
+        "data cleaning",
+        "descriptive statistics",
+        "Power BI or Tableau",
+        "data visualization",
+        "stakeholder communication",
+        "Exploratory data analysis",
+        "data storytelling",
+        "A/B testing",
+        "metric definition",
+        "data quality checks",
+        "communicating insights"
+      ]
+    },
+    {
+      "role_id": 4,
+      "sector": "Technology",
+      "job_role": "Business Intelligence Analyst",
+      "required_skills": [
+        "SQL",
+        "Power BI or Tableau",
+        "data modeling",
+        "DAX (Power BI roles)",
+        "Excel",
+        "KPI design",
+        "dashboard storytelling",
+        "Exploratory data analysis",
+        "data storytelling",
+        "A/B testing",
+        "metric definition",
+        "data quality checks",
+        "communicating insights"
+      ]
+    },
+    {
+      "role_id": 5,
+      "sector": "Technology",
+      "job_role": "Data Engineer",
+      "required_skills": [
+        "Python",
+        "SQL",
+        "ETL/ELT",
+        "data modeling",
+        "Apache Spark/PySpark",
+        "orchestration (Airflow)",
+        "cloud storage/warehouse",
+        "Git",
+        "Pipeline observability",
+        "schema evolution",
+        "data contracts",
+        "partitioning",
+        "orchestration",
+        "access governance"
+      ]
+    },
+    {
+      "role_id": 6,
+      "sector": "Technology",
+      "job_role": "Python Software Developer",
+      "required_skills": [
+        "Python",
+        "object-oriented programming",
+        "data structures",
+        "REST APIs",
+        "SQL",
+        "unit testing",
+        "Git",
+        "debugging",
+        "Version control workflows",
+        "code review",
+        "API design",
+        "unit/integration testing",
+        "secure coding"
+      ]
+    },
+    {
+      "role_id": 7,
+      "sector": "Technology",
+      "job_role": "Java Backend Developer",
+      "required_skills": [
+        "Java",
+        "Spring Boot",
+        "REST APIs",
+        "SQL",
+        "object-oriented design",
+        "unit testing",
+        "Git",
+        "debugging",
+        "Version control workflows",
+        "code review",
+        "API design",
+        "unit/integration testing",
+        "secure coding"
+      ]
+    },
+    {
+      "role_id": 8,
+      "sector": "Technology",
+      "job_role": "Frontend Developer (React)",
+      "required_skills": [
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "HTML5",
+        "CSS3",
+        "REST API integration",
+        "responsive design",
+        "frontend testing",
+        "Version control workflows",
+        "code review",
+        "API design",
+        "debugging",
+        "unit/integration testing",
+        "secure coding"
+      ]
+    },
+    {
+      "role_id": 9,
+      "sector": "Technology",
+      "job_role": "QA Automation Engineer",
+      "required_skills": [
+        "test planning",
+        "test case design",
+        "Selenium or Playwright",
+        "Python or Java",
+        "API testing",
+        "SQL",
+        "defect tracking",
+        "Git",
+        "Requirements gathering",
+        "workflow design",
+        "integration testing",
+        "release management",
+        "documentation",
+        "access permissions"
+      ]
+    },
+    {
+      "role_id": 10,
+      "sector": "Technology",
+      "job_role": "Cloud Support Engineer",
+      "required_skills": [
+        "Linux",
+        "networking fundamentals",
+        "AWS or Azure",
+        "IAM",
+        "DNS",
+        "logs and monitoring",
+        "ticketing",
+        "scripting basics",
+        "infrastructure as code",
+        "CI/CD",
+        "monitoring and alerting",
+        "backup and disaster recovery"
+      ]
+    },
+    {
+      "role_id": 11,
+      "sector": "Technology",
+      "job_role": "DevOps / Platform Engineer",
+      "required_skills": [
+        "Linux",
+        "Git",
+        "CI/CD",
+        "Docker",
+        "Kubernetes",
+        "Terraform",
+        "AWS or Azure",
+        "Bash or Python",
+        "monitoring",
+        "networking fundamentals",
+        "infrastructure as code",
+        "monitoring and alerting",
+        "backup and disaster recovery"
+      ]
+    },
+    {
+      "role_id": 12,
+      "sector": "Technology",
+      "job_role": "SOC / Cybersecurity Analyst",
+      "required_skills": [
+        "SIEM",
+        "alert triage",
+        "incident response",
+        "TCP/IP",
+        "Windows and Linux logs",
+        "MITRE ATT&CK",
+        "EDR",
+        "security reporting",
+        "Threat modeling",
+        "vulnerability management",
+        "security logging",
+        "risk assessment",
+        "security documentation"
+      ]
+    },
+    {
+      "role_id": 13,
+      "sector": "Technology",
+      "job_role": "GRC / Privacy Analyst",
+      "required_skills": [
+        "ISO 27001",
+        "risk assessment",
+        "control testing",
+        "policy writing",
+        "privacy principles",
+        "audit evidence",
+        "Excel",
+        "stakeholder communication",
+        "Threat modeling",
+        "vulnerability management",
+        "incident response",
+        "security logging",
+        "security documentation"
+      ]
+    },
+    {
+      "role_id": 14,
+      "sector": "Technology",
+      "job_role": "Product Analyst",
+      "required_skills": [
+        "SQL",
+        "Excel",
+        "product metrics",
+        "funnel analysis",
+        "A/B testing",
+        "statistics",
+        "dashboarding",
+        "product documentation",
+        "Git",
+        "documentation",
+        "debugging",
+        "testing",
+        "collaboration in code review"
+      ]
+    },
+    {
+      "role_id": 15,
+      "sector": "Technology",
+      "job_role": "UX/UI Designer",
+      "required_skills": [
+        "Figma",
+        "wireframing",
+        "prototyping",
+        "interaction design",
+        "usability testing",
+        "accessibility basics",
+        "design systems",
+        "user research",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 16,
+      "sector": "Technology",
+      "job_role": "Technical Writer",
+      "required_skills": [
+        "technical research",
+        "structured writing",
+        "Markdown",
+        "API documentation",
+        "diagrams",
+        "version control",
+        "editing",
+        "audience analysis",
+        "Git",
+        "documentation",
+        "debugging",
+        "testing",
+        "collaboration in code review"
+      ]
+    },
+    {
+      "role_id": 17,
+      "sector": "Technology",
+      "job_role": "IT Support Specialist",
+      "required_skills": [
+        "Windows",
+        "Linux basics",
+        "networking",
+        "Active Directory or Entra ID",
+        "hardware troubleshooting",
+        "ticketing",
+        "customer support",
+        "documentation",
+        "Git",
+        "debugging",
+        "testing",
+        "collaboration in code review"
+      ]
+    },
+    {
+      "role_id": 18,
+      "sector": "Technology",
+      "job_role": "GIS Analyst",
+      "required_skills": [
+        "QGIS or ArcGIS",
+        "spatial data",
+        "cartography",
+        "GPS data",
+        "SQL",
+        "Python basics",
+        "data validation",
+        "map communication",
+        "Git",
+        "documentation",
+        "debugging",
+        "testing",
+        "collaboration in code review"
+      ]
+    },
+    {
+      "role_id": 19,
+      "sector": "Technology",
+      "job_role": "Mobile Application Developer (Android)",
+      "required_skills": [
+        "Kotlin",
+        "Android SDK",
+        "Jetpack Compose",
+        "REST APIs",
+        "Room",
+        "Git",
+        "unit testing",
+        "Version control workflows",
+        "code review",
+        "API design",
+        "debugging",
+        "unit/integration testing",
+        "secure coding"
+      ]
+    },
+    {
+      "role_id": 20,
+      "sector": "Technology",
+      "job_role": "Mobile Application Developer (iOS)",
+      "required_skills": [
+        "Swift",
+        "SwiftUI",
+        "UIKit",
+        "Xcode",
+        "REST APIs",
+        "Core Data",
+        "XCTest",
+        "Version control workflows",
+        "code review",
+        "API design",
+        "debugging",
+        "unit/integration testing",
+        "secure coding"
+      ]
+    },
+    {
+      "role_id": 21,
+      "sector": "Technology",
+      "job_role": "Flutter Developer",
+      "required_skills": [
+        "Dart",
+        "Flutter",
+        "widget lifecycle",
+        "state management",
+        "REST APIs",
+        "Firebase",
+        "unit testing",
+        "Git",
+        "documentation",
+        "debugging",
+        "testing",
+        "collaboration in code review"
+      ]
+    },
+    {
+      "role_id": 22,
+      "sector": "Technology",
+      "job_role": "Full-Stack Developer (Node.js)",
+      "required_skills": [
+        "JavaScript",
+        "TypeScript",
+        "Node.js",
+        "Express",
+        "React",
+        "REST APIs",
+        "SQL",
+        "Git",
+        "Version control workflows",
+        "code review",
+        "API design",
+        "debugging",
+        "unit/integration testing",
+        "secure coding"
+      ]
+    },
+    {
+      "role_id": 23,
+      "sector": "Technology",
+      "job_role": "Full-Stack Developer (Java)",
+      "required_skills": [
+        "Java",
+        "Spring Boot",
+        "React or Angular",
+        "REST APIs",
+        "SQL",
+        "Docker",
+        "Git",
+        "Version control workflows",
+        "code review",
+        "API design",
+        "debugging",
+        "unit/integration testing",
+        "secure coding"
+      ]
+    },
+    {
+      "role_id": 24,
+      "sector": "Technology",
+      "job_role": "C# / .NET Developer",
+      "required_skills": [
+        "C#",
+        ".NET",
+        "ASP.NET Core",
+        "REST APIs",
+        "Entity Framework",
+        "SQL Server",
+        "unit testing",
+        "Git",
+        "documentation",
+        "debugging",
+        "testing",
+        "collaboration in code review"
+      ]
+    },
+    {
+      "role_id": 25,
+      "sector": "Technology",
+      "job_role": "Embedded Software Engineer",
+      "required_skills": [
+        "C",
+        "C++",
+        "microcontrollers",
+        "UART/SPI/I2C",
+        "RTOS",
+        "debugging",
+        "Git",
+        "Version control workflows",
+        "code review",
+        "API design",
+        "unit/integration testing",
+        "secure coding"
+      ]
+    },
+    {
+      "role_id": 26,
+      "sector": "Technology",
+      "job_role": "Firmware Engineer",
+      "required_skills": [
+        "C",
+        "C++",
+        "embedded Linux",
+        "device drivers",
+        "hardware debugging",
+        "Python scripting",
+        "Git",
+        "documentation",
+        "debugging",
+        "testing",
+        "collaboration in code review"
+      ]
+    },
+    {
+      "role_id": 27,
+      "sector": "Technology",
+      "job_role": "IoT Solutions Engineer",
+      "required_skills": [
+        "MQTT",
+        "IoT protocols",
+        "Python",
+        "edge devices",
+        "AWS IoT or Azure IoT",
+        "security",
+        "telemetry",
+        "Git",
+        "documentation",
+        "debugging",
+        "testing",
+        "collaboration in code review"
+      ]
+    },
+    {
+      "role_id": 28,
+      "sector": "Technology",
+      "job_role": "Computer Vision Engineer",
+      "required_skills": [
+        "Python",
+        "OpenCV",
+        "PyTorch",
+        "image processing",
+        "object detection",
+        "model evaluation",
+        "CUDA basics",
+        "Git",
+        "documentation",
+        "debugging",
+        "testing",
+        "collaboration in code review"
+      ]
+    },
+    {
+      "role_id": 29,
+      "sector": "Technology",
+      "job_role": "NLP Engineer",
+      "required_skills": [
+        "Python",
+        "NLP",
+        "tokenization",
+        "embeddings",
+        "transformers",
+        "PyTorch",
+        "evaluation",
+        "REST APIs",
+        "Git",
+        "documentation",
+        "debugging",
+        "testing",
+        "collaboration in code review"
+      ]
+    },
+    {
+      "role_id": 30,
+      "sector": "Technology",
+      "job_role": "MLOps Engineer",
+      "required_skills": [
+        "Python",
+        "Docker",
+        "Kubernetes",
+        "MLflow",
+        "CI/CD",
+        "model monitoring",
+        "cloud services",
+        "data versioning",
+        "Git",
+        "documentation",
+        "debugging",
+        "testing",
+        "collaboration in code review"
+      ]
+    },
+    {
+      "role_id": 31,
+      "sector": "Technology",
+      "job_role": "Data Quality Analyst",
+      "required_skills": [
+        "SQL",
+        "data profiling",
+        "validation rules",
+        "Excel",
+        "Python",
+        "root-cause analysis",
+        "documentation",
+        "Git",
+        "debugging",
+        "testing",
+        "collaboration in code review"
+      ]
+    },
+    {
+      "role_id": 32,
+      "sector": "Technology",
+      "job_role": "Database Administrator",
+      "required_skills": [
+        "SQL",
+        "backup and recovery",
+        "performance tuning",
+        "access control",
+        "PostgreSQL or Oracle",
+        "monitoring",
+        "scripting",
+        "Git",
+        "documentation",
+        "debugging",
+        "testing",
+        "collaboration in code review"
+      ]
+    },
+    {
+      "role_id": 33,
+      "sector": "Technology",
+      "job_role": "Network Engineer",
+      "required_skills": [
+        "TCP/IP",
+        "routing",
+        "switching",
+        "VLANs",
+        "DNS",
+        "firewalls",
+        "network monitoring",
+        "troubleshooting",
+        "Git",
+        "documentation",
+        "debugging",
+        "testing",
+        "collaboration in code review"
+      ]
+    },
+    {
+      "role_id": 34,
+      "sector": "Technology",
+      "job_role": "Application Security Engineer",
+      "required_skills": [
+        "OWASP Top 10",
+        "threat modeling",
+        "SAST/DAST",
+        "secure coding",
+        "penetration testing",
+        "CI/CD security",
+        "remediation",
+        "vulnerability management",
+        "incident response",
+        "security logging",
+        "risk assessment",
+        "security documentation"
+      ]
+    },
+    {
+      "role_id": 35,
+      "sector": "Technology",
+      "job_role": "AI Agent Engineer",
+      "required_skills": [
+        "Python",
+        "LLM APIs",
+        "agent orchestration",
+        "tool/function calling",
+        "RAG",
+        "evaluation",
+        "REST APIs",
+        "Git",
+        "Docker",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 36,
+      "sector": "Technology",
+      "job_role": "LLMOps Engineer",
+      "required_skills": [
+        "Python",
+        "LLM deployment",
+        "model serving",
+        "prompt/version management",
+        "evaluation pipelines",
+        "monitoring",
+        "Docker",
+        "Kubernetes",
+        "CI/CD",
+        "cloud",
+        "RAG evaluation",
+        "hallucination testing",
+        "inference optimization",
+        "latency and cost monitoring",
+        "access control"
+      ]
+    },
+    {
+      "role_id": 37,
+      "sector": "Technology",
+      "job_role": "AI Evaluation Engineer",
+      "required_skills": [
+        "Python",
+        "LLM evaluation",
+        "test datasets",
+        "benchmark design",
+        "prompt testing",
+        "statistical analysis",
+        "error analysis",
+        "experiment tracking",
+        "Git",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 38,
+      "sector": "Technology",
+      "job_role": "AI Safety / Responsible AI Engineer",
+      "required_skills": [
+        "Python",
+        "model evaluation",
+        "bias and robustness testing",
+        "privacy principles",
+        "red teaming",
+        "AI risk assessment",
+        "documentation",
+        "governance",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 39,
+      "sector": "Technology",
+      "job_role": "Data Scientist",
+      "required_skills": [
+        "Python",
+        "SQL",
+        "Pandas",
+        "NumPy",
+        "statistics",
+        "feature engineering",
+        "machine learning",
+        "experimentation",
+        "model evaluation",
+        "visualization",
+        "Exploratory data analysis",
+        "data storytelling",
+        "A/B testing",
+        "metric definition",
+        "data quality checks",
+        "communicating insights"
+      ]
+    },
+    {
+      "role_id": 40,
+      "sector": "Technology",
+      "job_role": "Analytics Engineer",
+      "required_skills": [
+        "SQL",
+        "dbt",
+        "data modeling",
+        "data warehouse concepts",
+        "Python",
+        "data quality tests",
+        "Git",
+        "BI tools",
+        "documentation",
+        "Exploratory data analysis",
+        "data storytelling",
+        "A/B testing",
+        "metric definition",
+        "data quality checks",
+        "communicating insights"
+      ]
+    },
+    {
+      "role_id": 41,
+      "sector": "Technology",
+      "job_role": "Cloud Engineer (AWS / Azure / GCP)",
+      "required_skills": [
+        "Linux",
+        "networking",
+        "AWS or Azure or GCP",
+        "IAM",
+        "cloud storage and compute",
+        "Terraform",
+        "Docker",
+        "monitoring",
+        "scripting",
+        "Git",
+        "networking fundamentals",
+        "infrastructure as code",
+        "CI/CD",
+        "monitoring and alerting",
+        "backup and disaster recovery"
+      ]
+    },
+    {
+      "role_id": 42,
+      "sector": "Technology",
+      "job_role": "Site Reliability Engineer (SRE)",
+      "required_skills": [
+        "Linux",
+        "networking",
+        "Python or Go",
+        "observability",
+        "incident response",
+        "SLO/SLI",
+        "Kubernetes",
+        "cloud",
+        "CI/CD",
+        "infrastructure as code",
+        "networking fundamentals",
+        "monitoring and alerting",
+        "backup and disaster recovery"
+      ]
+    },
+    {
+      "role_id": 43,
+      "sector": "Technology",
+      "job_role": "DevSecOps Engineer",
+      "required_skills": [
+        "Linux",
+        "CI/CD",
+        "Git",
+        "Docker",
+        "Kubernetes",
+        "Terraform",
+        "SAST/DAST",
+        "dependency scanning",
+        "secrets management",
+        "cloud IAM",
+        "scripting",
+        "Threat modeling",
+        "vulnerability management",
+        "incident response",
+        "security logging",
+        "risk assessment",
+        "security documentation"
+      ]
+    },
+    {
+      "role_id": 44,
+      "sector": "Technology",
+      "job_role": "Cloud Security Engineer",
+      "required_skills": [
+        "Cloud IAM",
+        "network security",
+        "cloud posture management",
+        "SIEM",
+        "encryption basics",
+        "vulnerability management",
+        "Terraform",
+        "scripting",
+        "incident response",
+        "Threat modeling",
+        "security logging",
+        "risk assessment",
+        "security documentation"
+      ]
+    },
+    {
+      "role_id": 45,
+      "sector": "Technology",
+      "job_role": "Identity and Access Management (IAM) Engineer",
+      "required_skills": [
+        "Identity lifecycle",
+        "SSO",
+        "OAuth 2.0",
+        "OpenID Connect",
+        "SAML",
+        "MFA",
+        "RBAC",
+        "directory services",
+        "scripting",
+        "audit logging",
+        "Threat modeling",
+        "vulnerability management",
+        "incident response",
+        "security logging",
+        "risk assessment",
+        "security documentation"
+      ]
+    },
+    {
+      "role_id": 46,
+      "sector": "Technology",
+      "job_role": "Data Platform Engineer",
+      "required_skills": [
+        "Python",
+        "SQL",
+        "Apache Spark",
+        "Kafka",
+        "orchestration",
+        "lakehouse/warehouse",
+        "cloud storage",
+        "data governance",
+        "Docker",
+        "monitoring",
+        "Pipeline observability",
+        "schema evolution",
+        "data contracts",
+        "partitioning",
+        "access governance"
+      ]
+    },
+    {
+      "role_id": 47,
+      "sector": "Technology",
+      "job_role": "AI Infrastructure Engineer",
+      "required_skills": [
+        "Linux",
+        "GPU computing",
+        "Python",
+        "containers",
+        "Kubernetes",
+        "distributed systems",
+        "cloud infrastructure",
+        "model serving",
+        "monitoring",
+        "networking",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 48,
+      "sector": "Technology",
+      "job_role": "Application Reliability / Performance Engineer",
+      "required_skills": [
+        "Linux",
+        "scripting",
+        "performance testing",
+        "observability",
+        "profiling",
+        "load testing",
+        "incident analysis",
+        "CI/CD",
+        "cloud",
+        "SQL",
+        "Git",
+        "documentation",
+        "debugging",
+        "testing",
+        "collaboration in code review"
+      ]
+    },
+    {
+      "role_id": 49,
+      "sector": "Technology",
+      "job_role": "AI Data Governance Specialist",
+      "required_skills": [
+        "Data quality",
+        "metadata management",
+        "lineage",
+        "data catalogues",
+        "privacy principles",
+        "access controls",
+        "policy documentation",
+        "SQL",
+        "governance frameworks",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 50,
+      "sector": "Technology",
+      "job_role": "Robotics Software Engineer",
+      "required_skills": [
+        "C++",
+        "Python",
+        "ROS 2",
+        "Linux",
+        "control systems",
+        "sensor integration",
+        "computer vision basics",
+        "simulation",
+        "Git",
+        "testing",
+        "Version control workflows",
+        "code review",
+        "API design",
+        "debugging",
+        "unit/integration testing",
+        "secure coding"
+      ]
+    },
+    {
+      "role_id": 51,
+      "sector": "Technology",
+      "job_role": "AI Red Team Engineer",
+      "required_skills": [
+        "Python",
+        "LLM evaluation",
+        "adversarial testing",
+        "prompt-injection testing",
+        "model security",
+        "threat modeling",
+        "test automation",
+        "Git",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 52,
+      "sector": "Technology",
+      "job_role": "Multimodal AI Engineer",
+      "required_skills": [
+        "Python",
+        "PyTorch",
+        "transformers",
+        "computer vision",
+        "NLP",
+        "audio/video processing",
+        "model fine-tuning",
+        "evaluation",
+        "Git",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 53,
+      "sector": "Technology",
+      "job_role": "Edge AI / TinyML Engineer",
+      "required_skills": [
+        "Python",
+        "C/C++",
+        "TensorFlow Lite Micro or ONNX Runtime",
+        "embedded systems",
+        "model quantization",
+        "microcontrollers",
+        "profiling",
+        "Git",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 54,
+      "sector": "Technology",
+      "job_role": "AI Data / Synthetic Data Engineer",
+      "required_skills": [
+        "Python",
+        "SQL",
+        "data pipelines",
+        "data validation",
+        "synthetic data generation",
+        "privacy basics",
+        "Pandas",
+        "cloud storage",
+        "Git",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 55,
+      "sector": "Technology",
+      "job_role": "Vector Database / Retrieval Engineer",
+      "required_skills": [
+        "Python",
+        "SQL",
+        "embeddings",
+        "vector databases",
+        "semantic search",
+        "RAG",
+        "retrieval evaluation",
+        "APIs",
+        "Docker",
+        "Git",
+        "Prompt/version management",
+        "RAG evaluation",
+        "hallucination testing",
+        "inference optimization",
+        "latency and cost monitoring",
+        "access control"
+      ]
+    },
+    {
+      "role_id": 56,
+      "sector": "Technology",
+      "job_role": "Cybersecurity Penetration Tester",
+      "required_skills": [
+        "Networking",
+        "Linux",
+        "web security",
+        "OWASP Top 10",
+        "scripting with Python",
+        "vulnerability assessment",
+        "Burp Suite",
+        "report writing",
+        "authorization and ethics",
+        "Threat modeling",
+        "vulnerability management",
+        "incident response",
+        "security logging",
+        "risk assessment",
+        "security documentation"
+      ]
+    },
+    {
+      "role_id": 57,
+      "sector": "Technology",
+      "job_role": "Threat Intelligence Analyst",
+      "required_skills": [
+        "Networking",
+        "Linux",
+        "SIEM basics",
+        "threat intelligence platforms",
+        "log analysis",
+        "MITRE ATT&CK",
+        "Python",
+        "incident reporting",
+        "Threat modeling",
+        "vulnerability management",
+        "incident response",
+        "security logging",
+        "risk assessment",
+        "security documentation"
+      ]
+    },
+    {
+      "role_id": 58,
+      "sector": "Technology",
+      "job_role": "Digital Forensics Analyst",
+      "required_skills": [
+        "Windows/Linux internals",
+        "file systems",
+        "evidence handling",
+        "forensic imaging",
+        "log analysis",
+        "incident response",
+        "scripting",
+        "chain of custody",
+        "Threat modeling",
+        "vulnerability management",
+        "security logging",
+        "risk assessment",
+        "security documentation"
+      ]
+    },
+    {
+      "role_id": 59,
+      "sector": "Technology",
+      "job_role": "Blockchain / Web3 Developer",
+      "required_skills": [
+        "Solidity",
+        "smart contracts",
+        "JavaScript/TypeScript",
+        "EVM",
+        "Hardhat or Foundry",
+        "testing",
+        "wallet integration",
+        "security fundamentals",
+        "Git",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 60,
+      "sector": "Technology",
+      "job_role": "Smart Contract Security Auditor",
+      "required_skills": [
+        "Solidity",
+        "EVM internals",
+        "threat modeling",
+        "static analysis",
+        "fuzz testing",
+        "exploit prevention",
+        "code review",
+        "security reporting",
+        "vulnerability management",
+        "incident response",
+        "security logging",
+        "risk assessment",
+        "security documentation"
+      ]
+    },
+    {
+      "role_id": 61,
+      "sector": "Technology",
+      "job_role": "AR/VR / XR Developer",
+      "required_skills": [
+        "Unity or Unreal Engine",
+        "C# or C++",
+        "3D mathematics",
+        "interaction design",
+        "spatial tracking",
+        "performance optimization",
+        "Git",
+        "Real-time performance profiling",
+        "asset optimization",
+        "input systems",
+        "usability testing",
+        "version control",
+        "platform compatibility"
+      ]
+    },
+    {
+      "role_id": 62,
+      "sector": "Technology",
+      "job_role": "Game Programmer",
+      "required_skills": [
+        "C# or C++",
+        "Unity or Unreal Engine",
+        "data structures",
+        "algorithms",
+        "debugging",
+        "physics integration",
+        "profiling",
+        "Git",
+        "Real-time performance profiling",
+        "asset optimization",
+        "input systems",
+        "usability testing",
+        "version control",
+        "platform compatibility"
+      ]
+    },
+    {
+      "role_id": 63,
+      "sector": "Technology",
+      "job_role": "Salesforce Developer",
+      "required_skills": [
+        "Apex",
+        "Lightning Web Components",
+        "JavaScript",
+        "SOQL",
+        "REST APIs",
+        "Salesforce security",
+        "automated testing",
+        "Git",
+        "Requirements gathering",
+        "workflow design",
+        "integration testing",
+        "release management",
+        "documentation",
+        "access permissions"
+      ]
+    },
+    {
+      "role_id": 64,
+      "sector": "Technology",
+      "job_role": "SAP ABAP / S/4HANA Developer",
+      "required_skills": [
+        "ABAP",
+        "SAP data dictionary",
+        "CDS views",
+        "OData",
+        "debugging",
+        "SAP transport management",
+        "SQL concepts",
+        "integration testing",
+        "Requirements gathering",
+        "workflow design",
+        "release management",
+        "documentation",
+        "access permissions"
+      ]
+    },
+    {
+      "role_id": 65,
+      "sector": "Technology",
+      "job_role": "RPA Developer / Automation Engineer",
+      "required_skills": [
+        "UiPath or Power Automate",
+        "Python or C#",
+        "workflow design",
+        "APIs",
+        "SQL",
+        "exception handling",
+        "process mapping",
+        "testing",
+        "Requirements gathering",
+        "integration testing",
+        "release management",
+        "documentation",
+        "access permissions"
+      ]
+    },
+    {
+      "role_id": 66,
+      "sector": "Technology",
+      "job_role": "Rust Systems Software Engineer",
+      "required_skills": [
+        "Rust",
+        "systems programming",
+        "memory safety",
+        "concurrency",
+        "Linux",
+        "networking",
+        "testing",
+        "profiling",
+        "Git",
+        "Version control workflows",
+        "code review",
+        "API design",
+        "debugging",
+        "unit/integration testing",
+        "secure coding"
+      ]
+    },
+    {
+      "role_id": 67,
+      "sector": "Technology",
+      "job_role": "VLSI Design / Verification Engineer",
+      "required_skills": [
+        "Verilog or SystemVerilog",
+        "digital logic",
+        "RTL design",
+        "UVM basics",
+        "simulation",
+        "assertions",
+        "scripting",
+        "EDA tools",
+        "Hardware/software integration",
+        "debugging with logs and traces",
+        "performance profiling",
+        "real-time constraints",
+        "system validation",
+        "version control"
+      ]
+    },
+    {
+      "role_id": 68,
+      "sector": "Technology",
+      "job_role": "FPGA Engineer",
+      "required_skills": [
+        "Verilog or VHDL",
+        "FPGA architecture",
+        "digital design",
+        "timing constraints",
+        "synthesis",
+        "simulation",
+        "embedded C",
+        "debugging",
+        "Hardware/software integration",
+        "debugging with logs and traces",
+        "performance profiling",
+        "real-time constraints",
+        "system validation",
+        "version control"
+      ]
+    },
+    {
+      "role_id": 69,
+      "sector": "Technology",
+      "job_role": "Semiconductor Process / Yield Engineer",
+      "required_skills": [
+        "Semiconductor fundamentals",
+        "process integration",
+        "SPC",
+        "defect analysis",
+        "DOE",
+        "data analysis with Python or Excel",
+        "root-cause analysis",
+        "Hardware/software integration",
+        "debugging with logs and traces",
+        "performance profiling",
+        "real-time constraints",
+        "system validation",
+        "version control"
+      ]
+    },
+    {
+      "role_id": 70,
+      "sector": "Technology",
+      "job_role": "Test Automation / SDET Engineer",
+      "required_skills": [
+        "Python or Java",
+        "Playwright or Selenium",
+        "API testing",
+        "CI/CD",
+        "SQL",
+        "test design",
+        "debugging",
+        "Git",
+        "Docker basics",
+        "Test planning",
+        "regression testing",
+        "defect tracking",
+        "CI test integration",
+        "test data management",
+        "risk-based testing"
+      ]
+    },
+    {
+      "role_id": 71,
+      "sector": "Technology",
+      "job_role": "API / Integration Engineer",
+      "required_skills": [
+        "REST and GraphQL APIs",
+        "Python/Java/Node.js",
+        "OAuth 2.0",
+        "JSON",
+        "SQL",
+        "message queues",
+        "API testing",
+        "observability",
+        "Git",
+        "Version control workflows",
+        "code review",
+        "API design",
+        "debugging",
+        "unit/integration testing",
+        "secure coding"
+      ]
+    },
+    {
+      "role_id": 72,
+      "sector": "Technology",
+      "job_role": "Privacy Engineering Specialist",
+      "required_skills": [
+        "Data protection principles",
+        "privacy-by-design",
+        "data mapping",
+        "anonymization",
+        "access controls",
+        "Python/SQL",
+        "threat modeling",
+        "compliance concepts",
+        "vulnerability management",
+        "incident response",
+        "security logging",
+        "risk assessment",
+        "security documentation"
+      ]
+    },
+    {
+      "role_id": 73,
+      "sector": "Technology",
+      "job_role": "Technical Product Engineer (Developer Tools)",
+      "required_skills": [
+        "Python or TypeScript",
+        "APIs",
+        "developer workflows",
+        "SDKs",
+        "documentation",
+        "telemetry",
+        "debugging",
+        "user research",
+        "Git",
+        "User feedback analysis",
+        "technical documentation",
+        "developer experience",
+        "usability testing",
+        "release notes"
+      ]
+    },
+    {
+      "role_id": 74,
+      "sector": "Technology",
+      "job_role": "Robotics Perception Engineer",
+      "required_skills": [
+        "Python",
+        "C++",
+        "ROS 2",
+        "OpenCV",
+        "sensor fusion",
+        "camera/LiDAR data",
+        "deep learning",
+        "calibration",
+        "simulation",
+        "Git",
+        "Hardware/software integration",
+        "debugging with logs and traces",
+        "performance profiling",
+        "real-time constraints",
+        "system validation",
+        "version control"
+      ]
+    },
+    {
+      "role_id": 75,
+      "sector": "Technology",
+      "job_role": "Autonomous Systems / ADAS Engineer",
+      "required_skills": [
+        "C++",
+        "Python",
+        "sensor fusion",
+        "perception",
+        "planning basics",
+        "ROS 2",
+        "simulation",
+        "embedded systems",
+        "safety testing",
+        "Hardware/software integration",
+        "debugging with logs and traces",
+        "performance profiling",
+        "real-time constraints",
+        "system validation",
+        "version control"
+      ]
+    },
+    {
+      "role_id": 76,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Clinical Data Coordinator",
+      "required_skills": [
+        "clinical trial documentation",
+        "data query resolution",
+        "Excel",
+        "EDC systems",
+        "GCP awareness",
+        "data quality",
+        "SOP compliance",
+        "communication",
+        "Data privacy",
+        "standard operating procedures",
+        "quality assurance",
+        "documentation",
+        "regulatory compliance",
+        "interdisciplinary communication"
+      ]
+    },
+    {
+      "role_id": 77,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Clinical Data Manager",
+      "required_skills": [
+        "clinical data management",
+        "EDC (e.g. Veeva EDC)",
+        "CRF design",
+        "data review",
+        "database lock",
+        "GCP",
+        "SOPs",
+        "vendor oversight",
+        "Data privacy",
+        "standard operating procedures",
+        "quality assurance",
+        "documentation",
+        "regulatory compliance",
+        "interdisciplinary communication"
+      ]
+    },
+    {
+      "role_id": 78,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Clinical Research Associate",
+      "required_skills": [
+        "Good Clinical Practice",
+        "site monitoring",
+        "informed consent",
+        "source document verification",
+        "protocol compliance",
+        "safety reporting",
+        "travel planning",
+        "documentation",
+        "Data privacy",
+        "standard operating procedures",
+        "quality assurance",
+        "regulatory compliance",
+        "interdisciplinary communication"
+      ]
+    },
+    {
+      "role_id": 79,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Pharmacovigilance Associate",
+      "required_skills": [
+        "individual case safety reports",
+        "adverse event coding",
+        "MedDRA",
+        "safety databases",
+        "literature screening",
+        "medical terminology",
+        "SOPs",
+        "quality review",
+        "Data privacy",
+        "standard operating procedures",
+        "quality assurance",
+        "documentation",
+        "regulatory compliance",
+        "interdisciplinary communication"
+      ]
+    },
+    {
+      "role_id": 80,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Medical Coder",
+      "required_skills": [
+        "medical terminology",
+        "anatomy and physiology",
+        "ICD-10-CM",
+        "CPT",
+        "HCPCS",
+        "coding guidelines",
+        "audit accuracy",
+        "clinical documentation review",
+        "Data privacy",
+        "standard operating procedures",
+        "quality assurance",
+        "documentation",
+        "regulatory compliance",
+        "interdisciplinary communication"
+      ]
+    },
+    {
+      "role_id": 81,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Health Informatics Analyst",
+      "required_skills": [
+        "healthcare data",
+        "SQL",
+        "Excel",
+        "EHR/EMR workflows",
+        "data quality",
+        "privacy",
+        "reporting",
+        "clinical stakeholder communication",
+        "Data privacy",
+        "quality assurance",
+        "standard operating procedures",
+        "accurate documentation",
+        "regulatory awareness"
+      ]
+    },
+    {
+      "role_id": 82,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Medical Laboratory Technician",
+      "required_skills": [
+        "specimen handling",
+        "laboratory safety",
+        "quality control",
+        "laboratory instruments",
+        "sample processing",
+        "result documentation",
+        "infection control",
+        "Data privacy",
+        "standard operating procedures",
+        "quality assurance",
+        "documentation",
+        "regulatory compliance",
+        "interdisciplinary communication"
+      ]
+    },
+    {
+      "role_id": 83,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Biostatistician",
+      "required_skills": [
+        "probability",
+        "statistical modeling",
+        "R or SAS",
+        "clinical trial design",
+        "regression",
+        "survival analysis",
+        "data visualization",
+        "reproducible reporting",
+        "App lifecycle management",
+        "API integration",
+        "local storage",
+        "accessibility",
+        "automated testing",
+        "app performance profiling"
+      ]
+    },
+    {
+      "role_id": 84,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Regulatory Affairs Associate (Pharma)",
+      "required_skills": [
+        "regulatory submissions",
+        "document control",
+        "product labeling",
+        "change control",
+        "pharmacopoeia research",
+        "quality systems",
+        "regulatory writing",
+        "deadline tracking",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 85,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Healthcare Operations Analyst",
+      "required_skills": [
+        "Excel",
+        "SQL",
+        "scheduling",
+        "process mapping",
+        "KPI analysis",
+        "patient-flow metrics",
+        "dashboarding",
+        "privacy-aware data handling",
+        "Data privacy",
+        "standard operating procedures",
+        "quality assurance",
+        "documentation",
+        "regulatory compliance",
+        "interdisciplinary communication"
+      ]
+    },
+    {
+      "role_id": 86,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Registered Nurse",
+      "required_skills": [
+        "patient assessment",
+        "vital signs",
+        "medication administration",
+        "infection control",
+        "electronic health records",
+        "clinical documentation",
+        "emergency response",
+        "Data privacy",
+        "quality assurance",
+        "standard operating procedures",
+        "accurate documentation",
+        "regulatory awareness"
+      ]
+    },
+    {
+      "role_id": 87,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Clinical Trial Coordinator",
+      "required_skills": [
+        "trial scheduling",
+        "participant communication",
+        "informed consent",
+        "GCP",
+        "regulatory files",
+        "EDC systems",
+        "visit documentation",
+        "Data privacy",
+        "standard operating procedures",
+        "quality assurance",
+        "documentation",
+        "regulatory compliance",
+        "interdisciplinary communication"
+      ]
+    },
+    {
+      "role_id": 88,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Medical Laboratory Technologist",
+      "required_skills": [
+        "specimen handling",
+        "clinical chemistry",
+        "hematology",
+        "microbiology",
+        "quality control",
+        "laboratory information systems",
+        "biosafety",
+        "Data privacy",
+        "standard operating procedures",
+        "quality assurance",
+        "documentation",
+        "regulatory compliance",
+        "interdisciplinary communication"
+      ]
+    },
+    {
+      "role_id": 89,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Medical Laboratory Assistant",
+      "required_skills": [
+        "specimen accessioning",
+        "phlebotomy support",
+        "sample labeling",
+        "centrifugation",
+        "biosafety",
+        "LIS data entry",
+        "quality procedures",
+        "Data privacy",
+        "standard operating procedures",
+        "quality assurance",
+        "documentation",
+        "regulatory compliance",
+        "interdisciplinary communication"
+      ]
+    },
+    {
+      "role_id": 90,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Radiology / MRI Technologist",
+      "required_skills": [
+        "patient positioning",
+        "MRI safety",
+        "imaging protocols",
+        "contrast safety",
+        "PACS",
+        "radiation protection",
+        "clinical documentation",
+        "Data privacy",
+        "quality assurance",
+        "standard operating procedures",
+        "accurate documentation",
+        "regulatory awareness"
+      ]
+    },
+    {
+      "role_id": 91,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Physiotherapist",
+      "required_skills": [
+        "musculoskeletal assessment",
+        "therapeutic exercise",
+        "manual therapy",
+        "rehabilitation planning",
+        "outcome measurement",
+        "patient education",
+        "clinical notes",
+        "Version control workflows",
+        "code review",
+        "API design",
+        "debugging",
+        "unit/integration testing",
+        "secure coding"
+      ]
+    },
+    {
+      "role_id": 92,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Occupational Therapist",
+      "required_skills": [
+        "functional assessment",
+        "activities of daily living",
+        "assistive devices",
+        "rehabilitation planning",
+        "sensory strategies",
+        "patient education",
+        "progress notes",
+        "Version control workflows",
+        "code review",
+        "API design",
+        "debugging",
+        "unit/integration testing",
+        "secure coding"
+      ]
+    },
+    {
+      "role_id": 93,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Medical Coder (ICD-10-CM)",
+      "required_skills": [
+        "ICD-10-CM",
+        "CPT",
+        "HCPCS Level II",
+        "anatomy",
+        "medical terminology",
+        "encoder software",
+        "coding compliance",
+        "Data privacy",
+        "standard operating procedures",
+        "quality assurance",
+        "documentation",
+        "regulatory compliance",
+        "interdisciplinary communication"
+      ]
+    },
+    {
+      "role_id": 94,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Health Information Management Specialist",
+      "required_skills": [
+        "medical record management",
+        "ICD-10-CM",
+        "privacy rules",
+        "release of information",
+        "data quality",
+        "EHR systems",
+        "audit support",
+        "Data privacy",
+        "quality assurance",
+        "standard operating procedures",
+        "accurate documentation",
+        "regulatory awareness"
+      ]
+    },
+    {
+      "role_id": 95,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Nutritionist / Dietitian",
+      "required_skills": [
+        "nutrition assessment",
+        "diet planning",
+        "medical nutrition therapy",
+        "food composition",
+        "counseling",
+        "progress monitoring",
+        "clinical documentation",
+        "Data privacy",
+        "quality assurance",
+        "standard operating procedures",
+        "accurate documentation",
+        "regulatory awareness"
+      ]
+    },
+    {
+      "role_id": 96,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Biomedical Equipment Technician",
+      "required_skills": [
+        "medical equipment maintenance",
+        "electrical safety",
+        "calibration",
+        "troubleshooting",
+        "preventive maintenance",
+        "service documentation",
+        "healthcare standards",
+        "Data privacy",
+        "standard operating procedures",
+        "quality assurance",
+        "documentation",
+        "regulatory compliance",
+        "interdisciplinary communication"
+      ]
+    },
+    {
+      "role_id": 97,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Bioinformatics Analyst",
+      "required_skills": [
+        "Python or R",
+        "Linux",
+        "NGS data",
+        "sequence alignment",
+        "genomics",
+        "statistics",
+        "workflow tools",
+        "Data privacy",
+        "quality assurance",
+        "standard operating procedures",
+        "accurate documentation",
+        "regulatory awareness"
+      ]
+    },
+    {
+      "role_id": 98,
+      "sector": "Healthcare & Life Sciences",
+      "job_role": "Quality Assurance Associate (Pharma)",
+      "required_skills": [
+        "GMP",
+        "deviation management",
+        "CAPA",
+        "change control",
+        "batch record review",
+        "audit readiness",
+        "quality management systems",
+        "Test planning",
+        "regression testing",
+        "defect tracking",
+        "CI test integration",
+        "test data management",
+        "risk-based testing"
+      ]
+    },
+    {
+      "role_id": 99,
+      "sector": "Business, Sales & People",
+      "job_role": "Digital Marketing Specialist",
+      "required_skills": [
+        "campaign analytics",
+        "Google Analytics",
+        "paid search/social",
+        "SEO basics",
+        "content briefs",
+        "A/B testing",
+        "Excel",
+        "conversion reporting",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 100,
+      "sector": "Business, Sales & People",
+      "job_role": "SEO Specialist",
+      "required_skills": [
+        "keyword research",
+        "technical SEO",
+        "Search Console",
+        "on-page optimization",
+        "crawl analysis",
+        "analytics",
+        "content briefs",
+        "reporting",
+        "Stakeholder communication",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 101,
+      "sector": "Business, Sales & People",
+      "job_role": "Content Strategist",
+      "required_skills": [
+        "audience research",
+        "editorial planning",
+        "content briefs",
+        "SEO",
+        "analytics",
+        "editing",
+        "brand voice",
+        "stakeholder interviews",
+        "Portfolio development",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 102,
+      "sector": "Business, Sales & People",
+      "job_role": "Technical Content Writer",
+      "required_skills": [
+        "technical research",
+        "clear writing",
+        "editing",
+        "Markdown",
+        "API/product documentation",
+        "interviews with SMEs",
+        "version control",
+        "audience adaptation",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 103,
+      "sector": "Business, Sales & People",
+      "job_role": "HR Recruiter / Talent Acquisition Specialist",
+      "required_skills": [
+        "job intake",
+        "sourcing",
+        "screening",
+        "structured interviews",
+        "ATS",
+        "candidate communication",
+        "hiring analytics",
+        "data privacy",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 104,
+      "sector": "Business, Sales & People",
+      "job_role": "Learning and Development Specialist",
+      "required_skills": [
+        "needs analysis",
+        "instructional design",
+        "facilitation",
+        "LMS",
+        "assessment design",
+        "training evaluation",
+        "presentation",
+        "stakeholder management",
+        "Stakeholder communication",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 105,
+      "sector": "Business, Sales & People",
+      "job_role": "Customer Success Specialist",
+      "required_skills": [
+        "customer onboarding",
+        "product training",
+        "CRM",
+        "issue triage",
+        "renewal health",
+        "usage analytics",
+        "communication",
+        "escalation management",
+        "Stakeholder communication",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 106,
+      "sector": "Business, Sales & People",
+      "job_role": "Sales Development Representative",
+      "required_skills": [
+        "prospecting",
+        "CRM",
+        "lead qualification",
+        "business writing",
+        "discovery questions",
+        "objection handling",
+        "call/email research",
+        "pipeline hygiene",
+        "Requirements gathering",
+        "spreadsheet/data literacy",
+        "process documentation",
+        "stakeholder communication",
+        "KPI tracking",
+        "problem resolution"
+      ]
+    },
+    {
+      "role_id": 107,
+      "sector": "Business, Sales & People",
+      "job_role": "Business Analyst",
+      "required_skills": [
+        "requirements elicitation",
+        "process mapping",
+        "user stories",
+        "SQL or Excel",
+        "acceptance criteria",
+        "documentation",
+        "stakeholder workshops",
+        "UAT",
+        "Stakeholder communication",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 108,
+      "sector": "Business, Sales & People",
+      "job_role": "Project Coordinator",
+      "required_skills": [
+        "work planning",
+        "status tracking",
+        "meeting notes",
+        "risk/issue logs",
+        "Excel",
+        "project tools",
+        "stakeholder communication",
+        "documentation",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 109,
+      "sector": "Business, Sales & People",
+      "job_role": "Instructional Designer",
+      "required_skills": [
+        "learning objectives",
+        "storyboarding",
+        "adult learning",
+        "LMS",
+        "e-learning authoring",
+        "assessment design",
+        "accessibility",
+        "evaluation",
+        "Learning outcome design",
+        "feedback analysis",
+        "lesson documentation",
+        "learner communication"
+      ]
+    },
+    {
+      "role_id": 110,
+      "sector": "Business, Sales & People",
+      "job_role": "Customer Support Specialist",
+      "required_skills": [
+        "active listening",
+        "product troubleshooting",
+        "ticketing",
+        "CRM",
+        "knowledge base use",
+        "de-escalation",
+        "written communication",
+        "service metrics",
+        "Requirements gathering",
+        "spreadsheet/data literacy",
+        "process documentation",
+        "stakeholder communication",
+        "KPI tracking",
+        "problem resolution"
+      ]
+    },
+    {
+      "role_id": 111,
+      "sector": "Business, Sales & People",
+      "job_role": "E-commerce Category Analyst",
+      "required_skills": [
+        "Excel",
+        "sales/inventory analysis",
+        "category performance",
+        "pricing",
+        "marketplace operations",
+        "SQL or BI",
+        "forecasting",
+        "vendor coordination",
+        "Stakeholder communication",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 112,
+      "sector": "Business, Sales & People",
+      "job_role": "Accessibility Specialist (Digital)",
+      "required_skills": [
+        "WCAG",
+        "screen-reader testing",
+        "keyboard navigation",
+        "accessibility audits",
+        "HTML/CSS basics",
+        "issue reporting",
+        "inclusive design",
+        "assistive technology",
+        "Stakeholder communication",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 113,
+      "sector": "Business, Sales & People",
+      "job_role": "Market Research Analyst",
+      "required_skills": [
+        "survey design",
+        "interview research",
+        "market sizing",
+        "Excel",
+        "statistical analysis",
+        "competitor analysis",
+        "insight presentation",
+        "Stakeholder communication",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 114,
+      "sector": "Business, Sales & People",
+      "job_role": "Product Marketing Manager",
+      "required_skills": [
+        "positioning",
+        "buyer research",
+        "messaging",
+        "go-to-market planning",
+        "competitive analysis",
+        "launch coordination",
+        "adoption metrics",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 115,
+      "sector": "Business, Sales & People",
+      "job_role": "Performance Marketing Analyst",
+      "required_skills": [
+        "Google Ads",
+        "Meta Ads",
+        "conversion tracking",
+        "GA4",
+        "attribution",
+        "A/B testing",
+        "campaign reporting",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 116,
+      "sector": "Business, Sales & People",
+      "job_role": "Social Media Manager",
+      "required_skills": [
+        "content calendar",
+        "platform publishing",
+        "community management",
+        "social analytics",
+        "copywriting",
+        "brand guidelines",
+        "moderation",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 117,
+      "sector": "Business, Sales & People",
+      "job_role": "Public Relations Specialist",
+      "required_skills": [
+        "media pitching",
+        "press releases",
+        "spokesperson briefing",
+        "media monitoring",
+        "crisis communication",
+        "editorial research",
+        "relationship management",
+        "Stakeholder communication",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 118,
+      "sector": "Business, Sales & People",
+      "job_role": "Corporate Communications Specialist",
+      "required_skills": [
+        "internal communications",
+        "executive messaging",
+        "editorial planning",
+        "change communications",
+        "proofreading",
+        "channel analytics",
+        "stakeholder coordination",
+        "Stakeholder communication",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 119,
+      "sector": "Business, Sales & People",
+      "job_role": "Sales Operations Analyst",
+      "required_skills": [
+        "CRM data",
+        "pipeline analysis",
+        "Excel",
+        "SQL or BI",
+        "sales forecasting",
+        "territory analysis",
+        "KPI reporting",
+        "Requirements gathering",
+        "spreadsheet/data literacy",
+        "process documentation",
+        "stakeholder communication",
+        "KPI tracking",
+        "problem resolution"
+      ]
+    },
+    {
+      "role_id": 120,
+      "sector": "Business, Sales & People",
+      "job_role": "Account Manager",
+      "required_skills": [
+        "account planning",
+        "customer discovery",
+        "CRM",
+        "renewal management",
+        "negotiation",
+        "escalation handling",
+        "revenue forecasting",
+        "Stakeholder communication",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 121,
+      "sector": "Business, Sales & People",
+      "job_role": "Recruitment Coordinator",
+      "required_skills": [
+        "interview scheduling",
+        "applicant tracking systems",
+        "candidate communication",
+        "offer coordination",
+        "data privacy",
+        "calendar management",
+        "recruiting metrics",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 122,
+      "sector": "Business, Sales & People",
+      "job_role": "HR Operations Specialist",
+      "required_skills": [
+        "HRIS",
+        "employee records",
+        "onboarding",
+        "payroll coordination",
+        "labor-law basics",
+        "service tickets",
+        "data confidentiality",
+        "Requirements gathering",
+        "spreadsheet/data literacy",
+        "process documentation",
+        "stakeholder communication",
+        "KPI tracking",
+        "problem resolution"
+      ]
+    },
+    {
+      "role_id": 123,
+      "sector": "Business, Sales & People",
+      "job_role": "Compensation and Benefits Analyst",
+      "required_skills": [
+        "salary benchmarking",
+        "compensation survey data",
+        "Excel",
+        "job evaluation",
+        "benefits administration",
+        "HRIS",
+        "pay equity analysis",
+        "Stakeholder communication",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 124,
+      "sector": "Business, Sales & People",
+      "job_role": "Workforce Planning Analyst",
+      "required_skills": [
+        "headcount modeling",
+        "Excel",
+        "SQL or BI",
+        "scenario planning",
+        "HRIS data",
+        "forecasting",
+        "executive reporting",
+        "Stakeholder communication",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 125,
+      "sector": "Business, Sales & People",
+      "job_role": "Customer Experience Analyst",
+      "required_skills": [
+        "VOC analysis",
+        "survey design",
+        "NPS/CSAT",
+        "SQL or Excel",
+        "journey mapping",
+        "dashboarding",
+        "recommendations",
+        "Stakeholder communication",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 126,
+      "sector": "Business, Sales & People",
+      "job_role": "Business Process Analyst",
+      "required_skills": [
+        "process mapping",
+        "requirements elicitation",
+        "BPMN",
+        "root-cause analysis",
+        "Excel",
+        "SOP writing",
+        "workshop facilitation",
+        "Stakeholder communication",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 127,
+      "sector": "Business, Sales & People",
+      "job_role": "Proposal / Bid Manager",
+      "required_skills": [
+        "RFP analysis",
+        "compliance matrix",
+        "proposal writing",
+        "bid schedule",
+        "stakeholder coordination",
+        "document control",
+        "pricing coordination",
+        "Stakeholder communication",
+        "KPI tracking",
+        "spreadsheet proficiency",
+        "process documentation",
+        "presentation skills"
+      ]
+    },
+    {
+      "role_id": 128,
+      "sector": "Business, Sales & People",
+      "job_role": "Franchise Operations Consultant",
+      "required_skills": [
+        "franchise standards",
+        "operational audits",
+        "training",
+        "unit economics",
+        "store KPIs",
+        "corrective action",
+        "field coaching",
+        "Requirements gathering",
+        "spreadsheet/data literacy",
+        "process documentation",
+        "stakeholder communication",
+        "KPI tracking",
+        "problem resolution"
+      ]
+    },
+    {
+      "role_id": 129,
+      "sector": "Finance & Insurance",
+      "job_role": "Financial Analyst",
+      "required_skills": [
+        "Excel",
+        "financial statements",
+        "budgeting",
+        "forecasting",
+        "variance analysis",
+        "financial modeling",
+        "PowerPoint",
+        "business writing",
+        "Data validation",
+        "spreadsheet modeling",
+        "audit trail maintenance",
+        "regulatory awareness",
+        "reporting accuracy",
+        "stakeholder communication"
+      ]
+    },
+    {
+      "role_id": 130,
+      "sector": "Finance & Insurance",
+      "job_role": "Credit Risk Analyst",
+      "required_skills": [
+        "Excel",
+        "SQL",
+        "probability",
+        "credit scoring",
+        "financial statement analysis",
+        "portfolio monitoring",
+        "Python or R",
+        "regulatory awareness",
+        "Data validation",
+        "spreadsheet modeling",
+        "audit trail maintenance",
+        "reporting accuracy",
+        "stakeholder communication"
+      ]
+    },
+    {
+      "role_id": 131,
+      "sector": "Finance & Insurance",
+      "job_role": "Fraud Risk Analyst",
+      "required_skills": [
+        "transaction monitoring",
+        "SQL",
+        "Excel",
+        "anomaly detection",
+        "investigation writing",
+        "AML red flags",
+        "statistics",
+        "case management",
+        "Data validation",
+        "spreadsheet modeling",
+        "audit trail maintenance",
+        "regulatory awareness",
+        "reporting accuracy",
+        "stakeholder communication"
+      ]
+    },
+    {
+      "role_id": 132,
+      "sector": "Finance & Insurance",
+      "job_role": "KYC / AML Analyst",
+      "required_skills": [
+        "customer due diligence",
+        "KYC",
+        "AML",
+        "sanctions screening",
+        "adverse media research",
+        "case documentation",
+        "Excel",
+        "attention to detail",
+        "Spreadsheet modeling",
+        "data validation",
+        "audit trails",
+        "risk awareness",
+        "regulatory documentation"
+      ]
+    },
+    {
+      "role_id": 133,
+      "sector": "Finance & Insurance",
+      "job_role": "Regulatory Compliance Analyst (Finance)",
+      "required_skills": [
+        "regulatory monitoring",
+        "control testing",
+        "policy interpretation",
+        "audit evidence",
+        "Excel",
+        "risk registers",
+        "report writing",
+        "stakeholder coordination",
+        "Data validation",
+        "spreadsheet modeling",
+        "audit trail maintenance",
+        "regulatory awareness",
+        "reporting accuracy",
+        "stakeholder communication"
+      ]
+    },
+    {
+      "role_id": 134,
+      "sector": "Finance & Insurance",
+      "job_role": "Actuarial Analyst",
+      "required_skills": [
+        "probability",
+        "statistics",
+        "Excel",
+        "R or Python",
+        "actuarial modeling",
+        "data validation",
+        "financial mathematics",
+        "exam progress",
+        "Spreadsheet modeling",
+        "audit trails",
+        "risk awareness",
+        "regulatory documentation"
+      ]
+    },
+    {
+      "role_id": 135,
+      "sector": "Finance & Insurance",
+      "job_role": "Insurance Claims Analyst",
+      "required_skills": [
+        "policy interpretation",
+        "claims review",
+        "evidence assessment",
+        "Excel",
+        "documentation",
+        "customer communication",
+        "fraud indicators",
+        "case management",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 136,
+      "sector": "Finance & Insurance",
+      "job_role": "Accounts Payable / Receivable Associate",
+      "required_skills": [
+        "accounting fundamentals",
+        "invoice processing",
+        "reconciliations",
+        "Excel",
+        "ERP (SAP or Oracle)",
+        "GST basics",
+        "vendor communication",
+        "accuracy",
+        "Spreadsheet modeling",
+        "data validation",
+        "audit trails",
+        "risk awareness",
+        "regulatory documentation"
+      ]
+    },
+    {
+      "role_id": 137,
+      "sector": "Finance & Insurance",
+      "job_role": "Investment Research Analyst",
+      "required_skills": [
+        "financial statement analysis",
+        "valuation",
+        "Excel",
+        "financial modeling",
+        "industry research",
+        "report writing",
+        "PowerPoint",
+        "Data validation",
+        "spreadsheet modeling",
+        "audit trail maintenance",
+        "regulatory awareness",
+        "reporting accuracy",
+        "stakeholder communication"
+      ]
+    },
+    {
+      "role_id": 138,
+      "sector": "Finance & Insurance",
+      "job_role": "Equity Research Associate",
+      "required_skills": [
+        "company valuation",
+        "financial modeling",
+        "accounting",
+        "Excel",
+        "market research",
+        "earnings analysis",
+        "investment writing",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 139,
+      "sector": "Finance & Insurance",
+      "job_role": "Treasury Analyst",
+      "required_skills": [
+        "cash forecasting",
+        "bank reconciliation",
+        "Excel",
+        "liquidity management",
+        "FX basics",
+        "SAP or treasury system",
+        "reporting",
+        "Spreadsheet modeling",
+        "data validation",
+        "audit trails",
+        "risk awareness",
+        "regulatory documentation"
+      ]
+    },
+    {
+      "role_id": 140,
+      "sector": "Finance & Insurance",
+      "job_role": "Accounts Payable Specialist",
+      "required_skills": [
+        "invoice processing",
+        "three-way matching",
+        "vendor reconciliation",
+        "ERP",
+        "Excel",
+        "GST basics",
+        "month-end close",
+        "Spreadsheet modeling",
+        "data validation",
+        "audit trails",
+        "risk awareness",
+        "regulatory documentation"
+      ]
+    },
+    {
+      "role_id": 141,
+      "sector": "Finance & Insurance",
+      "job_role": "Accounts Receivable Specialist",
+      "required_skills": [
+        "billing",
+        "collections",
+        "cash application",
+        "customer reconciliation",
+        "ERP",
+        "Excel",
+        "aging analysis",
+        "Spreadsheet modeling",
+        "data validation",
+        "audit trails",
+        "risk awareness",
+        "regulatory documentation"
+      ]
+    },
+    {
+      "role_id": 142,
+      "sector": "Finance & Insurance",
+      "job_role": "Tax Analyst (India)",
+      "required_skills": [
+        "Income Tax Act basics",
+        "GST",
+        "tax computation",
+        "TDS",
+        "Excel",
+        "tax return preparation",
+        "documentation",
+        "Spreadsheet modeling",
+        "data validation",
+        "audit trails",
+        "risk awareness",
+        "regulatory documentation"
+      ]
+    },
+    {
+      "role_id": 143,
+      "sector": "Finance & Insurance",
+      "job_role": "Internal Auditor",
+      "required_skills": [
+        "risk assessment",
+        "audit planning",
+        "control testing",
+        "audit evidence",
+        "Excel",
+        "process documentation",
+        "report writing",
+        "Spreadsheet modeling",
+        "data validation",
+        "audit trails",
+        "risk awareness",
+        "regulatory documentation"
+      ]
+    },
+    {
+      "role_id": 144,
+      "sector": "Finance & Insurance",
+      "job_role": "Insurance Underwriter",
+      "required_skills": [
+        "risk assessment",
+        "policy wording",
+        "underwriting guidelines",
+        "loss data analysis",
+        "Excel",
+        "regulatory compliance",
+        "decision documentation",
+        "Spreadsheet modeling",
+        "data validation",
+        "audit trails",
+        "risk awareness",
+        "regulatory documentation"
+      ]
+    },
+    {
+      "role_id": 145,
+      "sector": "Finance & Insurance",
+      "job_role": "Claims Analyst",
+      "required_skills": [
+        "claim review",
+        "policy interpretation",
+        "document verification",
+        "fraud indicators",
+        "case management",
+        "Excel",
+        "customer communication",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 146,
+      "sector": "Finance & Insurance",
+      "job_role": "Actuarial Pricing Analyst",
+      "required_skills": [
+        "probability",
+        "statistics",
+        "Excel",
+        "R or Python",
+        "generalized linear models",
+        "insurance pricing",
+        "data validation",
+        "Spreadsheet modeling",
+        "audit trails",
+        "risk awareness",
+        "regulatory documentation"
+      ]
+    },
+    {
+      "role_id": 147,
+      "sector": "Finance & Insurance",
+      "job_role": "Financial Crime Investigator",
+      "required_skills": [
+        "AML red flags",
+        "transaction analysis",
+        "KYC",
+        "sanctions screening",
+        "case investigation",
+        "evidence writing",
+        "regulatory reporting",
+        "Data validation",
+        "spreadsheet modeling",
+        "audit trail maintenance",
+        "regulatory awareness",
+        "reporting accuracy",
+        "stakeholder communication"
+      ]
+    },
+    {
+      "role_id": 148,
+      "sector": "Finance & Insurance",
+      "job_role": "Payment Operations Analyst",
+      "required_skills": [
+        "payment systems",
+        "reconciliation",
+        "exception handling",
+        "SQL or Excel",
+        "fraud controls",
+        "SLA monitoring",
+        "incident documentation",
+        "Data validation",
+        "spreadsheet modeling",
+        "audit trail maintenance",
+        "regulatory awareness",
+        "reporting accuracy",
+        "stakeholder communication"
+      ]
+    },
+    {
+      "role_id": 149,
+      "sector": "Finance & Insurance",
+      "job_role": "Trade Finance Operations Analyst",
+      "required_skills": [
+        "letters of credit",
+        "documentary collections",
+        "UCP 600",
+        "sanctions screening",
+        "SWIFT",
+        "document checking",
+        "Excel",
+        "Data validation",
+        "spreadsheet modeling",
+        "audit trail maintenance",
+        "regulatory awareness",
+        "reporting accuracy",
+        "stakeholder communication"
+      ]
+    },
+    {
+      "role_id": 150,
+      "sector": "Finance & Insurance",
+      "job_role": "Mortgage / Loan Operations Analyst",
+      "required_skills": [
+        "loan documentation",
+        "credit checks",
+        "KYC",
+        "amortization",
+        "Excel",
+        "core banking systems",
+        "compliance",
+        "Requirements gathering",
+        "spreadsheet/data literacy",
+        "process documentation",
+        "stakeholder communication",
+        "KPI tracking",
+        "problem resolution"
+      ]
+    },
+    {
+      "role_id": 151,
+      "sector": "Finance & Insurance",
+      "job_role": "Personal Financial Advisor",
+      "required_skills": [
+        "financial planning",
+        "investment products",
+        "risk profiling",
+        "client discovery",
+        "regulatory suitability",
+        "portfolio review",
+        "communication",
+        "Data validation",
+        "spreadsheet modeling",
+        "audit trail maintenance",
+        "regulatory awareness",
+        "reporting accuracy",
+        "stakeholder communication"
+      ]
+    },
+    {
+      "role_id": 152,
+      "sector": "Finance & Insurance",
+      "job_role": "Insurance Sales Advisor",
+      "required_skills": [
+        "needs analysis",
+        "insurance products",
+        "suitability",
+        "lead management",
+        "CRM",
+        "policy servicing",
+        "regulatory conduct",
+        "Requirements gathering",
+        "spreadsheet/data literacy",
+        "process documentation",
+        "stakeholder communication",
+        "KPI tracking",
+        "problem resolution"
+      ]
+    },
+    {
+      "role_id": 153,
+      "sector": "Green Energy & Environment",
+      "job_role": "ESG / Sustainability Data Analyst",
+      "required_skills": [
+        "Excel",
+        "sustainability data validation",
+        "KPI reporting",
+        "Power BI",
+        "GHG Protocol basics",
+        "Scope 1/2/3 concepts",
+        "documentation",
+        "stakeholder coordination",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 154,
+      "sector": "Green Energy & Environment",
+      "job_role": "Carbon Accounting Analyst",
+      "required_skills": [
+        "GHG inventory",
+        "Scope 1/2/3 emissions",
+        "activity data",
+        "emission factors",
+        "GHG Protocol",
+        "Excel",
+        "data quality",
+        "BRSR/CSRD awareness",
+        "Data validation",
+        "spreadsheet modeling",
+        "audit trail maintenance",
+        "regulatory awareness",
+        "reporting accuracy",
+        "stakeholder communication"
+      ]
+    },
+    {
+      "role_id": 155,
+      "sector": "Green Energy & Environment",
+      "job_role": "Solar PV Technician / Installer",
+      "required_skills": [
+        "electrical safety",
+        "PV module installation",
+        "DC/AC wiring",
+        "inverter setup",
+        "site survey",
+        "multimeter use",
+        "commissioning",
+        "maintenance",
+        "Safety procedures",
+        "measurement quality",
+        "environmental/regulatory compliance",
+        "technical reporting",
+        "root-cause analysis",
+        "lifecycle thinking"
+      ]
+    },
+    {
+      "role_id": 156,
+      "sector": "Green Energy & Environment",
+      "job_role": "Solar PV Design Engineer",
+      "required_skills": [
+        "PV system sizing",
+        "AutoCAD",
+        "PVsyst",
+        "electrical design",
+        "inverter selection",
+        "yield estimation",
+        "site assessment",
+        "grid connection",
+        "Safety procedures",
+        "measurement quality",
+        "environmental/regulatory compliance",
+        "technical reporting",
+        "root-cause analysis",
+        "lifecycle thinking"
+      ]
+    },
+    {
+      "role_id": 157,
+      "sector": "Green Energy & Environment",
+      "job_role": "EV Battery Technician",
+      "required_skills": [
+        "lithium-ion battery safety",
+        "battery pack diagnostics",
+        "BMS basics",
+        "DC electrical systems",
+        "multimeter",
+        "wiring",
+        "fault troubleshooting",
+        "service records",
+        "Safety procedures",
+        "measurement quality",
+        "environmental/regulatory compliance",
+        "technical reporting",
+        "root-cause analysis",
+        "lifecycle thinking"
+      ]
+    },
+    {
+      "role_id": 158,
+      "sector": "Green Energy & Environment",
+      "job_role": "Battery Management System Technician",
+      "required_skills": [
+        "BMS diagnostics",
+        "cell balancing",
+        "battery telemetry",
+        "CAN communication",
+        "electrical testing",
+        "safety procedures",
+        "fault analysis",
+        "technical documentation",
+        "measurement quality",
+        "environmental/regulatory compliance",
+        "technical reporting",
+        "root-cause analysis",
+        "lifecycle thinking"
+      ]
+    },
+    {
+      "role_id": 159,
+      "sector": "Green Energy & Environment",
+      "job_role": "Wind Turbine Service Technician",
+      "required_skills": [
+        "electrical/mechanical maintenance",
+        "work-at-height safety",
+        "inspection",
+        "fault diagnosis",
+        "preventive maintenance",
+        "safety lockout",
+        "service reporting",
+        "Safety procedures",
+        "measurement quality",
+        "environmental/regulatory compliance",
+        "technical reporting",
+        "root-cause analysis",
+        "lifecycle thinking"
+      ]
+    },
+    {
+      "role_id": 160,
+      "sector": "Green Energy & Environment",
+      "job_role": "Energy Auditor / Efficiency Analyst",
+      "required_skills": [
+        "energy measurement",
+        "HVAC fundamentals",
+        "building systems",
+        "Excel",
+        "energy-use analysis",
+        "audit documentation",
+        "efficiency recommendations",
+        "applicable standards",
+        "Safety procedures",
+        "measurement quality",
+        "environmental/regulatory compliance",
+        "technical reporting",
+        "root-cause analysis",
+        "lifecycle thinking"
+      ]
+    },
+    {
+      "role_id": 161,
+      "sector": "Green Energy & Environment",
+      "job_role": "Environmental Compliance Specialist",
+      "required_skills": [
+        "environmental permits",
+        "waste management",
+        "EHS",
+        "compliance audits",
+        "sampling records",
+        "environmental regulations",
+        "incident reporting",
+        "stakeholder coordination",
+        "Safety procedures",
+        "measurement quality",
+        "environmental/regulatory compliance",
+        "technical reporting",
+        "root-cause analysis",
+        "lifecycle thinking"
+      ]
+    },
+    {
+      "role_id": 162,
+      "sector": "Green Energy & Environment",
+      "job_role": "Solar PV Installation Technician",
+      "required_skills": [
+        "PV module installation",
+        "DC wiring",
+        "inverter commissioning",
+        "earthing",
+        "electrical safety",
+        "multimeter use",
+        "maintenance",
+        "Safety procedures",
+        "measurement quality",
+        "environmental/regulatory compliance",
+        "technical reporting",
+        "root-cause analysis",
+        "lifecycle thinking"
+      ]
+    },
+    {
+      "role_id": 163,
+      "sector": "Green Energy & Environment",
+      "job_role": "Energy Auditor",
+      "required_skills": [
+        "energy balance",
+        "site surveys",
+        "HVAC systems",
+        "electrical load analysis",
+        "energy meters",
+        "audit reporting",
+        "efficiency calculations",
+        "Safety procedures",
+        "measurement quality",
+        "environmental/regulatory compliance",
+        "technical reporting",
+        "root-cause analysis",
+        "lifecycle thinking"
+      ]
+    },
+    {
+      "role_id": 164,
+      "sector": "Green Energy & Environment",
+      "job_role": "Energy Analyst",
+      "required_skills": [
+        "energy consumption analysis",
+        "Excel",
+        "SQL or Python",
+        "energy modeling",
+        "dashboarding",
+        "tariff analysis",
+        "reporting",
+        "Safety procedures",
+        "measurement quality",
+        "environmental/regulatory compliance",
+        "technical reporting",
+        "root-cause analysis",
+        "lifecycle thinking"
+      ]
+    },
+    {
+      "role_id": 165,
+      "sector": "Green Energy & Environment",
+      "job_role": "Battery Management Systems Engineer",
+      "required_skills": [
+        "battery chemistry",
+        "BMS",
+        "state-of-charge estimation",
+        "CAN",
+        "embedded C",
+        "cell balancing",
+        "safety testing",
+        "Safety procedures",
+        "measurement quality",
+        "environmental/regulatory compliance",
+        "technical reporting",
+        "root-cause analysis",
+        "lifecycle thinking"
+      ]
+    },
+    {
+      "role_id": 166,
+      "sector": "Green Energy & Environment",
+      "job_role": "EV Charging Infrastructure Engineer",
+      "required_skills": [
+        "EVSE",
+        "electrical design",
+        "load calculations",
+        "OCPP",
+        "protection systems",
+        "commissioning",
+        "local electrical codes",
+        "Linux",
+        "networking fundamentals",
+        "infrastructure as code",
+        "CI/CD",
+        "monitoring and alerting",
+        "backup and disaster recovery"
+      ]
+    },
+    {
+      "role_id": 167,
+      "sector": "Green Energy & Environment",
+      "job_role": "Environmental Impact Assessment Specialist",
+      "required_skills": [
+        "baseline environmental surveys",
+        "EIA methods",
+        "GIS",
+        "impact mitigation",
+        "environmental regulations",
+        "stakeholder consultation",
+        "technical reporting",
+        "Safety procedures",
+        "measurement quality",
+        "environmental/regulatory compliance",
+        "root-cause analysis",
+        "lifecycle thinking"
+      ]
+    },
+    {
+      "role_id": 168,
+      "sector": "Green Energy & Environment",
+      "job_role": "Environmental Compliance Officer",
+      "required_skills": [
+        "environmental permits",
+        "regulatory inspections",
+        "waste registers",
+        "emissions monitoring",
+        "incident reporting",
+        "ISO 14001",
+        "corrective actions",
+        "Safety procedures",
+        "measurement quality",
+        "environmental/regulatory compliance",
+        "technical reporting",
+        "root-cause analysis",
+        "lifecycle thinking"
+      ]
+    },
+    {
+      "role_id": 169,
+      "sector": "Green Energy & Environment",
+      "job_role": "Water / Wastewater Treatment Operator",
+      "required_skills": [
+        "water sampling",
+        "treatment processes",
+        "pumps",
+        "chemical dosing",
+        "SCADA basics",
+        "safety procedures",
+        "operating logs",
+        "measurement quality",
+        "compliance awareness",
+        "technical reporting",
+        "root-cause analysis"
+      ]
+    },
+    {
+      "role_id": 170,
+      "sector": "Green Energy & Environment",
+      "job_role": "Sustainability Reporting Analyst",
+      "required_skills": [
+        "GHG Protocol",
+        "Scope 1/2/3 data",
+        "ESG metrics",
+        "Excel",
+        "GRI or BRSR",
+        "data controls",
+        "report drafting",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 171,
+      "sector": "Green Energy & Environment",
+      "job_role": "Climate Risk Analyst",
+      "required_skills": [
+        "climate scenarios",
+        "physical risk assessment",
+        "transition risk",
+        "GIS",
+        "data analysis",
+        "financial risk concepts",
+        "disclosure writing",
+        "Data validation",
+        "spreadsheet modeling",
+        "audit trail maintenance",
+        "regulatory awareness",
+        "reporting accuracy",
+        "stakeholder communication"
+      ]
+    },
+    {
+      "role_id": 172,
+      "sector": "Green Energy & Environment",
+      "job_role": "Waste Management Coordinator",
+      "required_skills": [
+        "waste characterization",
+        "segregation",
+        "vendor coordination",
+        "waste manifests",
+        "environmental compliance",
+        "safety",
+        "KPI reporting",
+        "Safety procedures",
+        "measurement quality",
+        "compliance awareness",
+        "technical reporting",
+        "root-cause analysis"
+      ]
+    },
+    {
+      "role_id": 173,
+      "sector": "Green Energy & Environment",
+      "job_role": "Environmental GIS Specialist",
+      "required_skills": [
+        "QGIS or ArcGIS",
+        "spatial analysis",
+        "remote sensing",
+        "geodatabases",
+        "map production",
+        "field data validation",
+        "environmental datasets",
+        "Safety procedures",
+        "measurement quality",
+        "environmental/regulatory compliance",
+        "technical reporting",
+        "root-cause analysis",
+        "lifecycle thinking"
+      ]
+    },
+    {
+      "role_id": 174,
+      "sector": "Green Energy & Environment",
+      "job_role": "Green Hydrogen Process Technician",
+      "required_skills": [
+        "electrolyzer operations",
+        "process instrumentation",
+        "hydrogen safety",
+        "P&ID reading",
+        "gas detection",
+        "maintenance",
+        "operating logs",
+        "Safety procedures",
+        "measurement quality",
+        "compliance awareness",
+        "technical reporting",
+        "root-cause analysis"
+      ]
+    },
+    {
+      "role_id": 175,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Supply Chain Analyst",
+      "required_skills": [
+        "Excel",
+        "SQL",
+        "inventory analysis",
+        "KPI reporting",
+        "root-cause analysis",
+        "demand/supply concepts",
+        "SAP or planning system",
+        "stakeholder coordination",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 176,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Demand Planner",
+      "required_skills": [
+        "statistical forecasting",
+        "Excel",
+        "SAP IBP/APO",
+        "forecast review",
+        "inventory concepts",
+        "demand segmentation",
+        "Power BI/Tableau",
+        "stakeholder facilitation",
+        "Process improvement",
+        "quality control",
+        "safety standards",
+        "operational reporting",
+        "root-cause analysis"
+      ]
+    },
+    {
+      "role_id": 177,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Procurement Analyst",
+      "required_skills": [
+        "spend analysis",
+        "Excel",
+        "sourcing",
+        "purchase order lifecycle",
+        "supplier performance",
+        "contract basics",
+        "ERP",
+        "negotiation support",
+        "Process improvement",
+        "quality control",
+        "safety standards",
+        "operational reporting",
+        "root-cause analysis"
+      ]
+    },
+    {
+      "role_id": 178,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Inventory Planner",
+      "required_skills": [
+        "inventory control",
+        "replenishment",
+        "Excel",
+        "ERP",
+        "safety stock",
+        "service-level metrics",
+        "demand variability",
+        "root-cause analysis",
+        "Process improvement",
+        "quality control",
+        "safety standards",
+        "operational reporting"
+      ]
+    },
+    {
+      "role_id": 179,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Warehouse Operations Coordinator",
+      "required_skills": [
+        "WMS",
+        "inventory accuracy",
+        "receiving/picking/dispatch",
+        "safety procedures",
+        "shift reporting",
+        "Excel",
+        "barcode/RFID basics",
+        "team coordination",
+        "Pipeline observability",
+        "schema evolution",
+        "data contracts",
+        "partitioning",
+        "orchestration",
+        "access governance"
+      ]
+    },
+    {
+      "role_id": 180,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Quality Assurance Technician (Manufacturing)",
+      "required_skills": [
+        "inspection",
+        "measurement tools",
+        "quality records",
+        "non-conformance reporting",
+        "root-cause analysis",
+        "SPC basics",
+        "SOPs",
+        "safety",
+        "Test planning",
+        "regression testing",
+        "defect tracking",
+        "CI test integration",
+        "test data management",
+        "risk-based testing"
+      ]
+    },
+    {
+      "role_id": 181,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Food Safety / Quality Specialist",
+      "required_skills": [
+        "HACCP",
+        "GMP",
+        "sanitation",
+        "microbiological sampling",
+        "traceability",
+        "audit preparation",
+        "CAPA",
+        "food safety documentation",
+        "Field data collection",
+        "quality control",
+        "safety and compliance",
+        "seasonal planning",
+        "technical reporting",
+        "stakeholder coordination"
+      ]
+    },
+    {
+      "role_id": 182,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Production Planner",
+      "required_skills": [
+        "production scheduling",
+        "capacity planning",
+        "Excel",
+        "ERP/MRP",
+        "BOM",
+        "inventory coordination",
+        "KPI tracking",
+        "cross-functional communication",
+        "Root-cause analysis",
+        "process improvement",
+        "safety standards",
+        "quality control",
+        "operational reporting",
+        "preventive maintenance"
+      ]
+    },
+    {
+      "role_id": 183,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Industrial Maintenance Technician",
+      "required_skills": [
+        "electrical safety",
+        "preventive maintenance",
+        "PLC basics",
+        "motor controls",
+        "troubleshooting",
+        "equipment inspection",
+        "work orders",
+        "lockout/tagout",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 184,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Procurement Specialist",
+      "required_skills": [
+        "purchase orders",
+        "supplier negotiation",
+        "sourcing",
+        "vendor onboarding",
+        "ERP",
+        "cost analysis",
+        "procurement compliance",
+        "Process improvement",
+        "quality control",
+        "safety standards",
+        "operational reporting",
+        "root-cause analysis"
+      ]
+    },
+    {
+      "role_id": 185,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Logistics Coordinator",
+      "required_skills": [
+        "shipment tracking",
+        "freight documentation",
+        "carrier coordination",
+        "Excel",
+        "ERP or TMS",
+        "delivery exception handling",
+        "customer updates",
+        "Root-cause analysis",
+        "process improvement",
+        "safety standards",
+        "quality control",
+        "operational reporting",
+        "preventive maintenance"
+      ]
+    },
+    {
+      "role_id": 186,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Warehouse Operations Supervisor",
+      "required_skills": [
+        "WMS",
+        "inventory control",
+        "pick-pack-ship",
+        "workforce scheduling",
+        "safety",
+        "productivity KPIs",
+        "incident reporting",
+        "Pipeline observability",
+        "schema evolution",
+        "data contracts",
+        "partitioning",
+        "orchestration",
+        "access governance"
+      ]
+    },
+    {
+      "role_id": 187,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Inventory Control Analyst",
+      "required_skills": [
+        "cycle counting",
+        "stock reconciliation",
+        "ABC analysis",
+        "Excel",
+        "ERP/WMS",
+        "root-cause analysis",
+        "inventory accuracy reporting",
+        "Process improvement",
+        "quality control",
+        "safety standards",
+        "operational reporting"
+      ]
+    },
+    {
+      "role_id": 188,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Quality Engineer (Manufacturing)",
+      "required_skills": [
+        "8D",
+        "root-cause analysis",
+        "FMEA",
+        "SPC",
+        "control plans",
+        "CAPA",
+        "ISO 9001",
+        "process improvement",
+        "safety standards",
+        "quality control",
+        "operational reporting",
+        "preventive maintenance"
+      ]
+    },
+    {
+      "role_id": 189,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Quality Control Inspector",
+      "required_skills": [
+        "engineering drawings",
+        "measurement instruments",
+        "inspection plans",
+        "GD&T basics",
+        "nonconformance reporting",
+        "calibration awareness",
+        "traceability",
+        "Process improvement",
+        "quality control",
+        "safety standards",
+        "operational reporting",
+        "root-cause analysis"
+      ]
+    },
+    {
+      "role_id": 190,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "CNC Machinist",
+      "required_skills": [
+        "CNC setup",
+        "G-code",
+        "machine offsets",
+        "micrometers",
+        "calipers",
+        "tool wear monitoring",
+        "shop-floor safety",
+        "Process improvement",
+        "quality control",
+        "safety standards",
+        "operational reporting",
+        "root-cause analysis"
+      ]
+    },
+    {
+      "role_id": 191,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Industrial Automation Technician",
+      "required_skills": [
+        "PLC troubleshooting",
+        "sensors",
+        "VFDs",
+        "electrical schematics",
+        "HMI",
+        "preventive maintenance",
+        "lockout/tagout",
+        "Root-cause analysis",
+        "process improvement",
+        "safety standards",
+        "quality control",
+        "operational reporting"
+      ]
+    },
+    {
+      "role_id": 192,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Robotics Technician",
+      "required_skills": [
+        "robot teach pendant",
+        "robot cell safety",
+        "PLC I/O",
+        "calibration",
+        "fault diagnosis",
+        "preventive maintenance",
+        "work instructions",
+        "Hardware/software integration",
+        "debugging with logs and traces",
+        "performance profiling",
+        "real-time constraints",
+        "system validation",
+        "version control"
+      ]
+    },
+    {
+      "role_id": 193,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Maintenance Planner",
+      "required_skills": [
+        "CMMS",
+        "preventive maintenance scheduling",
+        "work orders",
+        "spare-parts planning",
+        "equipment history",
+        "Excel",
+        "safety permits",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 194,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Process Improvement Engineer",
+      "required_skills": [
+        "Lean",
+        "value stream mapping",
+        "Kaizen",
+        "time studies",
+        "OEE",
+        "root-cause analysis",
+        "standard work",
+        "Process improvement",
+        "quality control",
+        "safety standards",
+        "operational reporting"
+      ]
+    },
+    {
+      "role_id": 195,
+      "sector": "Logistics & Manufacturing",
+      "job_role": "Textile Quality Technologist",
+      "required_skills": [
+        "fabric inspection",
+        "textile testing",
+        "color fastness",
+        "defect classification",
+        "AQL",
+        "lab equipment",
+        "quality records",
+        "Process improvement",
+        "quality control",
+        "safety standards",
+        "operational reporting",
+        "root-cause analysis"
+      ]
+    },
+    {
+      "role_id": 196,
+      "sector": "Agriculture & Food",
+      "job_role": "Agronomist / Crop Advisor",
+      "required_skills": [
+        "soil testing",
+        "crop nutrition",
+        "pest management",
+        "crop scouting",
+        "irrigation practices",
+        "field trials",
+        "farm advisory",
+        "record keeping",
+        "Field data collection",
+        "quality control",
+        "safety and compliance",
+        "seasonal planning",
+        "technical reporting",
+        "stakeholder coordination"
+      ]
+    },
+    {
+      "role_id": 197,
+      "sector": "Agriculture & Food",
+      "job_role": "AgriTech Field Officer",
+      "required_skills": [
+        "farmer onboarding",
+        "crop data collection",
+        "mobile apps",
+        "field communication",
+        "crop cycle knowledge",
+        "survey quality",
+        "basic Excel",
+        "local-language communication",
+        "Field/data recording",
+        "quality control",
+        "safety procedures",
+        "seasonal planning",
+        "technical reporting"
+      ]
+    },
+    {
+      "role_id": 198,
+      "sector": "Agriculture & Food",
+      "job_role": "Food Technologist",
+      "required_skills": [
+        "food processing",
+        "product formulation",
+        "HACCP",
+        "sensory evaluation",
+        "quality testing",
+        "labeling",
+        "shelf-life studies",
+        "technical documentation",
+        "Field data collection",
+        "quality control",
+        "safety and compliance",
+        "seasonal planning",
+        "technical reporting",
+        "stakeholder coordination"
+      ]
+    },
+    {
+      "role_id": 199,
+      "sector": "Agriculture & Food",
+      "job_role": "Food Safety Inspector",
+      "required_skills": [
+        "food hygiene",
+        "sampling",
+        "inspection checklists",
+        "HACCP",
+        "regulatory documentation",
+        "evidence writing",
+        "risk assessment",
+        "communication",
+        "Field data collection",
+        "quality control",
+        "safety and compliance",
+        "seasonal planning",
+        "technical reporting",
+        "stakeholder coordination"
+      ]
+    },
+    {
+      "role_id": 200,
+      "sector": "Agriculture & Food",
+      "job_role": "Agronomist",
+      "required_skills": [
+        "soil sampling",
+        "crop planning",
+        "nutrient management",
+        "pest scouting",
+        "irrigation scheduling",
+        "field trials",
+        "farm advisory",
+        "Field data collection",
+        "quality control",
+        "safety and compliance",
+        "seasonal planning",
+        "technical reporting",
+        "stakeholder coordination"
+      ]
+    },
+    {
+      "role_id": 201,
+      "sector": "Agriculture & Food",
+      "job_role": "Precision Agriculture Specialist",
+      "required_skills": [
+        "GIS",
+        "GPS",
+        "remote sensing",
+        "drone imagery",
+        "variable-rate application",
+        "farm data analysis",
+        "equipment integration",
+        "Field data collection",
+        "quality control",
+        "safety and compliance",
+        "seasonal planning",
+        "technical reporting",
+        "stakeholder coordination"
+      ]
+    },
+    {
+      "role_id": 202,
+      "sector": "Agriculture & Food",
+      "job_role": "Agricultural Extension Officer",
+      "required_skills": [
+        "farmer training",
+        "crop advisory",
+        "field demonstrations",
+        "local language communication",
+        "pest management",
+        "record keeping",
+        "program monitoring",
+        "Field/data recording",
+        "quality control",
+        "safety procedures",
+        "seasonal planning",
+        "technical reporting"
+      ]
+    },
+    {
+      "role_id": 203,
+      "sector": "Agriculture & Food",
+      "job_role": "Seed Production Technologist",
+      "required_skills": [
+        "seed production planning",
+        "field isolation",
+        "crop inspections",
+        "seed processing",
+        "germination testing",
+        "varietal purity",
+        "traceability",
+        "Root-cause analysis",
+        "process improvement",
+        "safety standards",
+        "quality control",
+        "operational reporting",
+        "preventive maintenance"
+      ]
+    },
+    {
+      "role_id": 204,
+      "sector": "Agriculture & Food",
+      "job_role": "Plant Breeding Research Assistant",
+      "required_skills": [
+        "field trial design",
+        "phenotyping",
+        "plant crossing",
+        "germplasm records",
+        "statistics",
+        "crop biology",
+        "data management",
+        "Field/data recording",
+        "quality control",
+        "safety procedures",
+        "seasonal planning",
+        "technical reporting"
+      ]
+    },
+    {
+      "role_id": 205,
+      "sector": "Agriculture & Food",
+      "job_role": "Soil Laboratory Analyst",
+      "required_skills": [
+        "soil sample preparation",
+        "pH",
+        "EC",
+        "nutrient analysis",
+        "laboratory QA/QC",
+        "analytical instruments",
+        "result reporting",
+        "Data privacy",
+        "standard operating procedures",
+        "quality assurance",
+        "documentation",
+        "regulatory compliance",
+        "interdisciplinary communication"
+      ]
+    },
+    {
+      "role_id": 206,
+      "sector": "Agriculture & Food",
+      "job_role": "Irrigation Design Technician",
+      "required_skills": [
+        "irrigation hydraulics",
+        "drip/sprinkler layout",
+        "pump sizing",
+        "AutoCAD",
+        "water budgeting",
+        "field survey",
+        "installation supervision",
+        "Field data collection",
+        "quality control",
+        "safety and compliance",
+        "seasonal planning",
+        "technical reporting",
+        "stakeholder coordination"
+      ]
+    },
+    {
+      "role_id": 207,
+      "sector": "Agriculture & Food",
+      "job_role": "Aquaculture Technician",
+      "required_skills": [
+        "water quality testing",
+        "feed management",
+        "stocking density",
+        "disease observation",
+        "pond preparation",
+        "biosecurity",
+        "production logs",
+        "Field/data recording",
+        "quality control",
+        "safety procedures",
+        "seasonal planning",
+        "technical reporting"
+      ]
+    },
+    {
+      "role_id": 208,
+      "sector": "Agriculture & Food",
+      "job_role": "Food Safety Officer",
+      "required_skills": [
+        "HACCP",
+        "FSSAI requirements",
+        "GMP",
+        "sanitation inspection",
+        "traceability",
+        "allergen control",
+        "corrective-action reporting",
+        "Field data collection",
+        "quality control",
+        "safety and compliance",
+        "seasonal planning",
+        "technical reporting",
+        "stakeholder coordination"
+      ]
+    },
+    {
+      "role_id": 209,
+      "sector": "Agriculture & Food",
+      "job_role": "Food Quality Assurance Executive",
+      "required_skills": [
+        "HACCP",
+        "GMP",
+        "microbiological sampling",
+        "sensory evaluation",
+        "batch records",
+        "CAPA",
+        "supplier quality",
+        "Test planning",
+        "regression testing",
+        "defect tracking",
+        "CI test integration",
+        "test data management",
+        "risk-based testing"
+      ]
+    },
+    {
+      "role_id": 210,
+      "sector": "Agriculture & Food",
+      "job_role": "Food Microbiologist",
+      "required_skills": [
+        "aseptic technique",
+        "microbial culture",
+        "pathogen testing",
+        "environmental monitoring",
+        "media preparation",
+        "lab QA",
+        "LIMS",
+        "Field data collection",
+        "quality control",
+        "safety and compliance",
+        "seasonal planning",
+        "technical reporting",
+        "stakeholder coordination"
+      ]
+    },
+    {
+      "role_id": 211,
+      "sector": "Agriculture & Food",
+      "job_role": "Dairy Technologist",
+      "required_skills": [
+        "milk quality testing",
+        "pasteurization",
+        "homogenization",
+        "CIP",
+        "dairy microbiology",
+        "process control",
+        "HACCP",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 212,
+      "sector": "Agriculture & Food",
+      "job_role": "Food Packaging Technologist",
+      "required_skills": [
+        "packaging material testing",
+        "barrier properties",
+        "seal integrity",
+        "shelf-life studies",
+        "packaging specifications",
+        "supplier coordination",
+        "compliance",
+        "Field data collection",
+        "quality control",
+        "safety and compliance",
+        "seasonal planning",
+        "technical reporting",
+        "stakeholder coordination"
+      ]
+    },
+    {
+      "role_id": 213,
+      "sector": "Agriculture & Food",
+      "job_role": "Agricultural Commodity Trader",
+      "required_skills": [
+        "commodity grading",
+        "market price analysis",
+        "procurement",
+        "warehouse receipts",
+        "contract negotiation",
+        "Excel",
+        "trade documentation",
+        "Field/data recording",
+        "quality control",
+        "safety procedures",
+        "seasonal planning",
+        "technical reporting"
+      ]
+    },
+    {
+      "role_id": 214,
+      "sector": "Agriculture & Food",
+      "job_role": "Farm Operations Manager",
+      "required_skills": [
+        "crop calendar",
+        "labor planning",
+        "input procurement",
+        "irrigation operations",
+        "yield tracking",
+        "farm safety",
+        "cost control",
+        "Field data collection",
+        "quality control",
+        "safety and compliance",
+        "seasonal planning",
+        "technical reporting",
+        "stakeholder coordination"
+      ]
+    },
+    {
+      "role_id": 215,
+      "sector": "Education & Public Service",
+      "job_role": "School Teacher (Primary)",
+      "required_skills": [
+        "lesson planning",
+        "foundational literacy",
+        "numeracy instruction",
+        "classroom management",
+        "formative assessment",
+        "child safeguarding",
+        "parent communication",
+        "Learning outcome design",
+        "assessment design",
+        "accessibility",
+        "feedback analysis",
+        "lesson documentation",
+        "learner communication"
+      ]
+    },
+    {
+      "role_id": 216,
+      "sector": "Education & Public Service",
+      "job_role": "Secondary School Science Teacher",
+      "required_skills": [
+        "subject knowledge",
+        "lesson planning",
+        "laboratory safety",
+        "inquiry-based learning",
+        "assessment design",
+        "classroom management",
+        "student feedback",
+        "Learning outcome design",
+        "accessibility",
+        "feedback analysis",
+        "lesson documentation",
+        "learner communication"
+      ]
+    },
+    {
+      "role_id": 217,
+      "sector": "Education & Public Service",
+      "job_role": "Mathematics Teacher",
+      "required_skills": [
+        "mathematical reasoning",
+        "lesson planning",
+        "differentiated instruction",
+        "formative assessment",
+        "problem-based learning",
+        "classroom management",
+        "student progress tracking",
+        "Learning outcome design",
+        "assessment design",
+        "accessibility",
+        "feedback analysis",
+        "lesson documentation",
+        "learner communication"
+      ]
+    },
+    {
+      "role_id": 218,
+      "sector": "Education & Public Service",
+      "job_role": "Special Education Teacher",
+      "required_skills": [
+        "individualized education plans",
+        "differentiated instruction",
+        "inclusive classroom practice",
+        "behavior support",
+        "progress monitoring",
+        "family collaboration",
+        "safeguarding",
+        "Learning outcome design",
+        "assessment design",
+        "accessibility",
+        "feedback analysis",
+        "lesson documentation",
+        "learner communication"
+      ]
+    },
+    {
+      "role_id": 219,
+      "sector": "Education & Public Service",
+      "job_role": "School Counselor",
+      "required_skills": [
+        "student counseling",
+        "active listening",
+        "risk assessment",
+        "referral pathways",
+        "confidentiality",
+        "safeguarding",
+        "case documentation",
+        "Documentation",
+        "accessibility",
+        "assessment/evaluation",
+        "stakeholder communication",
+        "data privacy"
+      ]
+    },
+    {
+      "role_id": 220,
+      "sector": "Education & Public Service",
+      "job_role": "Academic Advisor",
+      "required_skills": [
+        "degree audit",
+        "course planning",
+        "student advising",
+        "student information systems",
+        "referral coordination",
+        "record keeping",
+        "communication",
+        "Documentation",
+        "accessibility",
+        "assessment/evaluation",
+        "stakeholder communication",
+        "data privacy"
+      ]
+    },
+    {
+      "role_id": 221,
+      "sector": "Education & Public Service",
+      "job_role": "Education Program Coordinator",
+      "required_skills": [
+        "program scheduling",
+        "curriculum coordination",
+        "learner tracking",
+        "LMS",
+        "facilitator support",
+        "monitoring and evaluation",
+        "reporting",
+        "Learning outcome design",
+        "assessment design",
+        "accessibility",
+        "feedback analysis",
+        "lesson documentation",
+        "learner communication"
+      ]
+    },
+    {
+      "role_id": 222,
+      "sector": "Education & Public Service",
+      "job_role": "Assessment / Examination Officer",
+      "required_skills": [
+        "assessment administration",
+        "exam security",
+        "accommodations",
+        "scoring workflows",
+        "records management",
+        "data analysis",
+        "policy compliance",
+        "Documentation",
+        "accessibility",
+        "assessment/evaluation",
+        "stakeholder communication",
+        "data privacy"
+      ]
+    },
+    {
+      "role_id": 223,
+      "sector": "Education & Public Service",
+      "job_role": "Librarian",
+      "required_skills": [
+        "cataloging",
+        "reference services",
+        "information literacy",
+        "library management systems",
+        "collection development",
+        "research support",
+        "reader services",
+        "Documentation",
+        "accessibility",
+        "assessment/evaluation",
+        "stakeholder communication",
+        "data privacy"
+      ]
+    },
+    {
+      "role_id": 224,
+      "sector": "Education & Public Service",
+      "job_role": "Instructional Coach",
+      "required_skills": [
+        "classroom observation",
+        "instructional feedback",
+        "curriculum alignment",
+        "adult learning",
+        "coaching conversations",
+        "data-informed planning",
+        "professional development",
+        "Learning outcome design",
+        "assessment design",
+        "accessibility",
+        "feedback analysis",
+        "lesson documentation",
+        "learner communication"
+      ]
+    },
+    {
+      "role_id": 225,
+      "sector": "Education & Public Service",
+      "job_role": "Public Health Program Officer",
+      "required_skills": [
+        "program planning",
+        "community outreach",
+        "health indicators",
+        "monitoring and evaluation",
+        "stakeholder coordination",
+        "public health reporting",
+        "safeguarding",
+        "Data privacy",
+        "standard operating procedures",
+        "quality assurance",
+        "documentation",
+        "regulatory compliance",
+        "interdisciplinary communication"
+      ]
+    },
+    {
+      "role_id": 226,
+      "sector": "Education & Public Service",
+      "job_role": "Public Policy Research Analyst",
+      "required_skills": [
+        "policy analysis",
+        "desk research",
+        "quantitative methods",
+        "data visualization",
+        "regulatory review",
+        "policy briefs",
+        "stakeholder interviews",
+        "Documentation",
+        "accessibility",
+        "assessment/evaluation",
+        "stakeholder communication",
+        "data privacy"
+      ]
+    },
+    {
+      "role_id": 227,
+      "sector": "Education & Public Service",
+      "job_role": "Monitoring and Evaluation Officer",
+      "required_skills": [
+        "logical frameworks",
+        "indicator design",
+        "survey methods",
+        "data quality checks",
+        "Excel or R",
+        "outcome evaluation",
+        "donor reporting",
+        "Documentation",
+        "accessibility",
+        "assessment/evaluation",
+        "stakeholder communication",
+        "data privacy"
+      ]
+    },
+    {
+      "role_id": 228,
+      "sector": "Education & Public Service",
+      "job_role": "Community Development Officer",
+      "required_skills": [
+        "community needs assessment",
+        "participatory planning",
+        "facilitation",
+        "local government coordination",
+        "safeguarding",
+        "program monitoring",
+        "report writing",
+        "Documentation",
+        "accessibility",
+        "assessment/evaluation",
+        "stakeholder communication",
+        "data privacy"
+      ]
+    },
+    {
+      "role_id": 229,
+      "sector": "Education & Public Service",
+      "job_role": "Government Procurement Officer",
+      "required_skills": [
+        "public procurement rules",
+        "tender documentation",
+        "bid evaluation",
+        "contract management",
+        "audit trail",
+        "e-procurement",
+        "conflict-of-interest controls",
+        "Documentation",
+        "accessibility",
+        "assessment/evaluation",
+        "stakeholder communication",
+        "data privacy"
+      ]
+    },
+    {
+      "role_id": 230,
+      "sector": "Education & Public Service",
+      "job_role": "Emergency Management Coordinator",
+      "required_skills": [
+        "incident action planning",
+        "hazard assessment",
+        "emergency communication",
+        "resource coordination",
+        "tabletop exercises",
+        "incident logs",
+        "safety protocols",
+        "Documentation",
+        "accessibility",
+        "assessment/evaluation",
+        "stakeholder communication",
+        "data privacy"
+      ]
+    },
+    {
+      "role_id": 231,
+      "sector": "Construction & Infrastructure",
+      "job_role": "Civil Site Engineer",
+      "required_skills": [
+        "construction drawings",
+        "quantity takeoff",
+        "site supervision",
+        "surveying",
+        "concrete works",
+        "QA/QC",
+        "safety documentation",
+        "Technical drawing interpretation",
+        "standards compliance",
+        "site safety",
+        "estimation",
+        "quality inspection",
+        "project documentation"
+      ]
+    },
+    {
+      "role_id": 232,
+      "sector": "Construction & Infrastructure",
+      "job_role": "Structural Engineer",
+      "required_skills": [
+        "structural analysis",
+        "reinforced concrete design",
+        "steel design",
+        "ETABS or STAAD.Pro",
+        "IS codes",
+        "design calculations",
+        "drawing review",
+        "Technical drawing interpretation",
+        "standards compliance",
+        "site safety",
+        "estimation",
+        "quality inspection",
+        "project documentation"
+      ]
+    },
+    {
+      "role_id": 233,
+      "sector": "Construction & Infrastructure",
+      "job_role": "Quantity Surveyor",
+      "required_skills": [
+        "quantity takeoff",
+        "BOQ",
+        "rate analysis",
+        "measurement standards",
+        "billing",
+        "contract documentation",
+        "Excel",
+        "Technical drawing interpretation",
+        "standards compliance",
+        "site safety",
+        "estimation",
+        "quality inspection",
+        "project documentation"
+      ]
+    },
+    {
+      "role_id": 234,
+      "sector": "Construction & Infrastructure",
+      "job_role": "Construction Project Planner",
+      "required_skills": [
+        "Primavera P6 or MS Project",
+        "baseline schedules",
+        "critical path",
+        "progress measurement",
+        "resource loading",
+        "delay analysis",
+        "reporting",
+        "Technical drawing interpretation",
+        "standards compliance",
+        "site safety",
+        "estimation",
+        "quality inspection",
+        "project documentation"
+      ]
+    },
+    {
+      "role_id": 235,
+      "sector": "Construction & Infrastructure",
+      "job_role": "BIM Modeler (Architecture)",
+      "required_skills": [
+        "Revit",
+        "architectural modeling",
+        "families",
+        "drawing extraction",
+        "model coordination",
+        "BIM standards",
+        "clash reporting",
+        "Technical drawing interpretation",
+        "standards compliance",
+        "site safety",
+        "estimation",
+        "quality inspection",
+        "project documentation"
+      ]
+    },
+    {
+      "role_id": 236,
+      "sector": "Construction & Infrastructure",
+      "job_role": "BIM Coordinator",
+      "required_skills": [
+        "Revit",
+        "Navisworks",
+        "clash detection",
+        "BIM execution plans",
+        "model federation",
+        "issue tracking",
+        "coordination meetings",
+        "Technical drawing interpretation",
+        "standards compliance",
+        "site safety",
+        "estimation",
+        "quality inspection",
+        "project documentation"
+      ]
+    },
+    {
+      "role_id": 237,
+      "sector": "Construction & Infrastructure",
+      "job_role": "Land Surveyor",
+      "required_skills": [
+        "total station",
+        "GNSS/GPS",
+        "leveling",
+        "traverse adjustment",
+        "AutoCAD Civil 3D",
+        "site setting-out",
+        "survey records",
+        "Technical drawing interpretation",
+        "standards compliance",
+        "site safety",
+        "estimation",
+        "quality inspection",
+        "project documentation"
+      ]
+    },
+    {
+      "role_id": 238,
+      "sector": "Construction & Infrastructure",
+      "job_role": "Highway Design Engineer",
+      "required_skills": [
+        "road geometry",
+        "Civil 3D",
+        "traffic data",
+        "pavement design",
+        "drainage",
+        "highway standards",
+        "design documentation",
+        "Technical documentation",
+        "safety standards",
+        "quality inspection",
+        "estimation",
+        "compliance awareness"
+      ]
+    },
+    {
+      "role_id": 239,
+      "sector": "Construction & Infrastructure",
+      "job_role": "Geotechnical Engineer",
+      "required_skills": [
+        "soil mechanics",
+        "geotechnical investigation",
+        "foundation design",
+        "slope stability",
+        "PLAXIS or similar",
+        "lab interpretation",
+        "technical reports",
+        "Technical documentation",
+        "safety standards",
+        "quality inspection",
+        "estimation",
+        "compliance awareness"
+      ]
+    },
+    {
+      "role_id": 240,
+      "sector": "Construction & Infrastructure",
+      "job_role": "Building Services Engineer (HVAC)",
+      "required_skills": [
+        "HVAC load calculations",
+        "duct design",
+        "chilled water systems",
+        "AutoCAD",
+        "HAP or equivalent",
+        "codes",
+        "commissioning",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 241,
+      "sector": "Construction & Infrastructure",
+      "job_role": "Electrical Design Engineer (Buildings)",
+      "required_skills": [
+        "load calculations",
+        "single-line diagrams",
+        "lighting design",
+        "protection coordination",
+        "AutoCAD",
+        "electrical codes",
+        "BOQ",
+        "Root-cause analysis",
+        "process improvement",
+        "safety standards",
+        "quality control",
+        "operational reporting",
+        "preventive maintenance"
+      ]
+    },
+    {
+      "role_id": 242,
+      "sector": "Construction & Infrastructure",
+      "job_role": "Plumbing Design Engineer",
+      "required_skills": [
+        "water supply design",
+        "drainage design",
+        "pump sizing",
+        "hydraulic calculations",
+        "Revit or AutoCAD",
+        "plumbing codes",
+        "coordination",
+        "Technical documentation",
+        "safety standards",
+        "quality inspection",
+        "estimation",
+        "compliance awareness"
+      ]
+    },
+    {
+      "role_id": 243,
+      "sector": "Construction & Infrastructure",
+      "job_role": "Construction Safety Officer",
+      "required_skills": [
+        "hazard identification",
+        "risk assessment",
+        "method statement review",
+        "site inspections",
+        "toolbox talks",
+        "incident investigation",
+        "safety legislation",
+        "Technical drawing interpretation",
+        "standards compliance",
+        "site safety",
+        "estimation",
+        "quality inspection",
+        "project documentation"
+      ]
+    },
+    {
+      "role_id": 244,
+      "sector": "Construction & Infrastructure",
+      "job_role": "Facilities Manager",
+      "required_skills": [
+        "building operations",
+        "preventive maintenance",
+        "vendor management",
+        "CAFM/CMMS",
+        "energy monitoring",
+        "safety compliance",
+        "service-level tracking",
+        "Technical documentation",
+        "safety standards",
+        "quality inspection",
+        "estimation",
+        "compliance awareness"
+      ]
+    },
+    {
+      "role_id": 245,
+      "sector": "Construction & Infrastructure",
+      "job_role": "Roads Maintenance Technician",
+      "required_skills": [
+        "road defect inspection",
+        "asphalt patching",
+        "drainage maintenance",
+        "traffic management",
+        "hand tools",
+        "work permits",
+        "maintenance logs",
+        "Model deployment",
+        "feature selection",
+        "cross-validation",
+        "experiment tracking",
+        "data leakage prevention",
+        "model monitoring"
+      ]
+    },
+    {
+      "role_id": 246,
+      "sector": "Construction & Infrastructure",
+      "job_role": "Water Resources Engineer",
+      "required_skills": [
+        "hydrology",
+        "hydraulic modeling",
+        "flood analysis",
+        "GIS",
+        "HEC-RAS or equivalent",
+        "drainage design",
+        "technical reporting",
+        "Technical documentation",
+        "safety standards",
+        "quality inspection",
+        "estimation",
+        "compliance awareness"
+      ]
+    },
+    {
+      "role_id": 247,
+      "sector": "Creative & Media",
+      "job_role": "Graphic Designer",
+      "required_skills": [
+        "Adobe Photoshop",
+        "Adobe Illustrator",
+        "layout",
+        "typography",
+        "brand guidelines",
+        "print production",
+        "file preparation",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 248,
+      "sector": "Creative & Media",
+      "job_role": "Motion Graphics Designer",
+      "required_skills": [
+        "Adobe After Effects",
+        "animation principles",
+        "storyboarding",
+        "compositing",
+        "typography animation",
+        "rendering",
+        "audio synchronization",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 249,
+      "sector": "Creative & Media",
+      "job_role": "Video Editor",
+      "required_skills": [
+        "Adobe Premiere Pro or DaVinci Resolve",
+        "footage logging",
+        "timeline editing",
+        "color correction",
+        "audio cleanup",
+        "captions",
+        "export standards",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 250,
+      "sector": "Creative & Media",
+      "job_role": "UX Researcher",
+      "required_skills": [
+        "research planning",
+        "interview moderation",
+        "usability testing",
+        "survey design",
+        "thematic analysis",
+        "research ethics",
+        "insight reporting",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 251,
+      "sector": "Creative & Media",
+      "job_role": "UX Writer / Content Designer",
+      "required_skills": [
+        "interface writing",
+        "content design",
+        "accessibility",
+        "voice and tone",
+        "usability testing",
+        "localization readiness",
+        "content systems",
+        "Portfolio development",
+        "audience research",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 252,
+      "sector": "Creative & Media",
+      "job_role": "Game Designer",
+      "required_skills": [
+        "game mechanics",
+        "level design",
+        "player research",
+        "prototyping",
+        "Unity or Unreal basics",
+        "balancing",
+        "design documentation",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 253,
+      "sector": "Creative & Media",
+      "job_role": "Game Artist (3D)",
+      "required_skills": [
+        "Blender or Maya",
+        "3D modeling",
+        "UV mapping",
+        "texturing",
+        "PBR materials",
+        "optimization",
+        "game engine workflow",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset management"
+      ]
+    },
+    {
+      "role_id": 254,
+      "sector": "Creative & Media",
+      "job_role": "Audio Engineer",
+      "required_skills": [
+        "microphone techniques",
+        "DAW",
+        "audio editing",
+        "mixing",
+        "signal flow",
+        "acoustic treatment",
+        "loudness standards",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset management"
+      ]
+    },
+    {
+      "role_id": 255,
+      "sector": "Creative & Media",
+      "job_role": "Journalist / Reporter",
+      "required_skills": [
+        "source verification",
+        "interviewing",
+        "fact checking",
+        "news writing",
+        "media law basics",
+        "deadline management",
+        "digital publishing",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset/file management",
+        "presenting rationale"
+      ]
+    },
+    {
+      "role_id": 256,
+      "sector": "Creative & Media",
+      "job_role": "Copywriter",
+      "required_skills": [
+        "audience research",
+        "headline writing",
+        "brand voice",
+        "editing",
+        "SEO writing",
+        "creative briefs",
+        "proofreading",
+        "Portfolio development",
+        "accessibility",
+        "feedback iteration",
+        "asset management"
+      ]
+    },
+    {
+      "role_id": 257,
+      "sector": "Creative & Media",
+      "job_role": "Photographer",
+      "required_skills": [
+        "camera exposure",
+        "composition",
+        "lighting",
+        "portrait or product setup",
+        "RAW workflow",
+        "image editing",
+        "file delivery",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset management"
+      ]
+    },
+    {
+      "role_id": 258,
+      "sector": "Creative & Media",
+      "job_role": "Podcast Producer",
+      "required_skills": [
+        "episode planning",
+        "guest coordination",
+        "recording",
+        "audio editing",
+        "show notes",
+        "publishing platforms",
+        "audience analytics",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset management"
+      ]
+    },
+    {
+      "role_id": 259,
+      "sector": "Creative & Media",
+      "job_role": "Digital Accessibility Tester",
+      "required_skills": [
+        "WCAG",
+        "screen reader testing",
+        "keyboard navigation",
+        "browser accessibility tools",
+        "issue reproduction",
+        "accessibility reporting",
+        "HTML semantics",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset management"
+      ]
+    },
+    {
+      "role_id": 260,
+      "sector": "Creative & Media",
+      "job_role": "3D Visualization Artist (Architecture)",
+      "required_skills": [
+        "3D modeling",
+        "rendering",
+        "lighting",
+        "material setup",
+        "AutoCAD or Revit imports",
+        "post-production",
+        "visual storytelling",
+        "Technical drawing interpretation",
+        "standards compliance",
+        "site safety",
+        "estimation",
+        "quality inspection",
+        "project documentation"
+      ]
+    },
+    {
+      "role_id": 261,
+      "sector": "Creative & Media",
+      "job_role": "Editorial Assistant",
+      "required_skills": [
+        "copy editing",
+        "fact checking",
+        "style guides",
+        "manuscript tracking",
+        "proofreading",
+        "content management systems",
+        "rights permissions",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset management"
+      ]
+    },
+    {
+      "role_id": 262,
+      "sector": "Creative & Media",
+      "job_role": "Localization Specialist",
+      "required_skills": [
+        "translation",
+        "terminology management",
+        "CAT tools",
+        "linguistic QA",
+        "cultural adaptation",
+        "style guides",
+        "file handling",
+        "Portfolio development",
+        "audience research",
+        "accessibility",
+        "feedback iteration",
+        "asset management"
+      ]
+    }
+  ]
+}
