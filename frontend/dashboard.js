@@ -480,6 +480,25 @@ async function loadJobRoles() {
 
         allRoles = data.roles;
 
+        // Attach bundled skill requirements as a backup even when the live
+        // role endpoint responds but an older backend build is still deployed.
+        try {
+            const backupResponse = await fetch("role_fallback.json");
+            if (backupResponse.ok) {
+                const backupData = await backupResponse.json();
+                const backupByName = new Map(
+                    (backupData.roles || []).map(role => [String(role.job_role).toLowerCase(), role.required_skills || []])
+                );
+                allRoles.forEach(role => {
+                    if (!Array.isArray(role.required_skills) || !role.required_skills.length) {
+                        role.required_skills = backupByName.get(String(role.job_role).toLowerCase()) || [];
+                    }
+                });
+            }
+        } catch (backupError) {
+            console.warn("Bundled skill backup could not be loaded:", backupError);
+        }
+
         // Extract unique categories
         const categories = [
             ...new Set(
