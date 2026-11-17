@@ -1049,6 +1049,35 @@ if (!response.ok) {
         return null;
     }
 }
+async function loadDashboardSummary(roleId, matchPercentage) {
+    const token = localStorage.getItem("access_token");
+    const careerMatch = document.getElementById("careerMatch");
+    const careerName = document.getElementById("careerName");
+
+    if (careerMatch) careerMatch.textContent = `${Number(matchPercentage || 0).toFixed(1)}%`;
+
+    try {
+        const response = await fetch(`${API_URL}/dashboard/${roleId}`, {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        if (!response.ok) {
+            if (response.status !== 404) throw new Error("Dashboard data could not be loaded.");
+            return;
+        }
+        const data = await response.json();
+        const summary = data.learning_summary || {};
+        if (careerName) careerName.textContent = data.career?.job_role || "Selected career";
+        document.getElementById("completedSkills").textContent = summary.completed_skills ?? 0;
+        document.getElementById("learningSkills").textContent = summary.in_progress_skills ?? 0;
+        document.getElementById("totalSkills").textContent = summary.total_skills ?? 0;
+        if (careerMatch) careerMatch.textContent = `${Number(summary.career_match ?? matchPercentage ?? 0).toFixed(1)}%`;
+        const careerGoal = document.getElementById("careerGoalName");
+        if (careerGoal) careerGoal.textContent = data.career?.job_role || "Selected career";
+    } catch (error) {
+        console.error("Dashboard summary:", error);
+    }
+}
+
 // Load saved analysis and open Skill Analysis first
 async function initializeDashboard() {
 
@@ -1060,6 +1089,13 @@ async function initializeDashboard() {
     console.log("Saved analysis:", savedAnalysis);
     console.log("Dashboard page:", document.getElementById("dashboardPage"));
     console.log("Analysis page:", document.getElementById("analysisPage"));
+
+    if (savedAnalysis?.role_id) {
+        await loadDashboardSummary(
+            savedAnalysis.role_id,
+            savedAnalysis.match_percentage
+        );
+    }
 
     if (savedAnalysis) {
 
