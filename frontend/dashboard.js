@@ -984,12 +984,12 @@ if (results) {
         block: "start"
     });
 }
-    document.getElementById("goToResourcesButton").addEventListener(
-        "click",
-        function () {
+    const goToResourcesButton = document.getElementById("goToResourcesButton");
+    if (goToResourcesButton) {
+        goToResourcesButton.addEventListener("click", function () {
             showPage("resources");
-        }
-    );
+        });
+    }
 }
 async function loadSavedStudentAnalysis() {
 
