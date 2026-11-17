@@ -1,16 +1,15 @@
 
 fastapi
 uvicorn[standard]
-flask
-flask-cors
 python-multipart
 pydantic
 python-jose[cryptography]
-passlib[bcrypt]
-sentence-transformers
-numpy
+passlib[argon2]
+argon2-cffi
+PyMuPDF
 pandas
+numpy
 openpyxl
 scikit-learn
-PyMuPDF
+sentence-transformers
 nltk
