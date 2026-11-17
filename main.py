@@ -62,7 +62,7 @@ if not SECRET_KEY:
     )
 
 ALGORITHM = "HS256"
-TOKEN_EXPIRY_MINUTES = 60
+TOKEN_EXPIRY_MINUTES = 10080  # Keep users signed in for 7 days
 security = HTTPBearer()
 
 
@@ -122,6 +122,22 @@ def migrate_student_database():
                 updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE(student_id, role_id, skill_name)
             )
+        """)
+
+        # Record real learning sessions for the weekly activity chart.
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS student_learning_sessions (
+                session_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                student_id INTEGER NOT NULL,
+                skill_name TEXT NOT NULL DEFAULT 'General learning',
+                minutes INTEGER NOT NULL CHECK(minutes BETWEEN 1 AND 600),
+                activity_date TEXT NOT NULL,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_learning_sessions_student_date
+            ON student_learning_sessions(student_id, activity_date)
         """)
 
         # Track completion of individual learning resources
@@ -289,6 +305,25 @@ class ResourceProgressUpdate(BaseModel):
             raise ValueError("Invalid resource progress status.")
         return value
 
+class LearningSessionCreate(BaseModel):
+    skill_name: str = Field(default="General learning", min_length=1, max_length=100)
+    minutes: int = Field(ge=1, le=600)
+    activity_date: str
+
+    @field_validator("skill_name")
+    @classmethod
+    def clean_session_skill(cls, value):
+        return value.strip() or "General learning"
+
+    @field_validator("activity_date")
+    @classmethod
+    def validate_activity_date(cls, value):
+        try:
+            datetime.strptime(value, "%Y-%m-%d")
+        except ValueError:
+            raise ValueError("Activity date must use YYYY-MM-DD format.")
+        return value
+
 
 # --------------------------------------------------
 # DATABASE HELPERS
@@ -395,6 +430,7 @@ def health():
         "student_skill_analysis",
         "student_skill_progress",
         "student_resource_progress",
+        "student_learning_sessions",
     }
 
     try:
@@ -1003,6 +1039,15 @@ def update_resource_progress(
     current_student=Depends(get_current_student)
 ):
     with get_connection() as conn:
+        # Assign the resource on demand for older learning plans too.
+        conn.execute("""
+            INSERT OR IGNORE INTO student_resource_progress
+                (student_id, role_id, resource_id)
+            SELECT ?, ?, resource_id
+            FROM learning_resources
+            WHERE resource_id = ?
+        """, (current_student["student_id"], request.role_id, request.resource_id))
+
         cursor = conn.execute("""
             UPDATE student_resource_progress
             SET status = ?,
@@ -1030,6 +1075,67 @@ def update_resource_progress(
         "message": "Resource progress updated.",
         "resource_id": request.resource_id,
         "status": request.status
+    }
+
+
+# --------------------------------------------------
+# DAILY LEARNING ACTIVITY
+# --------------------------------------------------
+
+@app.post("/learning-sessions", status_code=201)
+def create_learning_session(
+    request: LearningSessionCreate,
+    current_student=Depends(get_current_student)
+):
+    with get_connection() as conn:
+        conn.execute("""
+            INSERT INTO student_learning_sessions
+                (student_id, skill_name, minutes, activity_date)
+            VALUES (?, ?, ?, ?)
+        """, (
+            current_student["student_id"],
+            request.skill_name,
+            request.minutes,
+            request.activity_date
+        ))
+
+    return {
+        "message": "Learning session recorded.",
+        "skill_name": request.skill_name,
+        "minutes": request.minutes,
+        "activity_date": request.activity_date
+    }
+
+
+@app.get("/learning-activity")
+def get_learning_activity(
+    start_date: str,
+    end_date: str,
+    current_student=Depends(get_current_student)
+):
+    try:
+        start = datetime.strptime(start_date, "%Y-%m-%d").date()
+        end = datetime.strptime(end_date, "%Y-%m-%d").date()
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Dates must use YYYY-MM-DD format.")
+
+    if end < start or (end - start).days > 31:
+        raise HTTPException(status_code=400, detail="Choose a valid date range of up to 31 days.")
+
+    with get_connection() as conn:
+        rows = conn.execute("""
+            SELECT activity_date, SUM(minutes) AS total_minutes
+            FROM student_learning_sessions
+            WHERE student_id = ? AND activity_date BETWEEN ? AND ?
+            GROUP BY activity_date
+            ORDER BY activity_date
+        """, (current_student["student_id"], start_date, end_date)).fetchall()
+
+    return {
+        "start_date": start_date,
+        "end_date": end_date,
+        "total_minutes": sum(row["total_minutes"] for row in rows),
+        "days": [{"date": row["activity_date"], "minutes": row["total_minutes"]} for row in rows]
     }
 
 
