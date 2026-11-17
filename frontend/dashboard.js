@@ -1217,6 +1217,29 @@ async function loadLearningResources() {
     const skillResourceList =
         document.getElementById("skillResourceList");
 
+    const activeRoleId = localStorage.getItem("selected_role_id");
+    const authToken = localStorage.getItem("access_token");
+    let resourceStatuses = new Map();
+
+    if (activeRoleId && authToken) {
+        try {
+            const progressResponse = await fetch(
+                `${API_URL}/resource-progress/${activeRoleId}`,
+                { headers: { "Authorization": `Bearer ${authToken}` } }
+            );
+            if (progressResponse.ok) {
+                const progressData = await progressResponse.json();
+                resourceStatuses = new Map(
+                    (progressData.resources || []).map(item => [
+                        Number(item.resource_id), item.status
+                    ])
+                );
+            }
+        } catch (error) {
+            console.warn("Could not load resource progress:", error);
+        }
+    }
+
     for (const skill of missingSkills) {
         const displaySkill = skill.replace(/\b\w/g, char => char.toUpperCase());
 
@@ -1300,7 +1323,45 @@ async function loadLearningResources() {
                            </a>`
                         : `<span>Link unavailable</span>`
                     }
+                    <label class="resource-progress-control">
+                        Learning status
+                        <select class="resource-status"
+                            data-resource-id="${Number(resource.resource_id)}"
+                            ${!authToken || !activeRoleId ? "disabled" : ""}>
+                            <option value="Not Started" ${(resourceStatuses.get(Number(resource.resource_id)) || "Not Started") === "Not Started" ? "selected" : ""}>Not Started</option>
+                            <option value="In Progress" ${resourceStatuses.get(Number(resource.resource_id)) === "In Progress" ? "selected" : ""}>In Progress</option>
+                            <option value="Completed" ${resourceStatuses.get(Number(resource.resource_id)) === "Completed" ? "selected" : ""}>Completed</option>
+                        </select>
+                    </label>
                 `;
+
+                const statusSelect = resourceCard.querySelector(".resource-status");
+                statusSelect.addEventListener("change", async function () {
+                    const previousStatus = resourceStatuses.get(Number(resource.resource_id)) || "Not Started";
+                    this.disabled = true;
+                    try {
+                        const updateResponse = await fetch(`${API_URL}/resource-progress/update`, {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${authToken}`
+                            },
+                            body: JSON.stringify({
+                                role_id: Number(activeRoleId),
+                                resource_id: Number(resource.resource_id),
+                                status: this.value
+                            })
+                        });
+                        const updateData = await updateResponse.json();
+                        if (!updateResponse.ok) throw new Error(updateData.detail || "Could not update learning status.");
+                        resourceStatuses.set(Number(resource.resource_id), this.value);
+                    } catch (error) {
+                        this.value = previousStatus;
+                        alert(error.message);
+                    } finally {
+                        this.disabled = false;
+                    }
+                });
 
                 loading.appendChild(resourceCard);
 
