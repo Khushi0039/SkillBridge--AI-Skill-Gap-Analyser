@@ -433,82 +433,10 @@ function escapeHTML(value) {
 // SKILL ANALYSIS
 // =====================================
 
-const analysisContent = document.getElementById("analysisContent");
-
 const savedSkills = localStorage.getItem("entered_student_skills") || "";
+const skillsInputElement = document.getElementById("studentSkills");
+if (skillsInputElement && savedSkills) skillsInputElement.value = savedSkills;
 
-// Display Skill Analysis Form
-analysisContent.innerHTML = `
-
-    <div class="panel">
-
-        <h2>Discover Your Skill Gaps</h2>
-
-        <p style="color:#858398; margin:12px 0 25px;">
-            First select your career category, then choose
-            your target job role and enter your existing skills.
-        </p>
-
-        <label for="categorySelect">
-            <strong>Select Career Category</strong>
-        </label>
-
-        <select id="categorySelect"
-            style="width:100%; padding:13px; margin-top:10px;
-            margin-bottom:25px; border:1px solid #ddd8ec;
-            border-radius:9px; background:white;">
-
-            <option value="">Loading categories...</option>
-
-        </select>
-
-
-        <label for="careerSelect">
-            <strong>Select Target Job Role</strong>
-        </label>
-
-        <select id="careerSelect"
-            disabled
-            style="width:100%; padding:13px; margin-top:10px;
-            margin-bottom:25px; border:1px solid #ddd8ec;
-            border-radius:9px; background:white;">
-
-            <option value="">Select a category first</option>
-
-        </select>
-
-
-        <label for="studentSkills">
-            <strong>Your Existing Skills</strong>
-        </label>
-
-        <textarea id="studentSkills"
-        placeholder="Example: Python, SQL, Excel, Power BI"
-        rows="5"
-        style="width:100%; padding:15px; margin-top:10px;
-        border:1px solid #ddd8ec; border-radius:9px;
-        resize:vertical; font-family:inherit;">${escapeHTML(savedSkills)}
-        </textarea>
-
-        <p style="color:#858398; font-size:12px; margin-top:8px;">
-            Separate multiple skills using commas.
-        </p>
-
-        <button type="button"
-    id="analyzeSkillsButton"
-    class="primary-button"
-    style="margin-top:22px;">
-    Analyse My Skills →
-</button>
-        <p id="analysisMessage"
-            style="margin-top:15px; font-size:13px;">
-        </p>
-
-    </div>
-
-    <div id="analysisResults"></div>
-
-`;
 // =====================================
 // LOAD JOB ROLES
 // =====================================
@@ -777,220 +705,85 @@ document.getElementById("analyzeSkillsButton").addEventListener(
 // =====================================
 
 function displayAnalysisResults(data) {
-
     const results = document.getElementById("analysisResults");
+    const matchedSkills = Array.isArray(data.matched_skills) ? data.matched_skills : [];
+    const missingSkills = Array.isArray(data.missing_skills) ? data.missing_skills : [];
+    const percentage = Math.max(0, Math.min(100, Number(data.match_percentage) || 0));
+    const totalSkills = Number(data.total_required_skills) || matchedSkills.length + missingSkills.length;
+    const enteredSkills = (document.getElementById("studentSkills")?.value || "")
+        .split(",").map(skill => skill.trim()).filter(Boolean);
 
-    const matchedSkills = data.matched_skills || [];
+    localStorage.setItem("selected_role_id", String(data.role_id || document.getElementById("careerSelect").value));
+    localStorage.setItem("missing_skills", JSON.stringify(missingSkills));
+    localStorage.setItem("matched_skills", JSON.stringify(matchedSkills));
+    localStorage.setItem("entered_student_skills", enteredSkills.join(", "));
+    localStorage.setItem("recently_updated_skills", JSON.stringify(enteredSkills));
+    localStorage.setItem("total_required_skills", String(totalSkills));
 
-    const missingSkills = data.missing_skills || [];
-
-    // Save analysis results for other dashboard pages
-localStorage.setItem(
-    "missing_skills",
-    JSON.stringify(missingSkills)
-);
-
-localStorage.setItem(
-    "matched_skills",
-    JSON.stringify(matchedSkills)
-);
-
-// Save skills entered by the student
-const enteredSkills = document.getElementById("studentSkills")
-    .value
-    .split(",")
-    .map(skill => skill.trim())
-    .filter(Boolean);
-
-localStorage.setItem(
-    "entered_student_skills",
-    enteredSkills.join(", ")
-);
-
-localStorage.setItem(
-    "recently_updated_skills",
-    JSON.stringify(enteredSkills)
-);
-
-// Save total required skills
-localStorage.setItem(
-    "total_required_skills",
-    data.total_required_skills || (matchedSkills.length + missingSkills.length)
-);
-    const percentage = Number(data.match_percentage || 0);
+    const matchedMarkup = matchedSkills.length
+        ? matchedSkills.map(skill => `<li class="analysis-skill matched-skill"><span>✓</span>${escapeHTML(skill)}</li>`).join("")
+        : '<li class="analysis-empty">No direct matches yet. Add any skills you already know and analyse again.</li>';
+    const missingMarkup = missingSkills.length
+        ? missingSkills.map(skill => `<li class="analysis-skill missing-skill"><span>＋</span>${escapeHTML(skill)}</li>`).join("")
+        : '<li class="analysis-empty">Great work — no required skills are missing for this role.</li>';
 
     results.innerHTML = `
-        <div class="panel">
-
-            <p style="
-                color:#858398;
-                font-size:12px;
-                font-weight:600;
-            ">
-                YOUR CAREER MATCH
-            </p>
-
-            <h1 style="
-                color:#6941c6;
-                font-size:42px;
-                margin:10px 0;
-            ">
-                ${percentage.toFixed(2)}%
-            </h1>
-
-            <div style="
-                background:#eee8ff;
-                height:10px;
-                border-radius:20px;
-                overflow:hidden;
-            ">
-
-                <div style="
-                    width:${Math.min(100, Math.max(0, percentage))}%;
-                    height:100%;
-                    background:#6941c6;
-                    border-radius:20px;
-                "></div>
-
-            </div>
-
-
-            <div style="
-                display:grid;
-                grid-template-columns:repeat(2,minmax(0,1fr));
-                gap:20px;
-                margin-top:30px;
-            ">
-
-
+        <section class="panel analysis-result-card">
+            <div class="analysis-result-heading">
                 <div>
-
-                    <h3 style="color:#269b67;">
-                        ✓ Matched Skills (${matchedSkills.length})
-                    </h3>
-
-                    <div style="margin-top:15px;">
-
-                        ${
-                            matchedSkills.length
-                            ? matchedSkills.map(skill => `
-                                <p style="
-                                    background:#e9f8ef;
-                                    color:#267d53;
-                                    padding:10px;
-                                    border-radius:7px;
-                                    margin-bottom:8px;
-                                    font-size:13px;
-                                ">
-                                    ✓ ${escapeHTML(skill)}
-                                </p>
-                            `).join("")
-                            : "<p>No matched skills found.</p>"
-                        }
-
-                    </div>
-
+                    <p class="section-label">YOUR SKILL GAP REPORT</p>
+                    <h2>${escapeHTML(data.job_role || "Selected career")}</h2>
+                    <p class="analysis-sector">${escapeHTML(data.sector || "Career pathway")}</p>
                 </div>
-
-
-                <div>
-
-                    <h3 style="color:#d17c39;">
-                        + Skills to Learn (${missingSkills.length})
-                    </h3>
-
-                    <div style="margin-top:15px;">
-
-                        ${
-                            missingSkills.length
-                            ? missingSkills.map(skill => `
-                                <p style="
-                                    background:#fff3e8;
-                                    color:#a9642e;
-                                    padding:10px;
-                                    border-radius:7px;
-                                    margin-bottom:8px;
-                                    font-size:13px;
-                                ">
-                                    + ${escapeHTML(skill)}
-                                </p>
-                            `).join("")
-                            : "<p>No missing skills found.</p>"
-                        }
-
-                    </div>
-
-                </div>
-
-
+                <div class="match-score"><strong>${percentage.toFixed(1)}%</strong><span>Career match</span></div>
             </div>
+            <div class="match-track"><div class="match-fill" style="width:${percentage}%"></div></div>
+            <p class="analysis-explanation">${matchedSkills.length} of ${totalSkills} required skills matched. Focus on the skills listed below to strengthen your profile.</p>
+            <div class="analysis-skill-columns">
+                <div class="analysis-skill-group">
+                    <h3>✓ Skills you have <span>${matchedSkills.length}</span></h3>
+                    <ul>${matchedMarkup}</ul>
+                </div>
+                <div class="analysis-skill-group">
+                    <h3>＋ Skills to develop <span>${missingSkills.length}</span></h3>
+                    <ul>${missingMarkup}</ul>
+                </div>
+            </div>
+            <div class="analysis-next-step">
+                <p>Next step</p>
+                <span>Use your missing-skill list to explore focused learning resources and track your progress.</span>
+                <button type="button" class="primary-button" id="goToResourcesButton">Explore Learning Resources →</button>
+            </div>
+        </section>`;
 
-            <button
-                class="primary-button"
-                id="goToResourcesButton"
-                style="margin-top:25px;"
-            >
-                Explore Learning Resources →
-            </button>
+    const careerMatch = document.getElementById("careerMatch");
+    const careerName = document.getElementById("careerName");
+    const careerGoal = document.getElementById("careerGoalName");
+    const completedSkills = document.getElementById("completedSkills");
+    const learningSkills = document.getElementById("learningSkills");
+    const totalSkillsElement = document.getElementById("totalSkills");
 
-        </div>
+    if (careerMatch) careerMatch.textContent = `${percentage.toFixed(1)}%`;
+    const selectedRole = document.getElementById("careerSelect")?.selectedOptions?.[0]?.textContent || data.job_role || "Selected career";
+    if (careerName) careerName.textContent = selectedRole;
+    if (careerGoal) careerGoal.textContent = data.job_role || selectedRole;
+    if (completedSkills) completedSkills.textContent = matchedSkills.length;
+    if (learningSkills) learningSkills.textContent = missingSkills.length;
+    if (totalSkillsElement) totalSkillsElement.textContent = totalSkills;
 
-    `;
-
-
-    // Update Dashboard Overview statistics
-    document.getElementById("careerMatch").textContent =
-        `${percentage.toFixed(2)}%`;
-
-    document.getElementById("careerName").textContent =
-        document.getElementById("careerSelect")
-            .selectedOptions[0].textContent;
-
-    document.getElementById("completedSkills").textContent =
-        matchedSkills.length;
-
-    document.getElementById("totalSkills").textContent =
-        data.total_required_skills || (matchedSkills.length + missingSkills.length);
-    
-    // Display recently updated skills
-    const recentSkills = JSON.parse(
-        localStorage.getItem("recently_updated_skills") || "[]"
-    );
-
-    const recentSkillsContainer = document.getElementById("recentSkills");
-
-    if (recentSkillsContainer) {
-        recentSkillsContainer.innerHTML = recentSkills.length
-    ? `
-        <div class="recent-skills-list">
-            ${recentSkills.map(skill => `
-                <span class="recent-skill-tag">
-                    <span class="skill-check">✓</span>
-                    ${escapeHTML(skill)}
-                </span>
-            `).join("")}
-        </div>
-        <p class="recent-skills-note">
-            Keep building your career skills!
-        </p>
-    `
-    : `<p class="empty-skills">No skills added yet.</p>`;
-}
-   // Make analysis results visible
-if (results) {
-    results.style.display = "block";
-    results.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-}
-    const goToResourcesButton = document.getElementById("goToResourcesButton");
-    if (goToResourcesButton) {
-        goToResourcesButton.addEventListener("click", function () {
-            showPage("resources");
-        });
+    const recentSkills = document.getElementById("recentSkills");
+    if (recentSkills) {
+        recentSkills.innerHTML = enteredSkills.length
+            ? `<div class="recent-skills-list">${enteredSkills.map(skill => `<span class="recent-skill-tag"><span class="skill-check">✓</span>${escapeHTML(skill)}</span>`).join("")}</div><p class="recent-skills-note">Your submitted skills are saved with this analysis.</p>`
+            : '<p class="empty-skills">No skills added yet.</p>';
     }
+
+    const goButton = document.getElementById("goToResourcesButton");
+    if (goButton) goButton.addEventListener("click", () => showPage("resources"));
+    results.style.display = "block";
+    results.scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
 async function loadSavedStudentAnalysis() {
 
     const token = localStorage.getItem("access_token");

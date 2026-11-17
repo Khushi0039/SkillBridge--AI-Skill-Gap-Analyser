@@ -1332,3 +1332,119 @@ textarea:focus {
     }
 
 }
+
+/* DEMO-READY SKILL ANALYSIS FORM AND RESULTS */
+.analysis-form label {
+    display: block;
+    margin: 20px 0 8px;
+    color: var(--text-main);
+    font-size: 13px;
+    font-weight: 700;
+}
+.analysis-form select,
+.analysis-form textarea {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 13px 14px;
+    border: 1px solid var(--border-dark);
+    border-radius: 9px;
+    background: #102231;
+    color: var(--text-main);
+    font: inherit;
+    font-size: 13px;
+    line-height: 1.5;
+}
+.analysis-form select { min-height: 46px; }
+.analysis-form select:disabled { opacity: .65; cursor: not-allowed; }
+.analysis-form textarea { min-height: 110px; resize: vertical; }
+.analysis-form select:focus,
+.analysis-form textarea:focus {
+    outline: 2px solid rgba(34, 211, 238, .22);
+    border-color: var(--accent);
+}
+.analysis-intro,
+.analysis-hint,
+#analysisMessage {
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+.analysis-intro { margin: 8px 0 18px; }
+.analysis-hint { margin-top: 8px; }
+#analysisMessage { margin-top: 14px; }
+.analysis-results { display: block; min-width: 0; }
+.analysis-result-card { padding: 26px; }
+.analysis-result-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+.analysis-result-heading h2 { margin: 4px 0; color: var(--text-main); }
+.analysis-sector { color: var(--text-muted); font-size: 12px; }
+.match-score { display: flex; flex-direction: column; align-items: flex-end; flex-shrink: 0; }
+.match-score strong { color: var(--mint); font-size: 32px; line-height: 1.1; }
+.match-score span { color: var(--text-soft); font-size: 11px; margin-top: 5px; }
+.match-track {
+    height: 11px; margin: 22px 0 10px; overflow: hidden;
+    border-radius: 20px; background: var(--border-dark);
+}
+.match-fill {
+    height: 100%; border-radius: inherit;
+    background: linear-gradient(90deg, var(--accent), var(--mint));
+    transition: width .4s ease;
+}
+.analysis-explanation {
+    color: var(--text-muted); font-size: 12px; line-height: 1.6; margin-bottom: 22px;
+}
+.analysis-skill-columns {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;
+}
+.analysis-skill-group {
+    min-width: 0; padding: 17px; border: 1px solid var(--border-dark);
+    border-radius: 12px; background: var(--bg-main);
+}
+.analysis-skill-group h3 {
+    display: flex; justify-content: space-between; gap: 8px;
+    margin-bottom: 13px; color: var(--text-main); font-size: 14px;
+}
+.analysis-skill-group h3 span { color: var(--text-soft); }
+.analysis-skill-group ul { display: grid; gap: 8px; padding: 0; list-style: none; }
+.analysis-skill {
+    display: flex; align-items: flex-start; gap: 9px; padding: 10px 11px;
+    border-radius: 8px; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere;
+}
+.matched-skill { background: rgba(20, 184, 166, .10); color: #8BE3D3; }
+.missing-skill { background: rgba(245, 158, 11, .10); color: #F7C77A; }
+.analysis-empty { color: var(--text-muted); font-size: 12px; line-height: 1.6; }
+.analysis-next-step {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 12px; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border-dark);
+}
+.analysis-next-step p {
+    width: 100%; color: var(--mint); font-size: 11px; font-weight: 800;
+    letter-spacing: 1px; text-transform: uppercase;
+}
+.analysis-next-step span { flex: 1 1 250px; color: var(--text-muted); font-size: 12px; line-height: 1.6; }
+@media (max-width: 650px) {
+    .analysis-result-card { padding: 18px; }
+    .analysis-result-heading { flex-direction: column; }
+    .match-score { align-items: flex-start; }
+    .analysis-skill-columns { grid-template-columns: 1fr; }
+    .analysis-next-step .primary-button { width: 100%; }
+}
+
+/* Keep the analysis controls consistent with the dark dashboard theme. */
+#analysisPage .analysis-form #categorySelect,
+#analysisPage .analysis-form #careerSelect {
+    background: #102231;
+    color: var(--text-main);
+    border-color: var(--border-dark);
+}
+#analysisPage .analysis-form #categorySelect option,
+#analysisPage .analysis-form #careerSelect option {
+    background: #102231;
+    color: var(--text-main);
+}
