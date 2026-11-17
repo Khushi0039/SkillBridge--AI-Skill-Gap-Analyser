@@ -650,12 +650,6 @@ async def analyze_resume(
     except HTTPException:
         raise
 
-    except Exception as error:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Resume processing failed: {str(error)}"
-        )
-
     except Exception:
         logger.exception("Resume processing failed")
         raise HTTPException(
