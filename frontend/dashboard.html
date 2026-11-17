@@ -336,26 +336,22 @@
         <!-- SKILL ANALYSIS -->
         <section id="analysisPage" class="content-page">
             <h1>Skill Analysis</h1>
-            <div class="panel" style="margin-bottom:22px;">
+            <div class="panel analysis-form" style="margin-bottom:22px;">
+                <p class="section-label">PERSONALISED CAREER CHECK</p>
                 <h2>Choose your career goal</h2>
+                <p class="analysis-intro">Compare the skills you already have with the skills expected for your target role.</p>
                 <label for="categorySelect">Career category</label>
                 <select id="categorySelect"><option value="">Loading categories...</option></select>
                 <label for="careerSelect">Target job role</label>
                 <select id="careerSelect" disabled><option value="">Select a category first</option></select>
                 <label for="studentSkills">Your existing skills (comma-separated)</label>
                 <textarea id="studentSkills" rows="4" placeholder="Python, SQL, Excel, Communication"></textarea>
+                <p class="analysis-hint">Enter skills separated by commas. Use the skills you genuinely know.</p>
                 <button class="primary-button" id="analyzeSkillsButton" type="button">Analyse My Skills →</button>
                 <p id="analysisMessage" role="status" aria-live="polite"></p>
                 <div id="analysisResults"></div>
             </div>
-            <div class="panel">
-                <h2>Or analyse your resume</h2>
-                <p>Upload a text-based PDF resume (maximum 8 MB). Your selected career role will be used for analysis.</p>
-                <input id="resumeFile" type="file" accept="application/pdf,.pdf">
-                <button class="primary-button" id="analyzeResumeButton" type="button">Upload and Analyse Resume →</button>
-                <p id="resumeMessage" role="status" aria-live="polite"></p>
-            </div>
-            <div id="analysisContent"></div>
+            <div id="analysisResults" class="analysis-results" aria-live="polite"></div>
         </section>
 
 
