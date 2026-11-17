@@ -54,11 +54,42 @@ app.add_middleware(
 SECRET_KEY = os.getenv("SKILLBRIDGE_SECRET_KEY")
 
 if not SECRET_KEY:
-    raise RuntimeError("Set SKILLBRIDGE_SECRET_KEY in Render environment variables.")
+    raise RuntimeError(
+        "Set SKILLBRIDGE_SECRET_KEY in Render environment variables."
+    )
 
 ALGORITHM = "HS256"
 TOKEN_EXPIRY_MINUTES = 60
 security = HTTPBearer()
+
+
+# --------------------------------------------------
+# DATABASE MIGRATION
+# --------------------------------------------------
+
+@app.on_event("startup")
+def migrate_student_database():
+    with get_connection() as conn:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS students (
+                student_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                email TEXT NOT NULL UNIQUE,
+                password_hash TEXT
+            )
+        """)
+
+        columns = {
+            row["name"]
+            for row in conn.execute(
+                "PRAGMA table_info(students)"
+            ).fetchall()
+        }
+
+        if "password_hash" not in columns:
+            conn.execute(
+                "ALTER TABLE students ADD COLUMN password_hash TEXT"
+            )
 
 
 # --------------------------------------------------
@@ -71,7 +102,10 @@ def create_access_token(student_id):
     )
 
     return jwt.encode(
-        {"sub": str(student_id), "exp": expiry},
+        {
+            "sub": str(student_id),
+            "exp": expiry
+        },
         SECRET_KEY,
         algorithm=ALGORITHM
     )
@@ -86,7 +120,9 @@ def get_current_student(
             SECRET_KEY,
             algorithms=[ALGORITHM]
         )
+
         student_id = int(payload.get("sub"))
+
     except (JWTError, ValueError, TypeError):
         raise HTTPException(
             status_code=401,
@@ -104,7 +140,10 @@ def get_current_student(
         ).fetchone()
 
     if student is None:
-        raise HTTPException(status_code=401, detail="Student not found.")
+        raise HTTPException(
+            status_code=401,
+            detail="Student not found."
+        )
 
     return student
 
@@ -149,8 +188,10 @@ class SkillAnalysisRequest(BaseModel):
     @classmethod
     def clean_skills(cls, skills):
         cleaned = [s.strip() for s in skills if s.strip()]
+
         if not cleaned:
             raise ValueError("Enter at least one skill.")
+
         return cleaned
 
 
@@ -206,13 +247,15 @@ def save_analysis(student_id, role_id, skills, result):
                 json.dumps(result["matched_skills"]),
                 json.dumps(result["missing_skills"]),
                 result["match_percentage"],
-                len(result["matched_skills"]) + len(result["missing_skills"])
+                len(result["matched_skills"]) +
+                len(result["missing_skills"])
             )
         )
 
 
 def initialize_student_progress(student_id, role_id, result):
     with get_connection() as conn:
+
         for skill in result["matched_skills"]:
             conn.execute(
                 """
@@ -256,41 +299,60 @@ def health():
     try:
         with get_connection() as conn:
             conn.execute("SELECT 1")
-        return {"status": "healthy", "database": "connected"}
-    except Exception as error:
+
+        return {
+            "status": "healthy",
+            "database": "connected"
+        }
+
+    except Exception:
         raise HTTPException(
             status_code=503,
-            detail=f"Database unavailable: {str(error)}"
+            detail="Database unavailable."
         )
 
 
 @app.get("/roles")
 def read_roles():
     roles = get_all_roles()
-    return {"total_roles": len(roles), "roles": roles}
+
+    return {
+        "total_roles": len(roles),
+        "roles": roles
+    }
 
 
 @app.get("/roles/{role_id}")
 def read_role(role_id: int):
     role = get_role_details(role_id)
+
     if role is None:
-        raise HTTPException(status_code=404, detail="Job role not found.")
+        raise HTTPException(
+            status_code=404,
+            detail="Job role not found."
+        )
+
     return role
 
 
 # --------------------------------------------------
-# STUDENT REGISTRATION AND LOGIN
+# STUDENT REGISTRATION
 # --------------------------------------------------
 
 @app.post("/students", status_code=201)
 def register_student(student: StudentCreate):
+
     try:
         password_hash = hash_password(student.password)
 
         with get_connection() as conn:
             cursor = conn.execute(
                 """
-                INSERT INTO students (name, email, password_hash)
+                INSERT INTO students (
+                    name,
+                    email,
+                    password_hash
+                )
                 VALUES (?, ?, ?)
                 """,
                 (
@@ -299,6 +361,7 @@ def register_student(student: StudentCreate):
                     password_hash
                 )
             )
+
             student_id = cursor.lastrowid
 
         return {
@@ -315,8 +378,13 @@ def register_student(student: StudentCreate):
         )
 
 
+# --------------------------------------------------
+# STUDENT LOGIN
+# --------------------------------------------------
+
 @app.post("/login")
 def login_student(credentials: StudentLogin):
+
     with get_connection() as conn:
         student = conn.execute(
             """
@@ -327,10 +395,21 @@ def login_student(credentials: StudentLogin):
             (credentials.email,)
         ).fetchone()
 
-    if student is None or not verify_password(
-        credentials.password,
-        student["password_hash"]
-    ):
+    if student is None or not student["password_hash"]:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid email or password."
+        )
+
+    try:
+        password_valid = verify_password(
+            credentials.password,
+            student["password_hash"]
+        )
+    except (ValueError, TypeError):
+        password_valid = False
+
+    if not password_valid:
         raise HTTPException(
             status_code=401,
             detail="Invalid email or password."
@@ -338,7 +417,9 @@ def login_student(credentials: StudentLogin):
 
     return {
         "message": "Login successful",
-        "access_token": create_access_token(student["student_id"]),
+        "access_token": create_access_token(
+            student["student_id"]
+        ),
         "token_type": "bearer",
         "student": {
             "student_id": student["student_id"],
@@ -350,7 +431,9 @@ def login_student(credentials: StudentLogin):
 
 @app.get("/me")
 def get_profile(current_student=Depends(get_current_student)):
-    return {"student": dict(current_student)}
+    return {
+        "student": dict(current_student)
+    }
 
 
 # --------------------------------------------------
@@ -362,13 +445,17 @@ def analyze_skills(
     request: SkillAnalysisRequest,
     current_student=Depends(get_current_student)
 ):
+
     result = analyze_role_gap(
         request.role_id,
         request.student_skills
     )
 
     if result is None:
-        raise HTTPException(status_code=404, detail="Role not found.")
+        raise HTTPException(
+            status_code=404,
+            detail="Role not found."
+        )
 
     student_id = current_student["student_id"]
 
@@ -398,6 +485,7 @@ async def analyze_resume(
     resume: UploadFile = File(...),
     current_student=Depends(get_current_student)
 ):
+
     filename = (resume.filename or "").lower()
 
     if not filename.endswith(".pdf"):
@@ -409,7 +497,10 @@ async def analyze_resume(
     content = await resume.read()
 
     if not content:
-        raise HTTPException(status_code=400, detail="Uploaded file is empty.")
+        raise HTTPException(
+            status_code=400,
+            detail="Uploaded file is empty."
+        )
 
     if len(content) > 8 * 1024 * 1024:
         raise HTTPException(
@@ -430,26 +521,40 @@ async def analyze_resume(
             suffix=".pdf",
             delete=False
         ) as temp_file:
+
             temp_file.write(content)
             temp_path = temp_file.name
 
         parsed = parse_resume(temp_path)
 
         if parsed.get("error"):
-            raise HTTPException(status_code=422, detail=parsed["error"])
+            raise HTTPException(
+                status_code=422,
+                detail=parsed["error"]
+            )
 
         extracted_skills = parsed.get("skills", [])
 
         if not extracted_skills:
             raise HTTPException(
                 status_code=422,
-                detail="No skills were detected in the resume. Please ensure your PDF has a clearly labelled Skills section, or enter your skills manually."
+                detail=(
+                    "No skills were detected in the resume. "
+                    "Please ensure your PDF has a clearly labelled "
+                    "Skills section, or enter your skills manually."
+                )
             )
 
-        result = analyze_role_gap(role_id, extracted_skills)
+        result = analyze_role_gap(
+            role_id,
+            extracted_skills
+        )
 
         if result is None:
-            raise HTTPException(status_code=404, detail="Role not found.")
+            raise HTTPException(
+                status_code=404,
+                detail="Role not found."
+            )
 
         student_id = current_student["student_id"]
 
@@ -476,11 +581,13 @@ async def analyze_resume(
 
     except HTTPException:
         raise
+
     except Exception as error:
         raise HTTPException(
             status_code=500,
             detail=f"Resume processing failed: {str(error)}"
         )
+
     finally:
         if temp_path and os.path.exists(temp_path):
             os.remove(temp_path)
@@ -491,7 +598,10 @@ async def analyze_resume(
 # --------------------------------------------------
 
 @app.get("/student-analysis")
-def student_analysis(current_student=Depends(get_current_student)):
+def student_analysis(
+    current_student=Depends(get_current_student)
+):
+
     with get_connection() as conn:
         row = conn.execute(
             """
@@ -512,7 +622,9 @@ def student_analysis(current_student=Depends(get_current_student)):
         ).fetchone()
 
     if row is None:
-        return {"has_analysis": False}
+        return {
+            "has_analysis": False
+        }
 
     return {
         "has_analysis": True,
@@ -533,7 +645,10 @@ def student_analysis(current_student=Depends(get_current_student)):
 
 @app.get("/resources/{skill_name}")
 def resources(skill_name: str):
-    result = get_learning_resources(skill_name.strip())
+
+    result = get_learning_resources(
+        skill_name.strip()
+    )
 
     return {
         "skill": skill_name,
@@ -543,7 +658,7 @@ def resources(skill_name: str):
 
 
 # --------------------------------------------------
-# LEARNING PROGRESS
+# LEARNING PROGRESS INITIALIZATION
 # --------------------------------------------------
 
 @app.post("/progress/initialize")
@@ -551,13 +666,17 @@ def initialize_progress(
     request: ProgressInitialize,
     current_student=Depends(get_current_student)
 ):
+
     result = analyze_role_gap(
         request.role_id,
         request.student_skills
     )
 
     if result is None:
-        raise HTTPException(status_code=404, detail="Role not found.")
+        raise HTTPException(
+            status_code=404,
+            detail="Role not found."
+        )
 
     student_id = current_student["student_id"]
 
@@ -583,11 +702,16 @@ def initialize_progress(
     }
 
 
+# --------------------------------------------------
+# GET LEARNING PROGRESS
+# --------------------------------------------------
+
 @app.get("/progress/{role_id}")
 def get_progress(
     role_id: int,
     current_student=Depends(get_current_student)
 ):
+
     with get_connection() as conn:
         rows = conn.execute(
             """
@@ -596,7 +720,10 @@ def get_progress(
             WHERE student_id = ? AND role_id = ?
             ORDER BY skill_name
             """,
-            (current_student["student_id"], role_id)
+            (
+                current_student["student_id"],
+                role_id
+            )
         ).fetchall()
 
     if not rows:
@@ -606,7 +733,10 @@ def get_progress(
         )
 
     total = len(rows)
-    overall = sum(row["progress_percentage"] for row in rows) / total
+
+    overall = sum(
+        row["progress_percentage"] for row in rows
+    ) / total
 
     return {
         "role_id": role_id,
@@ -622,12 +752,18 @@ def get_progress(
     }
 
 
+# --------------------------------------------------
+# UPDATE LEARNING PROGRESS
+# --------------------------------------------------
+
 @app.put("/progress/update")
 def update_progress(
     request: ProgressUpdate,
     current_student=Depends(get_current_student)
 ):
+
     with get_connection() as conn:
+
         row = conn.execute(
             """
             SELECT skill_name
@@ -682,9 +818,11 @@ def dashboard(
     role_id: int,
     current_student=Depends(get_current_student)
 ):
+
     student_id = current_student["student_id"]
 
     with get_connection() as conn:
+
         role = conn.execute(
             """
             SELECT role_id, job_role, sector
@@ -695,7 +833,10 @@ def dashboard(
         ).fetchone()
 
         if role is None:
-            raise HTTPException(status_code=404, detail="Role not found.")
+            raise HTTPException(
+                status_code=404,
+                detail="Role not found."
+            )
 
         skills = conn.execute(
             """
@@ -727,6 +868,7 @@ def dashboard(
     not_started = []
 
     for skill in skills:
+
         item = {
             "skill_name": skill["skill_name"],
             "progress": skill["progress_percentage"]
@@ -734,12 +876,16 @@ def dashboard(
 
         if skill["progress_percentage"] >= 100:
             completed.append(item)
+
         elif skill["progress_percentage"] > 0:
             in_progress.append(item)
+
         else:
             not_started.append(item)
 
-    overall = sum(s["progress_percentage"] for s in skills) / len(skills)
+    overall = sum(
+        skill["progress_percentage"] for skill in skills
+    ) / len(skills)
 
     return {
         "student": dict(current_student),
@@ -750,7 +896,9 @@ def dashboard(
             "in_progress_skills": len(in_progress),
             "not_started_skills": len(not_started),
             "overall_progress": round(overall, 2),
-            "career_match": analysis["match_percentage"] if analysis else 0
+            "career_match": (
+                analysis["match_percentage"] if analysis else 0
+            )
         },
         "skills": {
             "completed": completed,
