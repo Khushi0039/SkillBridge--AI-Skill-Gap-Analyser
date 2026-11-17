@@ -341,17 +341,28 @@ def home():
 def health():
     try:
         with get_connection() as conn:
-            conn.execute("SELECT 1")
+            required_tables = {"roles", "role_skills", "students", "student_skill_analysis", "student_skill_progress"}
+            existing_tables = {
+                row["name"] for row in conn.execute(
+                    "SELECT name FROM sqlite_master WHERE type = 'table'"
+                ).fetchall()
+            }
+            missing_tables = sorted(required_tables - existing_tables)
+            if missing_tables:
+                raise RuntimeError("Required database tables are missing: " + ", ".join(missing_tables))
+            role_count = conn.execute("SELECT COUNT(*) FROM roles").fetchone()[0]
 
         return {
             "status": "healthy",
-            "database": "connected"
+            "database": "connected",
+            "schema": "ready",
+            "available_roles": role_count
         }
 
     except Exception:
         raise HTTPException(
             status_code=503,
-            detail="Database unavailable."
+            detail="Database or required schema unavailable."
         )
 
 
@@ -628,7 +639,7 @@ async def analyze_resume(
     except Exception as error:
         raise HTTPException(
             status_code=500,
-            detail=f"Resume processing failed: {str(error)}"
+            detail="Resume processing failed. Please try another text-based PDF or enter skills manually."
         )
 
     finally:

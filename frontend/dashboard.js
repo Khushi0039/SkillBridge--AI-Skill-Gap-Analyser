@@ -490,6 +490,10 @@ analysisContent.innerHTML = `
         resize:vertical; font-family:inherit;">${escapeHTML(savedSkills)}
         </textarea>
 
+        <label for="resumeFile" style="display:block; margin-top:18px;"><strong>Or upload your resume (PDF, max 8 MB)</strong></label>
+        <input id="resumeFile" type="file" accept=".pdf,application/pdf" style="display:block; width:100%; margin-top:10px; padding:12px; border:1px solid #ddd8ec; border-radius:9px; background:#fff;">
+        <p style="color:#858398; font-size:12px; margin-top:8px;">Enter skills manually or upload a PDF. If both are provided, the resume will be used.</p>
+
         <p style="color:#858398; font-size:12px; margin-top:8px;">
             Separate multiple skills using commas.
         </p>
@@ -737,14 +741,17 @@ document.getElementById("analyzeSkillsButton").addEventListener(
 
         }
 
-        if (!skillsInput.trim()) {
+        const resumeFile = document.getElementById("resumeFile").files[0];
 
-            message.textContent = "Please enter at least one existing skill.";
-
+        if (!skillsInput.trim() && !resumeFile) {
+            message.textContent = "Enter your skills or upload a PDF resume.";
             return;
-
         }
 
+        if (resumeFile && resumeFile.size > 8 * 1024 * 1024) {
+            message.textContent = "Resume must be smaller than 8 MB.";
+            return;
+        }
 
         const studentSkills = skillsInput
             .split(",")
@@ -763,31 +770,41 @@ document.getElementById("analyzeSkillsButton").addEventListener(
 
         try {
 
-            const response = await fetch(
-        `${API_URL}/analyze-skills`,
-        {
-        method: "POST",
+            let response;
 
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        },
-
-        body: JSON.stringify({
-            role_id: Number(roleId),
-            student_skills: studentSkills
-        })
-    }
-);
+            if (resumeFile) {
+                const formData = new FormData();
+                formData.append("role_id", String(roleId));
+                formData.append("resume", resumeFile);
+                message.textContent = "Uploading and analysing your resume...";
+                response = await fetch(`${API_URL}/resume/analyze`, {
+                    method: "POST",
+                    headers: { "Authorization": `Bearer ${token}` },
+                    body: formData
+                });
+            } else {
+                response = await fetch(`${API_URL}/analyze-skills`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        role_id: Number(roleId),
+                        student_skills: studentSkills
+                    })
+                });
+            }
 
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(
-                    data.detail || "Skill analysis failed."
-                );
+                throw new Error(data.detail || "Skill analysis failed.");
             }
 
+            const analysisData = data.analysis || data;
+            const skillsUsed = data.extracted_skills || studentSkills;
+            document.getElementById("studentSkills").value = skillsUsed.join(", ");
 
             // Save selected career
             localStorage.setItem(
@@ -796,9 +813,8 @@ document.getElementById("analyzeSkillsButton").addEventListener(
             );
 
             // Display results
-            displayAnalysisResults(data);
-            message.textContent =
-                "Your skill analysis is complete!";
+            displayAnalysisResults(analysisData);
+            message.textContent = data.message || "Your skill analysis is complete!";
         }
 
         catch (error) {

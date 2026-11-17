@@ -2,15 +2,6 @@ import os
 import re
 import json
 import fitz  # PyMuPDF
-import pandas as pd
-import nltk
-from nltk.tokenize import word_tokenize
-
-# Ensure NLTK punkt is available
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    nltk.download('punkt', quiet=True)
 
 
 def extract_text_from_pdf(pdf_path: str) -> str:
@@ -25,7 +16,7 @@ def extract_text_from_pdf(pdf_path: str) -> str:
             text += page.get_text("text") + "\n"
         doc.close()
     except Exception as e:
-        print(f"Error reading PDF: {e}")
+        raise ValueError("Unable to read the uploaded PDF.") from e
     return text
 
 
@@ -75,7 +66,7 @@ def extract_skills_strictly(text: str) -> list:
         skills_block = match.group(1).strip()
         
         # Split by bullet points, newlines, or semicolons
-        raw_items = re.split(r'[\n•;]+', skills_block)
+        raw_items = re.split(r'[\n•;,|]+', skills_block)
         
         for item in raw_items:
             clean_item = item.strip()
@@ -99,7 +90,7 @@ def parse_resume(pdf_path: str) -> dict:
 
     raw_text = extract_text_from_pdf(pdf_path)
     if not raw_text:
-        return {"error": "Could not extract text from PDF.", "candidate_name": None, "skills": []}
+        return {"error": "Could not extract readable text from this PDF. Scanned/image-only PDFs are not supported yet.", "candidate_name": None, "skills": []}
 
     candidate_name = extract_name(raw_text)
     candidate_skills = extract_skills_strictly(raw_text)
