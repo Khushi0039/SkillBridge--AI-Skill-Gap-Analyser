@@ -124,6 +124,26 @@ def migrate_student_database():
             )
         """)
 
+        # Track completion of individual learning resources
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS student_resource_progress (
+                progress_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                student_id INTEGER NOT NULL,
+                role_id INTEGER NOT NULL,
+                resource_id INTEGER NOT NULL,
+                status TEXT NOT NULL DEFAULT 'Not Started'
+                    CHECK(status IN ('Not Started', 'In Progress', 'Completed')),
+                started_at TEXT,
+                completed_at TEXT,
+                updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(student_id, role_id, resource_id)
+            )
+        """)
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_student_resource_progress
+            ON student_resource_progress(student_id, role_id)
+        """)
+
         # Database indexes for faster dashboard queries
         conn.execute("""
             CREATE INDEX IF NOT EXISTS idx_student_analysis
@@ -256,6 +276,19 @@ class ProgressUpdate(BaseModel):
     def clean_skill(cls, value):
         return value.strip()
 
+class ResourceProgressUpdate(BaseModel):
+    role_id: int = Field(gt=0)
+    resource_id: int = Field(gt=0)
+    status: str
+
+    @field_validator("status")
+    @classmethod
+    def validate_status(cls, value):
+        allowed = {"Not Started", "In Progress", "Completed"}
+        if value not in allowed:
+            raise ValueError("Invalid resource progress status.")
+        return value
+
 
 # --------------------------------------------------
 # DATABASE HELPERS
@@ -325,6 +358,18 @@ def initialize_student_progress(student_id, role_id, result):
                 """,
                 (student_id, role_id, skill)
             )
+
+        # Assign real learning resources for the identified skill gaps.
+        conn.execute("""
+            INSERT OR IGNORE INTO student_resource_progress
+                (student_id, role_id, resource_id)
+            SELECT ?, ?, resource_id
+            FROM learning_resources
+            WHERE LOWER(TRIM(skill_name)) IN (
+                SELECT LOWER(TRIM(value))
+                FROM json_each(?)
+            )
+        """, (student_id, role_id, json.dumps(result["missing_skills"])))
 
 
 # --------------------------------------------------
@@ -876,6 +921,79 @@ def update_progress(
         "message": "Progress updated",
         "skill_name": row["skill_name"],
         "progress_percentage": request.progress_percentage
+    }
+
+
+# --------------------------------------------------
+# LEARNING RESOURCE PROGRESS
+# --------------------------------------------------
+
+@app.get("/resource-progress/{role_id}")
+def get_resource_progress(
+    role_id: int,
+    current_student=Depends(get_current_student)
+):
+    with get_connection() as conn:
+        rows = conn.execute("""
+            SELECT
+                srp.resource_id,
+                lr.skill_name,
+                lr.platform,
+                lr.resource_title,
+                lr.resource_url,
+                lr.resource_type,
+                srp.status,
+                srp.updated_at
+            FROM student_resource_progress srp
+            JOIN learning_resources lr ON lr.resource_id = srp.resource_id
+            WHERE srp.student_id = ? AND srp.role_id = ?
+            ORDER BY lr.skill_name, lr.resource_title
+        """, (current_student["student_id"], role_id)).fetchall()
+
+    completed = sum(row["status"] == "Completed" for row in rows)
+    total = len(rows)
+    return {
+        "role_id": role_id,
+        "total_resources": total,
+        "completed_resources": completed,
+        "progress_percentage": round(completed / total * 100, 2) if total else 0,
+        "resources": [dict(row) for row in rows]
+    }
+
+
+@app.put("/resource-progress/update")
+def update_resource_progress(
+    request: ResourceProgressUpdate,
+    current_student=Depends(get_current_student)
+):
+    with get_connection() as conn:
+        cursor = conn.execute("""
+            UPDATE student_resource_progress
+            SET status = ?,
+                started_at = CASE
+                    WHEN ? = 'Not Started' THEN NULL
+                    ELSE COALESCE(started_at, CURRENT_TIMESTAMP)
+                END,
+                completed_at = CASE
+                    WHEN ? = 'Completed' THEN CURRENT_TIMESTAMP
+                    ELSE NULL
+                END,
+                updated_at = CURRENT_TIMESTAMP
+            WHERE student_id = ? AND role_id = ? AND resource_id = ?
+        """, (
+            request.status, request.status, request.status,
+            current_student["student_id"], request.role_id, request.resource_id
+        ))
+        if cursor.rowcount == 0:
+            raise HTTPException(
+                status_code=404,
+                detail="Resource is not assigned to your learning plan. Run skill analysis first."
+            )
+
+    return {
+        "message": "Resource progress updated.",
+        "resource_id": request.resource_id,
+        "status": request.status
     }
 
 
