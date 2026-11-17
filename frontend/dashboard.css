@@ -1448,3 +1448,23 @@ textarea:focus {
     background: #102231;
     color: var(--text-main);
 }
+
+
+/* Learning activity entry and progress visual summaries */
+.activity-entry{display:flex;align-items:end;flex-wrap:wrap;gap:12px;margin-top:18px;padding-top:18px;border-top:1px solid var(--border-dark)}
+.activity-entry label{display:flex;flex-direction:column;gap:7px;color:var(--text-muted);font-size:11px;flex:1 1 170px}
+.activity-entry input{width:100%;min-height:40px;padding:10px 12px;border-radius:8px;border:1px solid var(--border-dark);background:#08131e;color:var(--text-main);outline:none}
+.activity-entry input:focus{border-color:var(--accent)}
+.activity-entry .primary-button{min-height:40px;white-space:nowrap}
+.activity-message{margin-top:10px;color:var(--text-soft);font-size:11px}
+.progress-status-chart{display:grid;grid-template-columns:1fr;gap:9px;margin-top:16px;max-width:620px}
+.progress-status-chart>div:not(.status-track){display:flex;align-items:center;gap:9px;color:var(--text-muted);font-size:12px}
+.progress-status-chart strong{margin-left:auto;color:var(--text-main)}
+.status-dot{width:9px;height:9px;border-radius:50%}
+.completed-dot{background:#14b8a6}.learning-dot{background:#22d3ee}.pending-dot{background:#64748b}
+.status-track{height:7px;overflow:hidden;background:var(--border-dark);border-radius:10px;margin-bottom:5px}
+.status-fill{display:block;height:100%;border-radius:inherit}
+.completed-fill{background:#14b8a6}.learning-fill{background:#22d3ee}.pending-fill{background:#64748b}
+.resource-progress-control{display:flex;align-items:center;gap:8px;color:var(--text-muted);font-size:11px;white-space:nowrap}
+.resource-progress-control select{background:#08131e;color:var(--text-main);border:1px solid var(--border-dark);border-radius:7px;padding:8px}
+@media(max-width:700px){.activity-summary{align-items:flex-start;flex-direction:column}.activity-total{text-align:left}.resource-item{align-items:flex-start;flex-direction:column}.resource-progress-control{white-space:normal}}
