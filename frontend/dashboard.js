@@ -661,49 +661,6 @@ document.getElementById("categorySelect")
 
     });
 // =====================================
-// FILTER ROLES BY CATEGORY
-// =====================================
-
-function updateCareerOptions(selectedCategory) {
-
-    const careerSelect =
-        document.getElementById("careerSelect");
-
-    careerSelect.innerHTML =
-        `<option value="">Choose your target job role</option>`;
-
-    const filteredRoles = allRoles.filter(
-        role => role.sector === selectedCategory
-    );
-
-    filteredRoles.forEach(role => {
-
-        const option = document.createElement("option");
-
-        option.value = role.role_id;
-        option.textContent = role.job_role;
-
-        careerSelect.appendChild(option);
-
-    });
-
-    careerSelect.disabled = filteredRoles.length === 0;
-
-}
-
-
-// =====================================
-// CATEGORY CHANGE EVENT
-// =====================================
-
-document.getElementById("categorySelect")
-    .addEventListener("change", function () {
-
-        updateCareerOptions(this.value);
-
-    });
-
-// =====================================
 // ANALYSE SKILLS
 // =====================================
 
@@ -1381,7 +1338,7 @@ document.getElementById("logoutButton").addEventListener(
     logoutStudent
 );
 
-document.getElementById("settingsLogout").addEventListener(
-    "click",
-    logoutStudent
-);
+const settingsLogoutButton = document.getElementById("settingsLogout");
+if (settingsLogoutButton) {
+    settingsLogoutButton.addEventListener("click", logoutStudent);
+}
