@@ -63,6 +63,7 @@ TOKEN_EXPIRY_MINUTES = 60
 security = HTTPBearer()
 
 
+
 # --------------------------------------------------
 # DATABASE MIGRATION
 # --------------------------------------------------
@@ -70,6 +71,8 @@ security = HTTPBearer()
 @app.on_event("startup")
 def migrate_student_database():
     with get_connection() as conn:
+
+        # Students and authentication
         conn.execute("""
             CREATE TABLE IF NOT EXISTS students (
                 student_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -79,17 +82,57 @@ def migrate_student_database():
             )
         """)
 
-        columns = {
+        student_columns = {
             row["name"]
             for row in conn.execute(
                 "PRAGMA table_info(students)"
             ).fetchall()
         }
 
-        if "password_hash" not in columns:
+        if "password_hash" not in student_columns:
             conn.execute(
                 "ALTER TABLE students ADD COLUMN password_hash TEXT"
             )
+
+        # Latest skill analysis for each student
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS student_skill_analysis (
+                student_id INTEGER PRIMARY KEY,
+                role_id INTEGER NOT NULL,
+                student_skills TEXT NOT NULL DEFAULT '[]',
+                matched_skills TEXT NOT NULL DEFAULT '[]',
+                missing_skills TEXT NOT NULL DEFAULT '[]',
+                match_percentage REAL NOT NULL DEFAULT 0,
+                total_required_skills INTEGER NOT NULL DEFAULT 0,
+                updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+        # Individual learning progress for each skill
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS student_skill_progress (
+                progress_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                student_id INTEGER NOT NULL,
+                role_id INTEGER NOT NULL,
+                skill_name TEXT NOT NULL,
+                progress_percentage REAL NOT NULL DEFAULT 0,
+                updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(student_id, role_id, skill_name)
+            )
+        """)
+
+        # Database indexes for faster dashboard queries
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_student_analysis
+            ON student_skill_analysis(student_id)
+        """)
+
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_student_progress
+            ON student_skill_progress(student_id, role_id)
+        """)
+
+        conn.commit()
 
 
 # --------------------------------------------------
