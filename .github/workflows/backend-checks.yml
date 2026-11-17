@@ -23,5 +23,10 @@ jobs:
           python -m pip install fastapi "uvicorn[standard]" python-multipart pydantic "python-jose[cryptography]" "passlib[argon2]" argon2-cffi PyMuPDF pytest httpx
       - name: Compile Python files
         run: python -m compileall -q main.py db_queries.py skill_gap_engine.py auth_utils.py resume_parsing ml
+      - name: Check frontend JavaScript syntax
+        run: |
+          node --check frontend/dashboard.js
+          node --check frontend/script.js
+          node --check frontend/careers.js
       - name: Run API contract tests
         run: pytest -q tests/test_api_contract.py
