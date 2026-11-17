@@ -935,6 +935,24 @@ def get_resource_progress(
     current_student=Depends(get_current_student)
 ):
     with get_connection() as conn:
+        # Backfill assignments for analyses created before resource tracking existed.
+        saved_analysis = conn.execute("""
+            SELECT missing_skills
+            FROM student_skill_analysis
+            WHERE student_id = ? AND role_id = ?
+        """, (current_student["student_id"], role_id)).fetchone()
+
+        if saved_analysis:
+            missing = json.loads(saved_analysis["missing_skills"] or "[]")
+            for skill_name in missing:
+                conn.execute("""
+                    INSERT OR IGNORE INTO student_resource_progress
+                        (student_id, role_id, resource_id)
+                    SELECT ?, ?, resource_id
+                    FROM learning_resources
+                    WHERE LOWER(TRIM(skill_name)) = LOWER(TRIM(?))
+                """, (current_student["student_id"], role_id, skill_name))
+
         rows = conn.execute("""
             SELECT
                 srp.resource_id,
