@@ -1,6 +1,7 @@
 
 import os
 import json
+import logging
 import sqlite3
 import tempfile
 from pathlib import Path
@@ -30,6 +31,8 @@ from resume_parsing.resume_info import parse_resume
 # APPLICATION CONFIGURATION
 # --------------------------------------------------
 
+logger = logging.getLogger("skillbridge")
+
 app = FastAPI(
     title="SkillBridge API",
     description="AI-powered Career and Skill Gap Analysis Platform",
@@ -43,9 +46,9 @@ app.add_middleware(
         "http://127.0.0.1:5500",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "https://skillbridge-ai-skill-gap-analyser.netlify.app",
         "https://skillbridge-api-lsys.onrender.com"
     ],
-    allow_origin_regex=r"https://.*\.netlify\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -339,20 +342,42 @@ def home():
 
 @app.get("/health")
 def health():
+    required_tables = {
+        "students",
+        "roles",
+        "role_skills",
+        "learning_resources",
+        "student_skill_analysis",
+        "student_skill_progress",
+    }
+
     try:
         with get_connection() as conn:
-            conn.execute("SELECT 1")
+            existing_tables = {
+                row["name"]
+                for row in conn.execute(
+                    "SELECT name FROM sqlite_master WHERE type = 'table'"
+                ).fetchall()
+            }
 
-        return {
-            "status": "healthy",
-            "database": "connected"
-        }
+        missing_tables = sorted(required_tables - existing_tables)
+        if missing_tables:
+            raise HTTPException(
+                status_code=503,
+                detail={
+                    "status": "unhealthy",
+                    "database": "connected",
+                    "missing_tables": missing_tables,
+                },
+            )
 
+        return {"status": "healthy", "database": "connected"}
+
+    except HTTPException:
+        raise
     except Exception:
-        raise HTTPException(
-            status_code=503,
-            detail="Database unavailable."
-        )
+        logger.exception("Health check failed")
+        raise HTTPException(status_code=503, detail="Database unavailable.")
 
 
 @app.get("/roles")
@@ -537,7 +562,7 @@ async def analyze_resume(
             detail="Only PDF resumes are supported."
         )
 
-    content = await resume.read()
+    content = await resume.read(8 * 1024 * 1024 + 1)
 
     if not content:
         raise HTTPException(
@@ -631,7 +656,15 @@ async def analyze_resume(
             detail=f"Resume processing failed: {str(error)}"
         )
 
+    except Exception:
+        logger.exception("Resume processing failed")
+        raise HTTPException(
+            status_code=500,
+            detail="Resume processing failed. Please try another text-based PDF."
+        )
+
     finally:
+        await resume.close()
         if temp_path and os.path.exists(temp_path):
             os.remove(temp_path)
 
