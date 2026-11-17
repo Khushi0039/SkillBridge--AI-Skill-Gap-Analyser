@@ -1435,3 +1435,16 @@ textarea:focus {
     .analysis-skill-columns { grid-template-columns: 1fr; }
     .analysis-next-step .primary-button { width: 100%; }
 }
+
+/* Keep the analysis controls consistent with the dark dashboard theme. */
+#analysisPage .analysis-form #categorySelect,
+#analysisPage .analysis-form #careerSelect {
+    background: #102231;
+    color: var(--text-main);
+    border-color: var(--border-dark);
+}
+#analysisPage .analysis-form #categorySelect option,
+#analysisPage .analysis-form #careerSelect option {
+    background: #102231;
+    color: var(--text-main);
+}
