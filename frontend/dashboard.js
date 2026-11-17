@@ -165,15 +165,9 @@ function displayMyProgress(data) {
 
     const skills = data.skills || [];
 
-    const completed = skills.filter(skill => skill.progress === 100).length;
-
-    const inProgress = skills.filter(
-        skill => skill.progress > 0 && skill.progress < 100
-    ).length;
-
-    const notStarted = skills.filter(
-        skill => skill.progress === 0
-    ).length;
+    const completed = skills.filter(skill => Number(skill.progress) >= 100).length;
+    const inProgress = skills.filter(skill => Number(skill.progress) > 0 && Number(skill.progress) < 100).length;
+    const notStarted = skills.filter(skill => Number(skill.progress) <= 0).length;
 
     progressContent.innerHTML = `
 
@@ -224,6 +218,18 @@ function displayMyProgress(data) {
         </div>
 
         <div class="panel skill-progress-panel">
+            <h2>Learning Status Overview</h2>
+            <div class="progress-status-chart">
+                <div><span class="status-dot completed-dot"></span>Completed <strong>${completed}</strong></div>
+                <div class="status-track"><span class="status-fill completed-fill" style="width:${skills.length ? completed / skills.length * 100 : 0}%"></span></div>
+                <div><span class="status-dot learning-dot"></span>In Progress <strong>${inProgress}</strong></div>
+                <div class="status-track"><span class="status-fill learning-fill" style="width:${skills.length ? inProgress / skills.length * 100 : 0}%"></span></div>
+                <div><span class="status-dot pending-dot"></span>Not Started <strong>${notStarted}</strong></div>
+                <div class="status-track"><span class="status-fill pending-fill" style="width:${skills.length ? notStarted / skills.length * 100 : 0}%"></span></div>
+            </div>
+        </div>
+
+        <div class="panel skill-progress-panel">
 
             <h2>Skill-wise Progress</h2>
 
@@ -239,9 +245,9 @@ function displayMyProgress(data) {
 
     skills.forEach(skill => {
 
-        const percentage = Number(skill.progress) || 0;
-
-        const displayName = skill.skill_name.replace(
+        const percentage = Math.max(0, Math.min(100, Number(skill.progress) || 0));
+        const skillName = String(skill.skill_name || "Unnamed skill");
+        const displayName = skillName.replace(
             /\b\w/g,
             char => char.toUpperCase()
         );
@@ -281,7 +287,7 @@ function displayMyProgress(data) {
                 </span>
 
                 <select class="progress-select"
-                    data-skill="${escapeHTML(skill.skill_name)}">
+                    data-skill="${escapeHTML(skillName)}">
 
                     <option value="0" ${percentage === 0 ? "selected" : ""}>0%</option>
 
@@ -948,11 +954,103 @@ async function loadDashboardSummary(roleId, matchPercentage) {
     }
 }
 
+// =====================================
+// WEEKLY LEARNING ACTIVITY
+// =====================================
+
+function getLocalDateKey(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
+
+async function loadWeeklyActivity() {
+    const chart = document.getElementById("weeklyActivityChart");
+    if (!chart) return;
+    const today = new Date();
+    const monday = new Date(today);
+    monday.setHours(0, 0, 0, 0);
+    monday.setDate(today.getDate() - ((today.getDay() + 6) % 7));
+    const sunday = new Date(monday);
+    sunday.setDate(monday.getDate() + 6);
+    const startDate = getLocalDateKey(monday);
+    const endDate = getLocalDateKey(sunday);
+    const token = localStorage.getItem("access_token");
+    const message = document.getElementById("weeklyActivityMessage");
+    try {
+        const response = await fetch(`${API_URL}/learning-activity?start_date=${startDate}&end_date=${endDate}`, {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        if (response.status === 401) throw new Error("Please log in again to view your activity.");
+        if (!response.ok) throw new Error("Activity could not be loaded.");
+        const data = await response.json();
+        const dayTotals = new Map((data.days || []).map(item => [item.date, Number(item.minutes) || 0]));
+        const values = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((label, index) => {
+            const date = new Date(monday);
+            date.setDate(monday.getDate() + index);
+            return dayTotals.get(getLocalDateKey(date)) || 0;
+        });
+        const max = Math.max(30, ...values);
+        chart.querySelectorAll(".activity-bar").forEach((bar, index) => {
+            const value = values[index] || 0;
+            bar.style.height = value ? `${Math.max(5, value / max * 100)}%` : "0%";
+            bar.title = `${value} minutes`;
+        });
+        const total = Number(data.total_minutes) || 0;
+        const totalLabel = document.getElementById("weeklyLearningTime");
+        if (totalLabel) totalLabel.textContent = total ? (total >= 60 ? `${Math.floor(total / 60)}h ${total % 60}m` : `${total} min`) : "0 min";
+        if (message) message.textContent = total ? "Your recorded learning sessions are shown above." : "No sessions logged this week yet. Add your first session below.";
+    } catch (error) {
+        console.error("Weekly activity:", error);
+        if (message) message.textContent = error.message;
+    }
+}
+
+const logLearningButton = document.getElementById("logLearningSession");
+if (logLearningButton) {
+    logLearningButton.addEventListener("click", async () => {
+        const minutesInput = document.getElementById("learningMinutes");
+        const skillInput = document.getElementById("learningSkill");
+        const message = document.getElementById("weeklyActivityMessage");
+        const minutes = Number(minutesInput.value);
+        const token = localStorage.getItem("access_token");
+        if (!Number.isInteger(minutes) || minutes < 1 || minutes > 600) {
+            message.textContent = "Enter learning time between 1 and 600 minutes.";
+            return;
+        }
+        logLearningButton.disabled = true;
+        logLearningButton.textContent = "Saving...";
+        try {
+            const response = await fetch(`${API_URL}/learning-sessions`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                body: JSON.stringify({
+                    minutes,
+                    skill_name: skillInput.value.trim() || "General learning",
+                    activity_date: getLocalDateKey(new Date())
+                })
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.detail || "Could not save this session.");
+            minutesInput.value = "";
+            message.textContent = "Learning session saved.";
+            await loadWeeklyActivity();
+        } catch (error) {
+            message.textContent = error.message;
+        } finally {
+            logLearningButton.disabled = false;
+            logLearningButton.textContent = "＋ Log session";
+        }
+    });
+}
+
 // Load saved analysis and open Skill Analysis first
 async function initializeDashboard() {
 
     // Load available job roles
     await loadJobRoles();
+    await loadWeeklyActivity();
 
     // Fetch previously saved analysis
     const savedAnalysis = await loadSavedStudentAnalysis();
