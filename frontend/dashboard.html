@@ -162,7 +162,7 @@
                     </div>
 
                     <div class="activity-total">
-                        <strong id="weeklyLearningTime">0 hrs</strong>
+                        <strong id="weeklyLearningTime">Not tracked</strong>
                         <span>Learning this week</span>
                     </div>
                 </div>
@@ -336,9 +336,26 @@
         <!-- SKILL ANALYSIS -->
         <section id="analysisPage" class="content-page">
             <h1>Skill Analysis</h1>
-            <div id="analysisContent">
-                <p>Your skill analysis will appear here.</p>
+            <div class="panel" style="margin-bottom:22px;">
+                <h2>Choose your career goal</h2>
+                <label for="categorySelect">Career category</label>
+                <select id="categorySelect"><option value="">Loading categories...</option></select>
+                <label for="careerSelect">Target job role</label>
+                <select id="careerSelect" disabled><option value="">Select a category first</option></select>
+                <label for="studentSkills">Your existing skills (comma-separated)</label>
+                <textarea id="studentSkills" rows="4" placeholder="Python, SQL, Excel, Communication"></textarea>
+                <button class="primary-button" id="analyzeSkillsButton" type="button">Analyse My Skills →</button>
+                <p id="analysisMessage" role="status" aria-live="polite"></p>
+                <div id="analysisResults"></div>
             </div>
+            <div class="panel">
+                <h2>Or analyse your resume</h2>
+                <p>Upload a text-based PDF resume (maximum 8 MB). Your selected career role will be used for analysis.</p>
+                <input id="resumeFile" type="file" accept="application/pdf,.pdf">
+                <button class="primary-button" id="analyzeResumeButton" type="button">Upload and Analyse Resume →</button>
+                <p id="resumeMessage" role="status" aria-live="polite"></p>
+            </div>
+            <div id="analysisContent"></div>
         </section>
 
 
@@ -360,7 +377,10 @@
         <!-- INTERNSHIPS -->
         <section id="internshipsPage" class="content-page">
             <h1>Internships</h1>
-            <div id="internshipsContent"></div>
+            <div id="internshipsContent" class="panel">
+                <h2>Internship listings are not connected yet</h2>
+                <p>We are not showing unverified or fabricated opportunities. This section will display listings once a trusted internship provider is connected.</p>
+            </div>
         </section>
 
 

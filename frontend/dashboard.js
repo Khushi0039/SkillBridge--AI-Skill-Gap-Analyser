@@ -661,49 +661,6 @@ document.getElementById("categorySelect")
 
     });
 // =====================================
-// FILTER ROLES BY CATEGORY
-// =====================================
-
-function updateCareerOptions(selectedCategory) {
-
-    const careerSelect =
-        document.getElementById("careerSelect");
-
-    careerSelect.innerHTML =
-        `<option value="">Choose your target job role</option>`;
-
-    const filteredRoles = allRoles.filter(
-        role => role.sector === selectedCategory
-    );
-
-    filteredRoles.forEach(role => {
-
-        const option = document.createElement("option");
-
-        option.value = role.role_id;
-        option.textContent = role.job_role;
-
-        careerSelect.appendChild(option);
-
-    });
-
-    careerSelect.disabled = filteredRoles.length === 0;
-
-}
-
-
-// =====================================
-// CATEGORY CHANGE EVENT
-// =====================================
-
-document.getElementById("categorySelect")
-    .addEventListener("change", function () {
-
-        updateCareerOptions(this.value);
-
-    });
-
-// =====================================
 // ANALYSE SKILLS
 // =====================================
 
@@ -1027,12 +984,12 @@ if (results) {
         block: "start"
     });
 }
-    document.getElementById("goToResourcesButton").addEventListener(
-        "click",
-        function () {
+    const goToResourcesButton = document.getElementById("goToResourcesButton");
+    if (goToResourcesButton) {
+        goToResourcesButton.addEventListener("click", function () {
             showPage("resources");
-        }
-    );
+        });
+    }
 }
 async function loadSavedStudentAnalysis() {
 
@@ -1092,6 +1049,35 @@ if (!response.ok) {
         return null;
     }
 }
+async function loadDashboardSummary(roleId, matchPercentage) {
+    const token = localStorage.getItem("access_token");
+    const careerMatch = document.getElementById("careerMatch");
+    const careerName = document.getElementById("careerName");
+
+    if (careerMatch) careerMatch.textContent = `${Number(matchPercentage || 0).toFixed(1)}%`;
+
+    try {
+        const response = await fetch(`${API_URL}/dashboard/${roleId}`, {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        if (!response.ok) {
+            if (response.status !== 404) throw new Error("Dashboard data could not be loaded.");
+            return;
+        }
+        const data = await response.json();
+        const summary = data.learning_summary || {};
+        if (careerName) careerName.textContent = data.career?.job_role || "Selected career";
+        document.getElementById("completedSkills").textContent = summary.completed_skills ?? 0;
+        document.getElementById("learningSkills").textContent = summary.in_progress_skills ?? 0;
+        document.getElementById("totalSkills").textContent = summary.total_skills ?? 0;
+        if (careerMatch) careerMatch.textContent = `${Number(summary.career_match ?? matchPercentage ?? 0).toFixed(1)}%`;
+        const careerGoal = document.getElementById("careerGoalName");
+        if (careerGoal) careerGoal.textContent = data.career?.job_role || "Selected career";
+    } catch (error) {
+        console.error("Dashboard summary:", error);
+    }
+}
+
 // Load saved analysis and open Skill Analysis first
 async function initializeDashboard() {
 
@@ -1103,6 +1089,13 @@ async function initializeDashboard() {
     console.log("Saved analysis:", savedAnalysis);
     console.log("Dashboard page:", document.getElementById("dashboardPage"));
     console.log("Analysis page:", document.getElementById("analysisPage"));
+
+    if (savedAnalysis?.role_id) {
+        await loadDashboardSummary(
+            savedAnalysis.role_id,
+            savedAnalysis.match_percentage
+        );
+    }
 
     if (savedAnalysis) {
 
@@ -1260,6 +1253,29 @@ async function loadLearningResources() {
     const skillResourceList =
         document.getElementById("skillResourceList");
 
+    const activeRoleId = localStorage.getItem("selected_role_id");
+    const authToken = localStorage.getItem("access_token");
+    let resourceStatuses = new Map();
+
+    if (activeRoleId && authToken) {
+        try {
+            const progressResponse = await fetch(
+                `${API_URL}/resource-progress/${activeRoleId}`,
+                { headers: { "Authorization": `Bearer ${authToken}` } }
+            );
+            if (progressResponse.ok) {
+                const progressData = await progressResponse.json();
+                resourceStatuses = new Map(
+                    (progressData.resources || []).map(item => [
+                        Number(item.resource_id), item.status
+                    ])
+                );
+            }
+        } catch (error) {
+            console.warn("Could not load resource progress:", error);
+        }
+    }
+
     for (const skill of missingSkills) {
         const displaySkill = skill.replace(/\b\w/g, char => char.toUpperCase());
 
@@ -1343,7 +1359,45 @@ async function loadLearningResources() {
                            </a>`
                         : `<span>Link unavailable</span>`
                     }
+                    <label class="resource-progress-control">
+                        Learning status
+                        <select class="resource-status"
+                            data-resource-id="${Number(resource.resource_id)}"
+                            ${!authToken || !activeRoleId ? "disabled" : ""}>
+                            <option value="Not Started" ${(resourceStatuses.get(Number(resource.resource_id)) || "Not Started") === "Not Started" ? "selected" : ""}>Not Started</option>
+                            <option value="In Progress" ${resourceStatuses.get(Number(resource.resource_id)) === "In Progress" ? "selected" : ""}>In Progress</option>
+                            <option value="Completed" ${resourceStatuses.get(Number(resource.resource_id)) === "Completed" ? "selected" : ""}>Completed</option>
+                        </select>
+                    </label>
                 `;
+
+                const statusSelect = resourceCard.querySelector(".resource-status");
+                statusSelect.addEventListener("change", async function () {
+                    const previousStatus = resourceStatuses.get(Number(resource.resource_id)) || "Not Started";
+                    this.disabled = true;
+                    try {
+                        const updateResponse = await fetch(`${API_URL}/resource-progress/update`, {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${authToken}`
+                            },
+                            body: JSON.stringify({
+                                role_id: Number(activeRoleId),
+                                resource_id: Number(resource.resource_id),
+                                status: this.value
+                            })
+                        });
+                        const updateData = await updateResponse.json();
+                        if (!updateResponse.ok) throw new Error(updateData.detail || "Could not update learning status.");
+                        resourceStatuses.set(Number(resource.resource_id), this.value);
+                    } catch (error) {
+                        this.value = previousStatus;
+                        alert(error.message);
+                    } finally {
+                        this.disabled = false;
+                    }
+                });
 
                 loading.appendChild(resourceCard);
 
@@ -1359,6 +1413,75 @@ async function loadLearningResources() {
             console.error(error);
         }
     }
+}
+
+// =====================================
+// RESUME UPLOAD AND ANALYSIS
+// =====================================
+
+const resumeButton = document.getElementById("analyzeResumeButton");
+
+if (resumeButton) {
+    resumeButton.addEventListener("click", async function () {
+        const fileInput = document.getElementById("resumeFile");
+        const message = document.getElementById("resumeMessage");
+        const roleId = document.getElementById("careerSelect")?.value;
+        const token = localStorage.getItem("access_token");
+        const file = fileInput?.files?.[0];
+
+        if (!token) {
+            message.textContent = "Your session has expired. Please log in again.";
+            return;
+        }
+        if (!roleId) {
+            message.textContent = "Please select your target job role first.";
+            return;
+        }
+        if (!file) {
+            message.textContent = "Please choose a PDF resume to upload.";
+            return;
+        }
+        if (file.size > 8 * 1024 * 1024) {
+            message.textContent = "Please choose a PDF smaller than 8 MB.";
+            return;
+        }
+        if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+            message.textContent = "Only PDF resumes are supported.";
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("role_id", roleId);
+        formData.append("resume", file);
+        this.disabled = true;
+        this.textContent = "Uploading and analysing...";
+        message.textContent = "Extracting skills from your resume...";
+
+        try {
+            const response = await fetch(`${API_URL}/resume/analyze`, {
+                method: "POST",
+                headers: { "Authorization": `Bearer ${token}` },
+                body: formData
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.detail || "Resume analysis failed.");
+            }
+
+            localStorage.setItem("selected_role_id", String(roleId));
+            const extracted = data.extracted_skills || [];
+            const skillsField = document.getElementById("studentSkills");
+            if (skillsField) skillsField.value = extracted.join(", ");
+            displayAnalysisResults(data.analysis);
+            message.textContent = `Resume analysed. ${data.total_extracted_skills || extracted.length} skills extracted.`;
+        } catch (error) {
+            message.textContent = error.message || "Could not analyse this resume.";
+            console.error("Resume analysis error:", error);
+        } finally {
+            this.disabled = false;
+            this.textContent = "Upload and Analyse Resume →";
+        }
+    });
 }
 
 // =====================================
@@ -1381,7 +1504,7 @@ document.getElementById("logoutButton").addEventListener(
     logoutStudent
 );
 
-document.getElementById("settingsLogout").addEventListener(
-    "click",
-    logoutStudent
-);
+const settingsLogoutButton = document.getElementById("settingsLogout");
+if (settingsLogoutButton) {
+    settingsLogoutButton.addEventListener("click", logoutStudent);
+}

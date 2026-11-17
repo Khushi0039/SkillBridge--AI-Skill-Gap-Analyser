@@ -2,15 +2,6 @@ import os
 import re
 import json
 import fitz  # PyMuPDF
-import pandas as pd
-import nltk
-from nltk.tokenize import word_tokenize
-
-# Ensure NLTK punkt is available
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    nltk.download('punkt', quiet=True)
 
 
 def extract_text_from_pdf(pdf_path: str) -> str:
@@ -75,7 +66,7 @@ def extract_skills_strictly(text: str) -> list:
         skills_block = match.group(1).strip()
         
         # Split by bullet points, newlines, or semicolons
-        raw_items = re.split(r'[\n•;]+', skills_block)
+        raw_items = re.split(r'[\n•;,]+', skills_block)
         
         for item in raw_items:
             clean_item = item.strip()
