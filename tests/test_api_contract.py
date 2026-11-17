@@ -37,6 +37,8 @@ def test_core_routes_are_registered():
         "/progress/initialize",
         "/progress/{role_id}",
         "/progress/update",
+        "/resource-progress/{role_id}",
+        "/resource-progress/update",
         "/dashboard/{role_id}",
     }
     assert expected.issubset(paths)
@@ -47,4 +49,6 @@ def test_openapi_contains_authenticated_workflows():
     paths = schema["paths"]
     assert "post" in paths["/resume/analyze"]
     assert "get" in paths["/dashboard/{role_id}"]
+    assert "get" in paths["/resource-progress/{role_id}"]
+    assert "put" in paths["/resource-progress/update"]
     assert "put" in paths["/progress/update"]
