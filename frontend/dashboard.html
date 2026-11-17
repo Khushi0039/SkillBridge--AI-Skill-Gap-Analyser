@@ -223,6 +223,16 @@
                 <p class="chart-note">
                     Your daily activity will appear here as learning sessions are recorded.
                 </p>
+                <div class="activity-entry">
+                    <label>Learning time (minutes)
+                        <input id="learningMinutes" type="number" min="1" max="600" placeholder="e.g. 45">
+                    </label>
+                    <label>Skill studied
+                        <input id="learningSkill" type="text" maxlength="100" placeholder="e.g. Python">
+                    </label>
+                    <button id="logLearningSession" class="primary-button" type="button">＋ Log session</button>
+                </div>
+                <p id="weeklyActivityMessage" class="activity-message" role="status" aria-live="polite">Log your study time to build your weekly activity chart.</p>
 
             </div>
 
