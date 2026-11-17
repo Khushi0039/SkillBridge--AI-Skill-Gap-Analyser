@@ -530,17 +530,34 @@ async function loadJobRoles() {
 
     } catch (error) {
 
-        console.error("Dropdown loading error:", error);
+        console.error("Live role list unavailable; loading bundled demo catalogue:", error);
 
-        categorySelect.innerHTML =
-            `<option value="">Unable to load categories</option>`;
+        try {
+            const fallbackResponse = await fetch("role_fallback.json");
+            if (!fallbackResponse.ok) throw new Error("Bundled role catalogue unavailable.");
+            const fallbackData = await fallbackResponse.json();
+            allRoles = Array.isArray(fallbackData.roles) ? fallbackData.roles : [];
+            if (!allRoles.length) throw new Error("Bundled role catalogue is empty.");
 
-        careerSelect.innerHTML =
-            `<option value="">Unable to load job roles</option>`;
+            const categories = [...new Set(allRoles.map(role => role.sector).filter(Boolean))].sort();
+            categorySelect.innerHTML = '<option value="">Choose a career category</option>';
+            categories.forEach(category => {
+                const option = document.createElement("option");
+                option.value = category;
+                option.textContent = category;
+                categorySelect.appendChild(option);
+            });
 
-        if (message) {
-            message.textContent =
-                "Unable to load categories. Please check the server.";
+            careerSelect.innerHTML = '<option value="">Choose a target job role</option>';
+            careerSelect.disabled = true;
+            if (message) {
+                message.textContent = "Using the built-in role catalogue while the server reconnects. Analysis will run as a local preview.";
+            }
+        } catch (fallbackError) {
+            console.error("Bundled role catalogue failed:", fallbackError);
+            categorySelect.innerHTML = '<option value="">Unable to load categories</option>';
+            careerSelect.innerHTML = '<option value="">Unable to load job roles</option>';
+            if (message) message.textContent = "Could not load the role catalogue. Refresh the page and try again.";
         }
 
     }
