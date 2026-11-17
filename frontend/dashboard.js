@@ -668,9 +668,9 @@ document.getElementById("analyzeSkillsButton").addEventListener(
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(
-                    data.detail || "Skill analysis failed."
-                );
+                const requestError = new Error(data.detail || "Skill analysis failed.");
+                requestError.allowOfflineFallback = response.status === 401 || response.status >= 500;
+                throw requestError;
             }
 
 
@@ -687,8 +687,71 @@ document.getElementById("analyzeSkillsButton").addEventListener(
         }
 
         catch (error) {
-            message.textContent = error.message;
-            console.error(error);
+            console.error("Skill analysis request failed:", error);
+
+            // Keep the core demo usable during Render cold starts or temporary
+            // network/auth failures. This preview is calculated from the real
+            // role-skill list already loaded from the API and is not saved.
+            if (error instanceof TypeError || error.allowOfflineFallback) {
+                const selectedRole = allRoles.find(
+                    role => String(role.role_id) === String(roleId)
+                );
+                const requiredSkills = selectedRole?.required_skills || [];
+
+                if (selectedRole && requiredSkills.length) {
+                    const normalize = value => {
+                        const aliases = {
+                            "py": "python",
+                            "python programming": "python",
+                            "ms excel": "excel",
+                            "microsoft excel": "excel",
+                            "mysql": "sql",
+                            "postgresql": "sql",
+                            "powerbi": "power bi",
+                            "ml": "machine learning",
+                            "ai": "artificial intelligence",
+                            "js": "javascript",
+                            "react.js": "react",
+                            "react js": "react",
+                            "node.js": "nodejs",
+                            "html5": "html",
+                            "css3": "css"
+                        };
+                        const key = String(value || "").trim().toLowerCase().replace(/\\s+/g, " ");
+                        return aliases[key] || key.replace(/[^a-z0-9+#]+/g, " ").trim();
+                    };
+
+                    const entered = new Set(studentSkills.map(normalize));
+                    const matched = [];
+                    const missing = [];
+
+                    requiredSkills.forEach(item => {
+                        const requirement = String(item || "").trim();
+                        const alternatives = requirement.split(/\\s+or\\s+/i);
+                        const found = alternatives.some(part => entered.has(normalize(part)));
+                        (found ? matched : missing).push(requirement.toLowerCase());
+                    });
+
+                    const total = matched.length + missing.length;
+                    const preview = {
+                        role_id: Number(roleId),
+                        job_role: selectedRole.job_role,
+                        sector: selectedRole.sector,
+                        matched_skills: matched.sort(),
+                        missing_skills: missing.sort(),
+                        match_percentage: total ? Math.round((matched.length / total) * 10000) / 100 : 0,
+                        learning_plan: {},
+                        offline_preview: true
+                    };
+
+                    displayAnalysisResults(preview);
+                    message.textContent = "Offline preview shown. The API could not be reached, so this result has not been saved.";
+                } else {
+                    message.textContent = "The server is temporarily unavailable and this role has no cached skill list. Please refresh once the server is awake.";
+                }
+            } else {
+                message.textContent = error.message || "Skill analysis failed. Please try again.";
+            }
         }
 
         finally {
