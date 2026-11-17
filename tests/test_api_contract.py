@@ -5,6 +5,10 @@ model downloads. They verify that the deployed API can be imported and that
 its documented routes remain available.
 """
 import os
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 os.environ.setdefault("SKILLBRIDGE_SECRET_KEY", "test-only-secret-key")
 
