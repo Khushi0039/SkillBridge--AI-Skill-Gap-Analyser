@@ -11,7 +11,7 @@ def normalize_skill(skill):
     """Normalize common skill names and abbreviations before comparing."""
 
     skill = str(skill or "").strip().lower()
-    skill = re.sub(r"\\s+", " ", skill)
+    skill = re.sub(r"\s+", " ", skill)
 
     aliases = {
         "python programming": "python",
@@ -46,7 +46,7 @@ def normalize_skill(skill):
         return aliases[skill]
 
     skill = re.sub(r"[^a-z0-9+#]+", " ", skill)
-    skill = re.sub(r"\\s+", " ", skill).strip()
+    skill = re.sub(r"\s+", " ", skill).strip()
     return aliases.get(skill, skill)
 
 def analyze_skill_gap(required_skills, student_skills):
