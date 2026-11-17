@@ -1319,6 +1319,75 @@ async function loadLearningResources() {
 }
 
 // =====================================
+// RESUME UPLOAD AND ANALYSIS
+// =====================================
+
+const resumeButton = document.getElementById("analyzeResumeButton");
+
+if (resumeButton) {
+    resumeButton.addEventListener("click", async function () {
+        const fileInput = document.getElementById("resumeFile");
+        const message = document.getElementById("resumeMessage");
+        const roleId = document.getElementById("careerSelect")?.value;
+        const token = localStorage.getItem("access_token");
+        const file = fileInput?.files?.[0];
+
+        if (!token) {
+            message.textContent = "Your session has expired. Please log in again.";
+            return;
+        }
+        if (!roleId) {
+            message.textContent = "Please select your target job role first.";
+            return;
+        }
+        if (!file) {
+            message.textContent = "Please choose a PDF resume to upload.";
+            return;
+        }
+        if (file.size > 8 * 1024 * 1024) {
+            message.textContent = "Please choose a PDF smaller than 8 MB.";
+            return;
+        }
+        if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+            message.textContent = "Only PDF resumes are supported.";
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("role_id", roleId);
+        formData.append("resume", file);
+        this.disabled = true;
+        this.textContent = "Uploading and analysing...";
+        message.textContent = "Extracting skills from your resume...";
+
+        try {
+            const response = await fetch(`${API_URL}/resume/analyze`, {
+                method: "POST",
+                headers: { "Authorization": `Bearer ${token}` },
+                body: formData
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.detail || "Resume analysis failed.");
+            }
+
+            localStorage.setItem("selected_role_id", String(roleId));
+            const extracted = data.extracted_skills || [];
+            const skillsField = document.getElementById("studentSkills");
+            if (skillsField) skillsField.value = extracted.join(", ");
+            displayAnalysisResults(data.analysis);
+            message.textContent = `Resume analysed. ${data.total_extracted_skills || extracted.length} skills extracted.`;
+        } catch (error) {
+            message.textContent = error.message || "Could not analyse this resume.";
+            console.error("Resume analysis error:", error);
+        } finally {
+            this.disabled = false;
+            this.textContent = "Upload and Analyse Resume →";
+        }
+    });
+}
+
+// =====================================
 // LOGOUT
 // =====================================
 
