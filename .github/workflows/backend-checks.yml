@@ -1,0 +1,27 @@
+name: Backend checks
+
+on:
+  push:
+    branches: [main, "release/**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  compile-and-contract:
+    runs-on: ubuntu-latest
+    env:
+      SKILLBRIDGE_SECRET_KEY: ci-only-not-for-production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install API runtime dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install fastapi "uvicorn[standard]" python-multipart pydantic "python-jose[cryptography]" "passlib[argon2]" argon2-cffi PyMuPDF pytest httpx
+      - name: Compile Python files
+        run: python -m compileall -q main.py db_queries.py skill_gap_engine.py auth_utils.py resume_parsing ml
+      - name: Run API contract tests
+        run: pytest -q tests/test_api_contract.py
