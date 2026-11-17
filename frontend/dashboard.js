@@ -116,70 +116,48 @@ function showPage(pageName) {
 // ======================================
 
 async function loadMyProgress() {
-
     const progressContent = document.getElementById("progressContent");
-
     const token = localStorage.getItem("access_token");
     const roleId = localStorage.getItem("selected_role_id");
 
     if (!roleId) {
-        progressContent.innerHTML = `
-            <div class="panel">
-                <h3>No career selected</h3>
-                <p>Complete your Skill Analysis first.</p>
-                <button class="primary-button"
-                    onclick="showPage('analysis')">
-                    Start Skill Analysis →
-                </button>
-            </div>
-        `;
+        progressContent.innerHTML = '<div class="panel"><h3>No career selected</h3><p>Complete your Skill Analysis first.</p><button class="primary-button" onclick="showPage(\'analysis\')">Start Skill Analysis →</button></div>';
+        return;
+    }
+    if (!token) {
+        progressContent.innerHTML = '<div class="panel"><h3>Your session has expired</h3><p>Please log in again to view your learning progress.</p></div>';
         return;
     }
 
     progressContent.innerHTML = "<p>Loading your progress...</p>";
-
     try {
-
-        const response = await fetch(
-            `${API_URL}/progress/${roleId}`,
-            {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            }
-        );
-
-        if (!response.ok) {                                                                        
-        const errorDetails = await response.text();
-
-        console.error("Progress API Error:", response.status);
-        console.error("Error Details:", errorDetails);
-        throw new Error(
-        `Progress loading failed: ${response.status}`
-    );
-}
-
-        const data = await response.json();
-
+        let response = await fetch(`${API_URL}/progress/${encodeURIComponent(roleId)}`, {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        let data;
+        if (response.ok) {
+            data = await response.json();
+        } else if (response.status === 401) {
+            throw new Error("Your session has expired. Please log in again.");
+        } else {
+            const fallback = await fetch(`${API_URL}/dashboard/${encodeURIComponent(roleId)}`, {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+            if (fallback.status === 401) throw new Error("Your session has expired. Please log in again.");
+            if (!fallback.ok) throw new Error("Progress is not available yet. Run Skill Analysis first.");
+            const summary = await fallback.json();
+            const groups = summary.skills || {};
+            const skills = [...(groups.completed || []), ...(groups.in_progress || []), ...(groups.not_started || [])];
+            const total = skills.length;
+            const overall = total ? skills.reduce((sum, skill) => sum + Number(skill.progress || 0), 0) / total : 0;
+            data = { role_id: Number(roleId), total_skills: total, overall_progress: Number(overall.toFixed(2)), skills };
+        }
         displayMyProgress(data);
-
     } catch (error) {
-
-        console.error(error);
-
-        progressContent.innerHTML = `
-            <div class="panel">
-                <h3>Unable to load progress</h3>
-                <p>Please log in again and try once more.</p>
-            </div>
-        `;
+        console.error("Progress loading failed:", error);
+        progressContent.innerHTML = '<div class="panel"><h3>Unable to load progress</h3><p>' + escapeHTML(error.message || "Please try again.") + '</p><button class="primary-button" onclick="loadMyProgress()">Try Again →</button></div>';
     }
 }
-
-
-// ======================================
-// DISPLAY PROGRESS
-// ======================================
 
 function displayMyProgress(data) {
 
