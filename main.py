@@ -394,6 +394,7 @@ def health():
         "learning_resources",
         "student_skill_analysis",
         "student_skill_progress",
+        "student_resource_progress",
     }
 
     try:
