@@ -8,25 +8,45 @@ from skill_analysis_math import analyze_skill_gap
 import re
 
 def normalize_skill(skill):
-    """Normalize skill names for better matching."""
+    """Normalize common skill names and abbreviations before comparing."""
 
-    skill = skill.strip().lower()
+    skill = str(skill or "").strip().lower()
+    skill = re.sub(r"\\s+", " ", skill)
 
     aliases = {
         "python programming": "python",
         "python language": "python",
+        "py": "python",
         "ms excel": "excel",
         "microsoft excel": "excel",
+        "excel spreadsheets": "excel",
         "structured query language": "sql",
         "mysql": "sql",
+        "postgresql": "sql",
+        "postgre sql": "sql",
         "statistical analysis": "statistics",
-        "power bi": "power bi",
+        "powerbi": "power bi",
+        "power bi desktop": "power bi",
         "ml": "machine learning",
         "ai": "artificial intelligence",
+        "js": "javascript",
+        "java script": "javascript",
+        "ts": "typescript",
+        "react.js": "react",
+        "react js": "react",
+        "node.js": "nodejs",
+        "node js": "nodejs",
+        "html5": "html",
+        "css3": "css",
+        "c sharp": "c#",
+        "cplusplus": "c++",
     }
 
-    skill = re.sub(r"\s+", " ", skill)
+    if skill in aliases:
+        return aliases[skill]
 
+    skill = re.sub(r"[^a-z0-9+#]+", " ", skill)
+    skill = re.sub(r"\\s+", " ", skill).strip()
     return aliases.get(skill, skill)
 
 def analyze_skill_gap(required_skills, student_skills):
