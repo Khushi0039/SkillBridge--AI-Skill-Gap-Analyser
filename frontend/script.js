@@ -297,7 +297,7 @@ loginForm.addEventListener("submit", async function (event) {
         authMessage.className = "auth-message success";
 
 setTimeout(function () {
-    window.location.href = "/frontend/dashboard.html";
+    window.location.href = "/dashboard.html";
 }, 1000);
 
  }
