@@ -1,0 +1,16 @@
+
+fastapi
+uvicorn[standard]
+flask
+flask-cors
+python-multipart
+pydantic
+python-jose[cryptography]
+passlib[bcrypt]
+sentence-transformers
+numpy
+pandas
+openpyxl
+scikit-learn
+PyMuPDF
+nltk
