@@ -25,7 +25,7 @@ if USING_TURSO:
         import libsql
     except ImportError as error:
         raise RuntimeError(
-            "The libsql package is required for Turso. Install requirements.txt."
+            "The libsql-py package is required for Turso. Install requirements.txt."
         ) from error
     DB_INTEGRITY_ERRORS = (
         sqlite3.IntegrityError,
@@ -56,14 +56,98 @@ if not USING_TURSO:
 # DATABASE CONNECTION
 # --------------------------------------------------
 
+class _CloudRow:
+    """Provide sqlite3.Row-style named and positional access for libsql tuples."""
+
+    def __init__(self, values, description):
+        self._values = tuple(values)
+        self._names = tuple(column[0] for column in (description or ()))
+
+    def __getitem__(self, key):
+        if isinstance(key, int):
+            return self._values[key]
+        return self._values[self._names.index(key)]
+
+    def __iter__(self):
+        return iter(self._names)
+
+    def __len__(self):
+        return len(self._names)
+
+    def keys(self):
+        return self._names
+
+
+class _CloudCursor:
+    def __init__(self, cursor):
+        self._cursor = cursor
+
+    @property
+    def description(self):
+        return self._cursor.description
+
+    @property
+    def lastrowid(self):
+        return self._cursor.lastrowid
+
+    @property
+    def rowcount(self):
+        return self._cursor.rowcount
+
+    def _row(self, values):
+        return None if values is None else _CloudRow(values, self.description)
+
+    def fetchone(self):
+        return self._row(self._cursor.fetchone())
+
+    def fetchall(self):
+        return [self._row(row) for row in self._cursor.fetchall()]
+
+    def fetchmany(self, size=None):
+        rows = self._cursor.fetchmany() if size is None else self._cursor.fetchmany(size)
+        return [self._row(row) for row in rows]
+
+    def __iter__(self):
+        for row in self._cursor:
+            yield self._row(row)
+
+
+class _CloudConnection:
+    """Adapt libsql's tuple rows to the sqlite3.Row interface used by SkillBridge."""
+
+    def __init__(self, connection):
+        self._connection = connection
+
+    def execute(self, sql, parameters=()):
+        return _CloudCursor(self._connection.execute(sql, parameters))
+
+    def executemany(self, sql, parameters):
+        return _CloudCursor(self._connection.executemany(sql, parameters))
+
+    def commit(self):
+        return self._connection.commit()
+
+    def rollback(self):
+        return self._connection.rollback()
+
+    def close(self):
+        return self._connection.close()
+
+    def __enter__(self):
+        self._connection.__enter__()
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        return self._connection.__exit__(exc_type, exc_value, traceback)
+
+
 def get_connection():
     if USING_TURSO:
         connection = libsql.connect(
             database=TURSO_DATABASE_URL,
             auth_token=TURSO_AUTH_TOKEN,
         )
-        connection.row_factory = sqlite3.Row
-        return connection
+        return _CloudConnection(connection)
 
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     connection = sqlite3.connect(
