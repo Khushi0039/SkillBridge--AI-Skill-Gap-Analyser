@@ -1,5 +1,6 @@
 
 import os
+import shutil
 import sqlite3
 from pathlib import Path
 
@@ -9,13 +10,27 @@ from pathlib import Path
 # --------------------------------------------------
 
 BASE_DIR = Path(__file__).resolve().parent
+BUNDLED_DB_PATH = BASE_DIR / "database" / "skill_gap.db"
 
-DB_PATH = Path(
-    os.getenv(
-        "DATABASE_PATH",
-        str(BASE_DIR / "database" / "skill_gap.db")
-    )
-)
+# Production must set DATABASE_PATH to a durable datastore location.
+# On Render, /var/data is suitable only when a paid persistent disk is
+# actually attached to the service. Without it, the filesystem is ephemeral.
+configured_path = os.getenv("DATABASE_PATH")
+DB_PATH = Path(configured_path) if configured_path else BUNDLED_DB_PATH
+
+
+def _prepare_database_file():
+    """Seed a new writable database from the committed reference database."""
+    if DB_PATH.resolve() == BUNDLED_DB_PATH.resolve() or DB_PATH.exists():
+        return
+
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    if BUNDLED_DB_PATH.is_file():
+        shutil.copy2(BUNDLED_DB_PATH, DB_PATH)
+
+
+_prepare_database_file()
 
 
 # --------------------------------------------------
@@ -25,9 +40,15 @@ DB_PATH = Path(
 def get_connection():
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(
+        str(DB_PATH),
+        timeout=30,
+        check_same_thread=False
+    )
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
+    conn.execute("PRAGMA busy_timeout = 30000")
+    conn.execute("PRAGMA journal_mode = WAL")
 
     return conn
 
