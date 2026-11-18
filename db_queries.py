@@ -101,7 +101,12 @@ def seed_reference_data_if_empty():
                         f"Reference database is missing the {table} table."
                     )
 
-                destination.execute(schema["sql"])
+                create_sql = schema["sql"].replace(
+                    "CREATE TABLE ",
+                    "CREATE TABLE IF NOT EXISTS ",
+                    1,
+                )
+                destination.execute(create_sql)
                 existing = destination.execute(
                     "SELECT COUNT(*) FROM " + table
                 ).fetchone()[0]
