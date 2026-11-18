@@ -13,3 +13,4 @@ openpyxl
 scikit-learn
 sentence-transformers
 nltk
+libsql
