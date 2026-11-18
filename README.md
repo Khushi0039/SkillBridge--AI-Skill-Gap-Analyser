@@ -50,12 +50,29 @@ export SKILLBRIDGE_SECRET_KEY="replace-with-a-long-random-secret"
 uvicorn main:app --reload
 ```
 
-The database path defaults to `database/skill_gap.db`. Set
-`DATABASE_PATH` to a persistent writable path in production. On Render,
-configure a persistent disk and point `DATABASE_PATH` at its mount path;
-otherwise SQLite data stored on the instance filesystem may be lost when the
-service is recreated. Ensure role, role-skill and learning-resource reference
-tables are seeded at that location.
+The database path defaults to `database/skill_gap.db`. If
+`DATABASE_PATH` points to a new, empty location, the application copies the
+committed reference database there once before startup migrations. It never
+overwrites a database file that already exists.
+
+**Important for Render:** the Free web-service plan has an ephemeral
+filesystem and does not support persistent disks. SQLite accounts created on
+that filesystem can disappear after a restart or deploy. For durable SQLite
+storage, use a paid web service with a persistent disk mounted at
+`/var/data`, and set `DATABASE_PATH=/var/data/skill_gap.db` in the service
+environment. The application will seed that file from the bundled reference
+database on first startup. Do not attach a disk over an existing populated
+database path without backing up the data first.
+
+If you need to stay on Render's Free web-service plan, use an external
+persistent database (such as managed PostgreSQL) instead of SQLite on the
+service filesystem. The current SQLite application has not been migrated to
+PostgreSQL; do not set a PostgreSQL URL as `DATABASE_PATH`.
+
+Existing accounts stored only on an ephemeral filesystem cannot be recovered
+by a code deployment. Users may need to register again after durable storage
+has been configured. Never delete or replace a populated production database
+to resolve a login issue.
 
 ## Deployment configuration
 
