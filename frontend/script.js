@@ -4,6 +4,28 @@
 
 const API_URL = "https://skillbridge-api-lsys.onrender.com";
 
+// Wake the Render free service as soon as the homepage opens.
+// This lets the server start while the visitor reads or fills the form.
+const backendWarmupPromise = (async function () {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 120000);
+
+    try {
+        const response = await fetch(`${API_URL}/health`, {
+            method: "GET",
+            cache: "no-store",
+            signal: controller.signal
+        });
+        return response.ok;
+    } catch (error) {
+        console.warn("SkillBridge backend warm-up:", error.message);
+        return false;
+    } finally {
+        clearTimeout(timeout);
+    }
+})();
+
+
 
 // =====================================
 // GET HTML ELEMENTS
@@ -185,6 +207,11 @@ signupForm.addEventListener("submit", async function (event) {
 
     try {
 
+        authMessage.textContent = "Connecting to SkillBridge...";
+        authMessage.className = "auth-message";
+
+        await backendWarmupPromise;
+
         const response = await fetch(`${API_URL}/students`, {
 
             method: "POST",
@@ -260,6 +287,11 @@ loginForm.addEventListener("submit", async function (event) {
     submitButton.textContent = "Logging in...";
 
     try {
+
+        authMessage.textContent = "Connecting to SkillBridge...";
+        authMessage.className = "auth-message";
+
+        await backendWarmupPromise;
 
         const response = await fetch(`${API_URL}/login`, {
 
