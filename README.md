@@ -55,19 +55,26 @@ The database path defaults to `database/skill_gap.db`. If
 committed reference database there once before startup migrations. It never
 overwrites a database file that already exists.
 
-**Important for Render:** the Free web-service plan has an ephemeral
-filesystem and does not support persistent disks. SQLite accounts created on
-that filesystem can disappear after a restart or deploy. For durable SQLite
-storage, use a paid web service with a persistent disk mounted at
-`/var/data`, and set `DATABASE_PATH=/var/data/skill_gap.db` in the service
-environment. The application will seed that file from the bundled reference
-database on first startup. Do not attach a disk over an existing populated
-database path without backing up the data first.
+**Free Render deployment (recommended):** Render's Free web-service
+filesystem is ephemeral, so do not use its local SQLite file for student
+accounts or learning progress. This project now supports a hosted Turso
+database while retaining local SQLite for development.
 
-If you need to stay on Render's Free web-service plan, use an external
-persistent database (such as managed PostgreSQL) instead of SQLite on the
-service filesystem. The current SQLite application has not been migrated to
-PostgreSQL; do not set a PostgreSQL URL as `DATABASE_PATH`.
+1. Create a free database in your Turso account and generate a database auth
+   token.
+2. Copy the database URL (it begins with `libsql://`) and the auth token.
+3. In Render → your `Skillbridge-api` service → Environment, add:
+   - `TURSO_DATABASE_URL` = your Turso database URL
+   - `TURSO_AUTH_TOKEN` = your database auth token
+4. Keep `SKILLBRIDGE_SECRET_KEY` configured. Do not commit any secret or token.
+5. Deploy the latest `main` branch. On first startup, the API creates the
+   required reference tables and copies roles, role skills and learning
+   resources from the bundled database. Student accounts and progress are
+   then written to Turso instead of Render's temporary filesystem.
+
+Do not set `DATABASE_PATH` when using Turso. If `TURSO_DATABASE_URL` is set
+without `TURSO_AUTH_TOKEN`, startup intentionally fails rather than silently
+falling back to temporary local storage. Keep your Turso token private.
 
 Existing accounts stored only on an ephemeral filesystem cannot be recovered
 by a code deployment. Users may need to register again after durable storage
