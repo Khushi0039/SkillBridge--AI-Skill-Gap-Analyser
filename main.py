@@ -20,7 +20,10 @@ from db_queries import (
     get_all_roles,
     get_role_details,
     get_learning_resources,
-    get_connection
+    get_connection,
+    seed_reference_data_if_empty,
+    DB_INTEGRITY_ERRORS,
+    USING_TURSO,
 )
 from skill_gap_engine import analyze_role_gap
 from auth_utils import hash_password, verify_password
@@ -73,6 +76,7 @@ security = HTTPBearer()
 
 @app.on_event("startup")
 def migrate_student_database():
+    seed_reference_data_if_empty()
     with get_connection() as conn:
 
         # Students and authentication
@@ -530,6 +534,16 @@ def register_student(student: StudentCreate):
             )
 
             student_id = cursor.lastrowid
+            if student_id is None:
+                student_id = conn.execute(
+                    "SELECT student_id FROM students WHERE LOWER(email) = LOWER(?)",
+                    (student.email,),
+                ).fetchone()["student_id"]
+            if student_id is None:
+                student_id = conn.execute(
+                    "SELECT student_id FROM students WHERE LOWER(email) = LOWER(?)",
+                    (student.email,),
+                ).fetchone()["student_id"]
 
         return {
             "message": "Registration successful",
@@ -538,7 +552,7 @@ def register_student(student: StudentCreate):
             "email": student.email
         }
 
-    except sqlite3.IntegrityError:
+    except DB_INTEGRITY_ERRORS:
         raise HTTPException(
             status_code=409,
             detail="This email is already registered."
