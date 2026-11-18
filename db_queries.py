@@ -12,25 +12,44 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 BUNDLED_DB_PATH = BASE_DIR / "database" / "skill_gap.db"
 
-# Production must set DATABASE_PATH to a durable datastore location.
-# On Render, /var/data is suitable only when a paid persistent disk is
-# actually attached to the service. Without it, the filesystem is ephemeral.
-configured_path = os.getenv("DATABASE_PATH")
-DB_PATH = Path(configured_path) if configured_path else BUNDLED_DB_PATH
+# Use Turso for durable free cloud storage when its credentials are configured.
+TURSO_DATABASE_URL = os.getenv("TURSO_DATABASE_URL", "").strip()
+TURSO_AUTH_TOKEN = os.getenv("TURSO_AUTH_TOKEN", "").strip()
+USING_TURSO = bool(TURSO_DATABASE_URL)
+
+if USING_TURSO and not TURSO_AUTH_TOKEN:
+    raise RuntimeError("TURSO_AUTH_TOKEN is required when TURSO_DATABASE_URL is set.")
+
+if USING_TURSO:
+    try:
+        import libsql
+    except ImportError as error:
+        raise RuntimeError(
+            "The libsql package is required for Turso. Install requirements.txt."
+        ) from error
+    DB_INTEGRITY_ERRORS = (
+        sqlite3.IntegrityError,
+        getattr(libsql, "IntegrityError", sqlite3.IntegrityError),
+    )
+else:
+    libsql = None
+    configured_path = os.getenv("DATABASE_PATH")
+    DB_PATH = Path(configured_path) if configured_path else BUNDLED_DB_PATH
+    DB_INTEGRITY_ERRORS = (sqlite3.IntegrityError,)
 
 
 def _prepare_database_file():
-    """Seed a new writable database from the committed reference database."""
-    if DB_PATH.resolve() == BUNDLED_DB_PATH.resolve() or DB_PATH.exists():
+    """Seed a new local writable database from the committed reference database."""
+    if USING_TURSO or DB_PATH.resolve() == BUNDLED_DB_PATH.resolve() or DB_PATH.exists():
         return
 
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-
     if BUNDLED_DB_PATH.is_file():
         shutil.copy2(BUNDLED_DB_PATH, DB_PATH)
 
 
-_prepare_database_file()
+if not USING_TURSO:
+    _prepare_database_file()
 
 
 # --------------------------------------------------
@@ -38,19 +57,82 @@ _prepare_database_file()
 # --------------------------------------------------
 
 def get_connection():
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    if USING_TURSO:
+        connection = libsql.connect(
+            database=TURSO_DATABASE_URL,
+            auth_token=TURSO_AUTH_TOKEN,
+        )
+        connection.row_factory = sqlite3.Row
+        return connection
 
-    conn = sqlite3.connect(
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    connection = sqlite3.connect(
         str(DB_PATH),
         timeout=30,
-        check_same_thread=False
+        check_same_thread=False,
     )
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA foreign_keys = ON")
-    conn.execute("PRAGMA busy_timeout = 30000")
-    conn.execute("PRAGMA journal_mode = WAL")
+    connection.row_factory = sqlite3.Row
+    connection.execute("PRAGMA foreign_keys = ON")
+    connection.execute("PRAGMA busy_timeout = 30000")
+    connection.execute("PRAGMA journal_mode = WAL")
+    return connection
 
-    return conn
+
+def seed_reference_data_if_empty():
+    """Copy the bundled role/resource catalogue into a new Turso database once."""
+    if not USING_TURSO:
+        return
+
+    if not BUNDLED_DB_PATH.is_file():
+        raise RuntimeError("The bundled reference database is missing.")
+
+    reference_tables = ("roles", "role_skills", "learning_resources")
+
+    with sqlite3.connect(str(BUNDLED_DB_PATH)) as source:
+        source.row_factory = sqlite3.Row
+        with get_connection() as destination:
+            for table in reference_tables:
+                schema = source.execute(
+                    "SELECT sql FROM sqlite_master WHERE type='table' AND name=?",
+                    (table,),
+                ).fetchone()
+                if schema is None or not schema["sql"]:
+                    raise RuntimeError(
+                        f"Reference database is missing the {table} table."
+                    )
+
+                destination.execute(schema["sql"])
+                existing = destination.execute(
+                    "SELECT COUNT(*) FROM " + table
+                ).fetchone()[0]
+                if existing:
+                    continue
+
+                columns = [
+                    row["name"]
+                    for row in source.execute(
+                        "PRAGMA table_info(" + table + ")"
+                    ).fetchall()
+                ]
+                if not columns:
+                    continue
+
+                column_sql = ", ".join(
+                    '"' + name.replace('"', '""') + '"' for name in columns
+                )
+                placeholders = ", ".join("?" for _ in columns)
+                insert_sql = (
+                    "INSERT INTO " + table +
+                    " (" + column_sql + ") VALUES (" + placeholders + ")"
+                )
+                rows = source.execute(
+                    "SELECT " + column_sql + " FROM " + table
+                ).fetchall()
+                if rows:
+                    destination.executemany(
+                        insert_sql,
+                        [tuple(row) for row in rows],
+                    )
 
 
 # --------------------------------------------------
