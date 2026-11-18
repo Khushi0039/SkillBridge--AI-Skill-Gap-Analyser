@@ -535,15 +535,11 @@ def register_student(student: StudentCreate):
 
             student_id = cursor.lastrowid
             if student_id is None:
-                student_id = conn.execute(
+                row = conn.execute(
                     "SELECT student_id FROM students WHERE LOWER(email) = LOWER(?)",
                     (student.email,),
-                ).fetchone()["student_id"]
-            if student_id is None:
-                student_id = conn.execute(
-                    "SELECT student_id FROM students WHERE LOWER(email) = LOWER(?)",
-                    (student.email,),
-                ).fetchone()["student_id"]
+                ).fetchone()
+                student_id = row["student_id"] if row else None
 
         return {
             "message": "Registration successful",
